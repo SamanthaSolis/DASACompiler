@@ -69,12 +69,6 @@ condicion: IF LPAREN expresion RPAREN bloque con1 ;
 
 con1: ELSE bloque |   ;
 
-funcion: ID LPAREN func1 RPAREN SCOLON ;
-
-func1: expresion func2 |   ;
-
-func2: COMMA func1 |   ;
-
 lectura: INPUT LPAREN ID lec1 RPAREN SCOLON ;
 
 lec1: LBRACK expresion RBRACK lec2 |   ;
@@ -124,6 +118,12 @@ regresion: REGRESSION LPAREN expresion reg1 RPAREN SCOLON ;
 reg1: COMMA expresion |   ;
 
 clustering: CLUSTER LPAREN expresion COMMA expresion RPAREN SCOLON ;
+
+funcion: ID LPAREN func1 RPAREN SCOLON ;
+
+func1: expresion func2 |   ;
+
+func2: COMMA func1 |   ;
 
 regresa: RETURN expresion SCOLON ;
 
@@ -235,16 +235,16 @@ MOD       :'%';
 AND       :'&&';
 OR        :'||';
 
-IGNORE: [\t\r\f\n]+ -> skip;
+IGNORE: [ \t\r\f\n]+ -> skip;
 
-CARRCHAR: [["].*? ["];
+CCHAR: ['].['];
 
-ID: [a-zA-Z_][a-zA-Z0-9_]*;
+CARRCHAR: ["].*? ["];
 
-CFLOAT: [0-9]+[.][0-9]*;
+CFLOAT: [0-9]+[.][0-9]+;
 
 CINT: [0-9]+;
 
-CCHAR: [a-zA-Z0-9_ ];
-
 CBOOL: 'True'|'False';
+
+ID: [a-zA-Z_][a-zA-Z0-9_]*;

@@ -1,0 +1,32 @@
+define Int : i1, i2;
+define Float : f1 = 1.23;
+define Char : c = 'A';
+define Int[2][2] : arrI = [[1, 2], [3, 4]];
+define Float[0] : arrF = [];
+define Char[5] : s = "Hello";
+define Bool : b1 = True;
+define Bool[3] : bools = [True, False, False];
+
+func add() : Int {
+    while(i1 > i2 && b1) {
+        i1 = arrI[0][1] + 1;
+    }
+    return i1 + i2 ;
+}
+
+main() {
+    add();
+    ;print("Hello world!");
+    input(arr[0]);
+    i1 = toInt(s);
+    s = toArrChar(f);
+    f = toFloat(s);
+    if(bools[1] || isNull(i2)) {
+        plot(arrI, "file.png");
+        regression(arrI);
+        cluster(arrI, 3);
+    } else {
+        regression(arrI, 0.5);
+        describe(arrF);
+    }
+}

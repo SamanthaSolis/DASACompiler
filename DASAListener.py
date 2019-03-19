@@ -269,33 +269,6 @@ class DASAListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by DASAParser#funcion.
-    def enterFuncion(self, ctx:DASAParser.FuncionContext):
-        pass
-
-    # Exit a parse tree produced by DASAParser#funcion.
-    def exitFuncion(self, ctx:DASAParser.FuncionContext):
-        pass
-
-
-    # Enter a parse tree produced by DASAParser#func1.
-    def enterFunc1(self, ctx:DASAParser.Func1Context):
-        pass
-
-    # Exit a parse tree produced by DASAParser#func1.
-    def exitFunc1(self, ctx:DASAParser.Func1Context):
-        pass
-
-
-    # Enter a parse tree produced by DASAParser#func2.
-    def enterFunc2(self, ctx:DASAParser.Func2Context):
-        pass
-
-    # Exit a parse tree produced by DASAParser#func2.
-    def exitFunc2(self, ctx:DASAParser.Func2Context):
-        pass
-
-
     # Enter a parse tree produced by DASAParser#lectura.
     def enterLectura(self, ctx:DASAParser.LecturaContext):
         pass
@@ -482,6 +455,33 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#clustering.
     def exitClustering(self, ctx:DASAParser.ClusteringContext):
+        pass
+
+
+    # Enter a parse tree produced by DASAParser#funcion.
+    def enterFuncion(self, ctx:DASAParser.FuncionContext):
+        pass
+
+    # Exit a parse tree produced by DASAParser#funcion.
+    def exitFuncion(self, ctx:DASAParser.FuncionContext):
+        pass
+
+
+    # Enter a parse tree produced by DASAParser#func1.
+    def enterFunc1(self, ctx:DASAParser.Func1Context):
+        pass
+
+    # Exit a parse tree produced by DASAParser#func1.
+    def exitFunc1(self, ctx:DASAParser.Func1Context):
+        pass
+
+
+    # Enter a parse tree produced by DASAParser#func2.
+    def enterFunc2(self, ctx:DASAParser.Func2Context):
+        pass
+
+    # Exit a parse tree produced by DASAParser#func2.
+    def exitFunc2(self, ctx:DASAParser.Func2Context):
         pass
 
 
