@@ -8,7 +8,7 @@ import sys
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\38")
-        buf.write("\u023f\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\u023e\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
@@ -45,20 +45,20 @@ def serializedATN():
         buf.write("/\3/\3/\3/\3\60\3\60\3\60\3\60\3\60\3\60\3\60\3\60\3\61")
         buf.write("\3\61\3\61\3\61\3\61\3\61\3\61\3\62\3\62\3\62\5\62\u01b1")
         buf.write("\n\62\3\63\3\63\3\63\3\63\3\63\3\63\3\63\3\63\3\64\3\64")
-        buf.write("\3\64\3\64\3\64\3\64\3\65\3\65\3\65\3\65\5\65\u01c5\n")
-        buf.write("\65\3\66\3\66\3\66\5\66\u01ca\n\66\3\67\3\67\3\67\3\67")
-        buf.write("\38\38\38\39\39\39\39\59\u01d7\n9\3:\3:\3;\3;\3;\3<\3")
-        buf.write("<\3<\3<\5<\u01e2\n<\3=\3=\3>\3>\3>\3?\3?\3?\3?\5?\u01ed")
-        buf.write("\n?\3@\3@\3A\3A\3A\3B\3B\3B\3B\5B\u01f8\nB\3C\3C\3D\3")
-        buf.write("D\3D\3E\3E\5E\u0201\nE\3F\3F\3F\3F\3F\3F\3F\5F\u020a\n")
-        buf.write("F\3G\3G\3G\5G\u020f\nG\3H\3H\3H\3H\3H\3H\3H\3H\3H\5H\u021a")
-        buf.write("\nH\3I\3I\3I\3I\3I\3I\5I\u0222\nI\3J\3J\3J\3J\3J\5J\u0229")
+        buf.write("\3\64\3\64\3\64\3\65\3\65\3\65\3\65\5\65\u01c4\n\65\3")
+        buf.write("\66\3\66\3\66\5\66\u01c9\n\66\3\67\3\67\3\67\3\67\38\3")
+        buf.write("8\38\39\39\39\39\59\u01d6\n9\3:\3:\3;\3;\3;\3<\3<\3<\3")
+        buf.write("<\5<\u01e1\n<\3=\3=\3>\3>\3>\3?\3?\3?\3?\5?\u01ec\n?\3")
+        buf.write("@\3@\3A\3A\3A\3B\3B\3B\3B\5B\u01f7\nB\3C\3C\3D\3D\3D\3")
+        buf.write("E\3E\5E\u0200\nE\3F\3F\3F\3F\3F\3F\3F\5F\u0209\nF\3G\3")
+        buf.write("G\3G\5G\u020e\nG\3H\3H\3H\3H\3H\3H\3H\3H\3H\5H\u0219\n")
+        buf.write("H\3I\3I\3I\3I\3I\3I\5I\u0221\nI\3J\3J\3J\3J\3J\5J\u0228")
         buf.write("\nJ\3K\3K\3K\3K\3K\3L\3L\3L\3L\3L\3M\3M\3M\3M\3M\3N\3")
         buf.write("N\3N\3N\3N\3N\2\2O\2\4\6\b\n\f\16\20\22\24\26\30\32\34")
         buf.write("\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNPRTVXZ\\^`bdfhjln")
         buf.write("prtvxz|~\u0080\u0082\u0084\u0086\u0088\u008a\u008c\u008e")
         buf.write("\u0090\u0092\u0094\u0096\u0098\u009a\2\b\4\2\31\31\63")
-        buf.write("\67\3\2\6\t\3\2\60\61\4\2#$&)\3\2*+\4\2,-//\2\u022b\2")
+        buf.write("\67\3\2\6\t\3\2\60\61\4\2#$&)\3\2*+\4\2,-//\2\u022a\2")
         buf.write("\u009c\3\2\2\2\4\u00a2\3\2\2\2\6\u00a6\3\2\2\2\b\u00a8")
         buf.write("\3\2\2\2\n\u00b2\3\2\2\2\f\u00b8\3\2\2\2\16\u00ba\3\2")
         buf.write("\2\2\20\u00c8\3\2\2\2\22\u00cd\3\2\2\2\24\u00d1\3\2\2")
@@ -73,15 +73,15 @@ def serializedATN():
         buf.write("\2\2\2N\u017d\3\2\2\2P\u0182\3\2\2\2R\u0184\3\2\2\2T\u0186")
         buf.write("\3\2\2\2V\u0188\3\2\2\2X\u0190\3\2\2\2Z\u0192\3\2\2\2")
         buf.write("\\\u0198\3\2\2\2^\u019e\3\2\2\2`\u01a6\3\2\2\2b\u01b0")
-        buf.write("\3\2\2\2d\u01b2\3\2\2\2f\u01ba\3\2\2\2h\u01c4\3\2\2\2")
-        buf.write("j\u01c9\3\2\2\2l\u01cb\3\2\2\2n\u01cf\3\2\2\2p\u01d6\3")
-        buf.write("\2\2\2r\u01d8\3\2\2\2t\u01da\3\2\2\2v\u01e1\3\2\2\2x\u01e3")
-        buf.write("\3\2\2\2z\u01e5\3\2\2\2|\u01ec\3\2\2\2~\u01ee\3\2\2\2")
-        buf.write("\u0080\u01f0\3\2\2\2\u0082\u01f7\3\2\2\2\u0084\u01f9\3")
-        buf.write("\2\2\2\u0086\u01fb\3\2\2\2\u0088\u0200\3\2\2\2\u008a\u0209")
-        buf.write("\3\2\2\2\u008c\u020e\3\2\2\2\u008e\u0219\3\2\2\2\u0090")
-        buf.write("\u0221\3\2\2\2\u0092\u0228\3\2\2\2\u0094\u022a\3\2\2\2")
-        buf.write("\u0096\u022f\3\2\2\2\u0098\u0234\3\2\2\2\u009a\u0239\3")
+        buf.write("\3\2\2\2d\u01b2\3\2\2\2f\u01ba\3\2\2\2h\u01c3\3\2\2\2")
+        buf.write("j\u01c8\3\2\2\2l\u01ca\3\2\2\2n\u01ce\3\2\2\2p\u01d5\3")
+        buf.write("\2\2\2r\u01d7\3\2\2\2t\u01d9\3\2\2\2v\u01e0\3\2\2\2x\u01e2")
+        buf.write("\3\2\2\2z\u01e4\3\2\2\2|\u01eb\3\2\2\2~\u01ed\3\2\2\2")
+        buf.write("\u0080\u01ef\3\2\2\2\u0082\u01f6\3\2\2\2\u0084\u01f8\3")
+        buf.write("\2\2\2\u0086\u01fa\3\2\2\2\u0088\u01ff\3\2\2\2\u008a\u0208")
+        buf.write("\3\2\2\2\u008c\u020d\3\2\2\2\u008e\u0218\3\2\2\2\u0090")
+        buf.write("\u0220\3\2\2\2\u0092\u0227\3\2\2\2\u0094\u0229\3\2\2\2")
+        buf.write("\u0096\u022e\3\2\2\2\u0098\u0233\3\2\2\2\u009a\u0238\3")
         buf.write("\2\2\2\u009c\u009d\5\4\3\2\u009d\u009e\5\6\4\2\u009e\u009f")
         buf.write("\5\b\5\2\u009f\3\3\2\2\2\u00a0\u00a3\5\36\20\2\u00a1\u00a3")
         buf.write("\3\2\2\2\u00a2\u00a0\3\2\2\2\u00a2\u00a1\3\2\2\2\u00a3")
@@ -197,65 +197,64 @@ def serializedATN():
         buf.write("\7\37\2\2\u01b4\u01b5\5n8\2\u01b5\u01b6\7\34\2\2\u01b6")
         buf.write("\u01b7\5n8\2\u01b7\u01b8\7 \2\2\u01b8\u01b9\7\33\2\2\u01b9")
         buf.write("e\3\2\2\2\u01ba\u01bb\78\2\2\u01bb\u01bc\7\37\2\2\u01bc")
-        buf.write("\u01bd\5h\65\2\u01bd\u01be\7 \2\2\u01be\u01bf\7\33\2\2")
-        buf.write("\u01bfg\3\2\2\2\u01c0\u01c1\5n8\2\u01c1\u01c2\5j\66\2")
-        buf.write("\u01c2\u01c5\3\2\2\2\u01c3\u01c5\3\2\2\2\u01c4\u01c0\3")
-        buf.write("\2\2\2\u01c4\u01c3\3\2\2\2\u01c5i\3\2\2\2\u01c6\u01c7")
-        buf.write("\7\34\2\2\u01c7\u01ca\5h\65\2\u01c8\u01ca\3\2\2\2\u01c9")
-        buf.write("\u01c6\3\2\2\2\u01c9\u01c8\3\2\2\2\u01cak\3\2\2\2\u01cb")
-        buf.write("\u01cc\7\25\2\2\u01cc\u01cd\5n8\2\u01cd\u01ce\7\33\2\2")
-        buf.write("\u01cem\3\2\2\2\u01cf\u01d0\5t;\2\u01d0\u01d1\5p9\2\u01d1")
-        buf.write("o\3\2\2\2\u01d2\u01d3\5r:\2\u01d3\u01d4\5t;\2\u01d4\u01d7")
-        buf.write("\3\2\2\2\u01d5\u01d7\3\2\2\2\u01d6\u01d2\3\2\2\2\u01d6")
-        buf.write("\u01d5\3\2\2\2\u01d7q\3\2\2\2\u01d8\u01d9\t\4\2\2\u01d9")
-        buf.write("s\3\2\2\2\u01da\u01db\5z>\2\u01db\u01dc\5v<\2\u01dcu\3")
-        buf.write("\2\2\2\u01dd\u01de\5x=\2\u01de\u01df\5z>\2\u01df\u01e2")
-        buf.write("\3\2\2\2\u01e0\u01e2\3\2\2\2\u01e1\u01dd\3\2\2\2\u01e1")
-        buf.write("\u01e0\3\2\2\2\u01e2w\3\2\2\2\u01e3\u01e4\t\5\2\2\u01e4")
-        buf.write("y\3\2\2\2\u01e5\u01e6\5\u0080A\2\u01e6\u01e7\5|?\2\u01e7")
-        buf.write("{\3\2\2\2\u01e8\u01e9\5~@\2\u01e9\u01ea\5\u0080A\2\u01ea")
-        buf.write("\u01ed\3\2\2\2\u01eb\u01ed\3\2\2\2\u01ec\u01e8\3\2\2\2")
-        buf.write("\u01ec\u01eb\3\2\2\2\u01ed}\3\2\2\2\u01ee\u01ef\t\6\2")
-        buf.write("\2\u01ef\177\3\2\2\2\u01f0\u01f1\5\u0086D\2\u01f1\u01f2")
-        buf.write("\5\u0082B\2\u01f2\u0081\3\2\2\2\u01f3\u01f4\5\u0084C\2")
-        buf.write("\u01f4\u01f5\5\u0080A\2\u01f5\u01f8\3\2\2\2\u01f6\u01f8")
-        buf.write("\3\2\2\2\u01f7\u01f3\3\2\2\2\u01f7\u01f6\3\2\2\2\u01f8")
-        buf.write("\u0083\3\2\2\2\u01f9\u01fa\t\7\2\2\u01fa\u0085\3\2\2\2")
-        buf.write("\u01fb\u01fc\5\u0088E\2\u01fc\u01fd\5\u008aF\2\u01fd\u0087")
-        buf.write("\3\2\2\2\u01fe\u0201\7.\2\2\u01ff\u0201\3\2\2\2\u0200")
-        buf.write("\u01fe\3\2\2\2\u0200\u01ff\3\2\2\2\u0201\u0089\3\2\2\2")
-        buf.write("\u0202\u0203\7\37\2\2\u0203\u0204\5n8\2\u0204\u0205\7")
-        buf.write(" \2\2\u0205\u020a\3\2\2\2\u0206\u0207\5\u008cG\2\u0207")
-        buf.write("\u0208\5\u008eH\2\u0208\u020a\3\2\2\2\u0209\u0202\3\2")
-        buf.write("\2\2\u0209\u0206\3\2\2\2\u020a\u008b\3\2\2\2\u020b\u020f")
-        buf.write("\7*\2\2\u020c\u020f\7+\2\2\u020d\u020f\3\2\2\2\u020e\u020b")
-        buf.write("\3\2\2\2\u020e\u020c\3\2\2\2\u020e\u020d\3\2\2\2\u020f")
-        buf.write("\u008d\3\2\2\2\u0210\u021a\5R*\2\u0211\u021a\5B\"\2\u0212")
-        buf.write("\u021a\5f\64\2\u0213\u021a\5\u0094K\2\u0214\u021a\5\u0096")
-        buf.write("L\2\u0215\u021a\5\u0098M\2\u0216\u021a\5\u009aN\2\u0217")
-        buf.write("\u0218\78\2\2\u0218\u021a\5\u0090I\2\u0219\u0210\3\2\2")
-        buf.write("\2\u0219\u0211\3\2\2\2\u0219\u0212\3\2\2\2\u0219\u0213")
-        buf.write("\3\2\2\2\u0219\u0214\3\2\2\2\u0219\u0215\3\2\2\2\u0219")
-        buf.write("\u0216\3\2\2\2\u0219\u0217\3\2\2\2\u021a\u008f\3\2\2\2")
-        buf.write("\u021b\u021c\7!\2\2\u021c\u021d\5n8\2\u021d\u021e\7\"")
-        buf.write("\2\2\u021e\u021f\5\u0092J\2\u021f\u0222\3\2\2\2\u0220")
-        buf.write("\u0222\3\2\2\2\u0221\u021b\3\2\2\2\u0221\u0220\3\2\2\2")
-        buf.write("\u0222\u0091\3\2\2\2\u0223\u0224\7!\2\2\u0224\u0225\5")
-        buf.write("n8\2\u0225\u0226\7\"\2\2\u0226\u0229\3\2\2\2\u0227\u0229")
-        buf.write("\3\2\2\2\u0228\u0223\3\2\2\2\u0228\u0227\3\2\2\2\u0229")
-        buf.write("\u0093\3\2\2\2\u022a\u022b\7\r\2\2\u022b\u022c\7\37\2")
-        buf.write("\2\u022c\u022d\5n8\2\u022d\u022e\7 \2\2\u022e\u0095\3")
-        buf.write("\2\2\2\u022f\u0230\7\16\2\2\u0230\u0231\7\37\2\2\u0231")
-        buf.write("\u0232\5n8\2\u0232\u0233\7 \2\2\u0233\u0097\3\2\2\2\u0234")
-        buf.write("\u0235\7\17\2\2\u0235\u0236\7\37\2\2\u0236\u0237\5n8\2")
-        buf.write("\u0237\u0238\7 \2\2\u0238\u0099\3\2\2\2\u0239\u023a\7")
-        buf.write("\20\2\2\u023a\u023b\7\37\2\2\u023b\u023c\5n8\2\u023c\u023d")
-        buf.write("\7 \2\2\u023d\u009b\3\2\2\2,\u00a2\u00a6\u00b2\u00b8\u00c8")
-        buf.write("\u00cd\u00d1\u00d7\u00db\u00e4\u00f3\u00f9\u0102\u0106")
-        buf.write("\u010b\u010f\u011e\u012c\u0132\u0144\u0153\u015a\u0162")
-        buf.write("\u0168\u016d\u0178\u017d\u0182\u0190\u01b0\u01c4\u01c9")
-        buf.write("\u01d6\u01e1\u01ec\u01f7\u0200\u0209\u020e\u0219\u0221")
-        buf.write("\u0228")
+        buf.write("\u01bd\5h\65\2\u01bd\u01be\7 \2\2\u01beg\3\2\2\2\u01bf")
+        buf.write("\u01c0\5n8\2\u01c0\u01c1\5j\66\2\u01c1\u01c4\3\2\2\2\u01c2")
+        buf.write("\u01c4\3\2\2\2\u01c3\u01bf\3\2\2\2\u01c3\u01c2\3\2\2\2")
+        buf.write("\u01c4i\3\2\2\2\u01c5\u01c6\7\34\2\2\u01c6\u01c9\5h\65")
+        buf.write("\2\u01c7\u01c9\3\2\2\2\u01c8\u01c5\3\2\2\2\u01c8\u01c7")
+        buf.write("\3\2\2\2\u01c9k\3\2\2\2\u01ca\u01cb\7\25\2\2\u01cb\u01cc")
+        buf.write("\5n8\2\u01cc\u01cd\7\33\2\2\u01cdm\3\2\2\2\u01ce\u01cf")
+        buf.write("\5t;\2\u01cf\u01d0\5p9\2\u01d0o\3\2\2\2\u01d1\u01d2\5")
+        buf.write("r:\2\u01d2\u01d3\5t;\2\u01d3\u01d6\3\2\2\2\u01d4\u01d6")
+        buf.write("\3\2\2\2\u01d5\u01d1\3\2\2\2\u01d5\u01d4\3\2\2\2\u01d6")
+        buf.write("q\3\2\2\2\u01d7\u01d8\t\4\2\2\u01d8s\3\2\2\2\u01d9\u01da")
+        buf.write("\5z>\2\u01da\u01db\5v<\2\u01dbu\3\2\2\2\u01dc\u01dd\5")
+        buf.write("x=\2\u01dd\u01de\5z>\2\u01de\u01e1\3\2\2\2\u01df\u01e1")
+        buf.write("\3\2\2\2\u01e0\u01dc\3\2\2\2\u01e0\u01df\3\2\2\2\u01e1")
+        buf.write("w\3\2\2\2\u01e2\u01e3\t\5\2\2\u01e3y\3\2\2\2\u01e4\u01e5")
+        buf.write("\5\u0080A\2\u01e5\u01e6\5|?\2\u01e6{\3\2\2\2\u01e7\u01e8")
+        buf.write("\5~@\2\u01e8\u01e9\5\u0080A\2\u01e9\u01ec\3\2\2\2\u01ea")
+        buf.write("\u01ec\3\2\2\2\u01eb\u01e7\3\2\2\2\u01eb\u01ea\3\2\2\2")
+        buf.write("\u01ec}\3\2\2\2\u01ed\u01ee\t\6\2\2\u01ee\177\3\2\2\2")
+        buf.write("\u01ef\u01f0\5\u0086D\2\u01f0\u01f1\5\u0082B\2\u01f1\u0081")
+        buf.write("\3\2\2\2\u01f2\u01f3\5\u0084C\2\u01f3\u01f4\5\u0080A\2")
+        buf.write("\u01f4\u01f7\3\2\2\2\u01f5\u01f7\3\2\2\2\u01f6\u01f2\3")
+        buf.write("\2\2\2\u01f6\u01f5\3\2\2\2\u01f7\u0083\3\2\2\2\u01f8\u01f9")
+        buf.write("\t\7\2\2\u01f9\u0085\3\2\2\2\u01fa\u01fb\5\u0088E\2\u01fb")
+        buf.write("\u01fc\5\u008aF\2\u01fc\u0087\3\2\2\2\u01fd\u0200\7.\2")
+        buf.write("\2\u01fe\u0200\3\2\2\2\u01ff\u01fd\3\2\2\2\u01ff\u01fe")
+        buf.write("\3\2\2\2\u0200\u0089\3\2\2\2\u0201\u0202\7\37\2\2\u0202")
+        buf.write("\u0203\5n8\2\u0203\u0204\7 \2\2\u0204\u0209\3\2\2\2\u0205")
+        buf.write("\u0206\5\u008cG\2\u0206\u0207\5\u008eH\2\u0207\u0209\3")
+        buf.write("\2\2\2\u0208\u0201\3\2\2\2\u0208\u0205\3\2\2\2\u0209\u008b")
+        buf.write("\3\2\2\2\u020a\u020e\7*\2\2\u020b\u020e\7+\2\2\u020c\u020e")
+        buf.write("\3\2\2\2\u020d\u020a\3\2\2\2\u020d\u020b\3\2\2\2\u020d")
+        buf.write("\u020c\3\2\2\2\u020e\u008d\3\2\2\2\u020f\u0219\5R*\2\u0210")
+        buf.write("\u0219\5B\"\2\u0211\u0219\5f\64\2\u0212\u0219\5\u0094")
+        buf.write("K\2\u0213\u0219\5\u0096L\2\u0214\u0219\5\u0098M\2\u0215")
+        buf.write("\u0219\5\u009aN\2\u0216\u0217\78\2\2\u0217\u0219\5\u0090")
+        buf.write("I\2\u0218\u020f\3\2\2\2\u0218\u0210\3\2\2\2\u0218\u0211")
+        buf.write("\3\2\2\2\u0218\u0212\3\2\2\2\u0218\u0213\3\2\2\2\u0218")
+        buf.write("\u0214\3\2\2\2\u0218\u0215\3\2\2\2\u0218\u0216\3\2\2\2")
+        buf.write("\u0219\u008f\3\2\2\2\u021a\u021b\7!\2\2\u021b\u021c\5")
+        buf.write("n8\2\u021c\u021d\7\"\2\2\u021d\u021e\5\u0092J\2\u021e")
+        buf.write("\u0221\3\2\2\2\u021f\u0221\3\2\2\2\u0220\u021a\3\2\2\2")
+        buf.write("\u0220\u021f\3\2\2\2\u0221\u0091\3\2\2\2\u0222\u0223\7")
+        buf.write("!\2\2\u0223\u0224\5n8\2\u0224\u0225\7\"\2\2\u0225\u0228")
+        buf.write("\3\2\2\2\u0226\u0228\3\2\2\2\u0227\u0222\3\2\2\2\u0227")
+        buf.write("\u0226\3\2\2\2\u0228\u0093\3\2\2\2\u0229\u022a\7\r\2\2")
+        buf.write("\u022a\u022b\7\37\2\2\u022b\u022c\5n8\2\u022c\u022d\7")
+        buf.write(" \2\2\u022d\u0095\3\2\2\2\u022e\u022f\7\16\2\2\u022f\u0230")
+        buf.write("\7\37\2\2\u0230\u0231\5n8\2\u0231\u0232\7 \2\2\u0232\u0097")
+        buf.write("\3\2\2\2\u0233\u0234\7\17\2\2\u0234\u0235\7\37\2\2\u0235")
+        buf.write("\u0236\5n8\2\u0236\u0237\7 \2\2\u0237\u0099\3\2\2\2\u0238")
+        buf.write("\u0239\7\20\2\2\u0239\u023a\7\37\2\2\u023a\u023b\5n8\2")
+        buf.write("\u023b\u023c\7 \2\2\u023c\u009b\3\2\2\2,\u00a2\u00a6\u00b2")
+        buf.write("\u00b8\u00c8\u00cd\u00d1\u00d7\u00db\u00e4\u00f3\u00f9")
+        buf.write("\u0102\u0106\u010b\u010f\u011e\u012c\u0132\u0144\u0153")
+        buf.write("\u015a\u0162\u0168\u016d\u0178\u017d\u0182\u0190\u01b0")
+        buf.write("\u01c3\u01c8\u01d5\u01e0\u01eb\u01f6\u01ff\u0208\u020d")
+        buf.write("\u0218\u0220\u0227")
         return buf.getvalue()
 
 
@@ -3527,9 +3526,6 @@ class DASAParser ( Parser ):
         def RPAREN(self):
             return self.getToken(DASAParser.RPAREN, 0)
 
-        def SCOLON(self):
-            return self.getToken(DASAParser.SCOLON, 0)
-
         def getRuleIndex(self):
             return DASAParser.RULE_funcion
 
@@ -3558,8 +3554,6 @@ class DASAParser ( Parser ):
             self.func1()
             self.state = 443
             self.match(DASAParser.RPAREN)
-            self.state = 444
-            self.match(DASAParser.SCOLON)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -3601,14 +3595,14 @@ class DASAParser ( Parser ):
         localctx = DASAParser.Func1Context(self, self._ctx, self.state)
         self.enterRule(localctx, 102, self.RULE_func1)
         try:
-            self.state = 450
+            self.state = 449
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.ISNULL, DASAParser.TOINT, DASAParser.TOFLOAT, DASAParser.TOARRCHAR, DASAParser.NULL, DASAParser.LPAREN, DASAParser.LBRACK, DASAParser.PLUS, DASAParser.MINUS, DASAParser.NOT, DASAParser.CCHAR, DASAParser.CARRCHAR, DASAParser.CFLOAT, DASAParser.CINT, DASAParser.CBOOL, DASAParser.ID]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 446
+                self.state = 445
                 self.expresion()
-                self.state = 447
+                self.state = 446
                 self.func2()
                 pass
             elif token in [DASAParser.RPAREN]:
@@ -3658,14 +3652,14 @@ class DASAParser ( Parser ):
         localctx = DASAParser.Func2Context(self, self._ctx, self.state)
         self.enterRule(localctx, 104, self.RULE_func2)
         try:
-            self.state = 455
+            self.state = 454
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.COMMA]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 452
+                self.state = 451
                 self.match(DASAParser.COMMA)
-                self.state = 453
+                self.state = 452
                 self.func1()
                 pass
             elif token in [DASAParser.RPAREN]:
@@ -3719,11 +3713,11 @@ class DASAParser ( Parser ):
         self.enterRule(localctx, 106, self.RULE_regresa)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 457
+            self.state = 456
             self.match(DASAParser.RETURN)
-            self.state = 458
+            self.state = 457
             self.expresion()
-            self.state = 459
+            self.state = 458
             self.match(DASAParser.SCOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -3767,9 +3761,9 @@ class DASAParser ( Parser ):
         self.enterRule(localctx, 108, self.RULE_expresion)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 461
+            self.state = 460
             self.comp()
-            self.state = 462
+            self.state = 461
             self.expres1()
         except RecognitionException as re:
             localctx.exception = re
@@ -3812,14 +3806,14 @@ class DASAParser ( Parser ):
         localctx = DASAParser.Expres1Context(self, self._ctx, self.state)
         self.enterRule(localctx, 110, self.RULE_expres1)
         try:
-            self.state = 468
+            self.state = 467
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.AND, DASAParser.OR]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 464
+                self.state = 463
                 self.expres2()
-                self.state = 465
+                self.state = 464
                 self.comp()
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK]:
@@ -3870,7 +3864,7 @@ class DASAParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 470
+            self.state = 469
             _la = self._input.LA(1)
             if not(_la==DASAParser.AND or _la==DASAParser.OR):
                 self._errHandler.recoverInline(self)
@@ -3919,9 +3913,9 @@ class DASAParser ( Parser ):
         self.enterRule(localctx, 114, self.RULE_comp)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 472
+            self.state = 471
             self.exp()
-            self.state = 473
+            self.state = 472
             self.comp1()
         except RecognitionException as re:
             localctx.exception = re
@@ -3964,14 +3958,14 @@ class DASAParser ( Parser ):
         localctx = DASAParser.Comp1Context(self, self._ctx, self.state)
         self.enterRule(localctx, 116, self.RULE_comp1)
         try:
-            self.state = 479
+            self.state = 478
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.DIFF, DASAParser.EQUALS, DASAParser.GREATEQ, DASAParser.LESSEQ, DASAParser.GREAT, DASAParser.LESS]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 475
+                self.state = 474
                 self.comp2()
-                self.state = 476
+                self.state = 475
                 self.exp()
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK, DASAParser.AND, DASAParser.OR]:
@@ -4034,7 +4028,7 @@ class DASAParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 481
+            self.state = 480
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DASAParser.DIFF) | (1 << DASAParser.EQUALS) | (1 << DASAParser.GREATEQ) | (1 << DASAParser.LESSEQ) | (1 << DASAParser.GREAT) | (1 << DASAParser.LESS))) != 0)):
                 self._errHandler.recoverInline(self)
@@ -4083,9 +4077,9 @@ class DASAParser ( Parser ):
         self.enterRule(localctx, 120, self.RULE_exp)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 483
+            self.state = 482
             self.termino()
-            self.state = 484
+            self.state = 483
             self.exp1()
         except RecognitionException as re:
             localctx.exception = re
@@ -4128,14 +4122,14 @@ class DASAParser ( Parser ):
         localctx = DASAParser.Exp1Context(self, self._ctx, self.state)
         self.enterRule(localctx, 122, self.RULE_exp1)
         try:
-            self.state = 490
+            self.state = 489
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.PLUS, DASAParser.MINUS]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 486
+                self.state = 485
                 self.exp2()
-                self.state = 487
+                self.state = 486
                 self.termino()
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK, DASAParser.DIFF, DASAParser.EQUALS, DASAParser.GREATEQ, DASAParser.LESSEQ, DASAParser.GREAT, DASAParser.LESS, DASAParser.AND, DASAParser.OR]:
@@ -4186,7 +4180,7 @@ class DASAParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 492
+            self.state = 491
             _la = self._input.LA(1)
             if not(_la==DASAParser.PLUS or _la==DASAParser.MINUS):
                 self._errHandler.recoverInline(self)
@@ -4235,9 +4229,9 @@ class DASAParser ( Parser ):
         self.enterRule(localctx, 126, self.RULE_termino)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 494
+            self.state = 493
             self.factor()
-            self.state = 495
+            self.state = 494
             self.term1()
         except RecognitionException as re:
             localctx.exception = re
@@ -4280,14 +4274,14 @@ class DASAParser ( Parser ):
         localctx = DASAParser.Term1Context(self, self._ctx, self.state)
         self.enterRule(localctx, 128, self.RULE_term1)
         try:
-            self.state = 501
+            self.state = 500
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.MULT, DASAParser.DIVIDE, DASAParser.MOD]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 497
+                self.state = 496
                 self.term2()
-                self.state = 498
+                self.state = 497
                 self.termino()
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK, DASAParser.DIFF, DASAParser.EQUALS, DASAParser.GREATEQ, DASAParser.LESSEQ, DASAParser.GREAT, DASAParser.LESS, DASAParser.PLUS, DASAParser.MINUS, DASAParser.AND, DASAParser.OR]:
@@ -4341,7 +4335,7 @@ class DASAParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 503
+            self.state = 502
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DASAParser.MULT) | (1 << DASAParser.DIVIDE) | (1 << DASAParser.MOD))) != 0)):
                 self._errHandler.recoverInline(self)
@@ -4390,9 +4384,9 @@ class DASAParser ( Parser ):
         self.enterRule(localctx, 132, self.RULE_factor)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 505
+            self.state = 504
             self.fact1()
-            self.state = 506
+            self.state = 505
             self.fact2()
         except RecognitionException as re:
             localctx.exception = re
@@ -4430,12 +4424,12 @@ class DASAParser ( Parser ):
         localctx = DASAParser.Fact1Context(self, self._ctx, self.state)
         self.enterRule(localctx, 134, self.RULE_fact1)
         try:
-            self.state = 510
+            self.state = 509
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.NOT]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 508
+                self.state = 507
                 self.match(DASAParser.NOT)
                 pass
             elif token in [DASAParser.ISNULL, DASAParser.TOINT, DASAParser.TOFLOAT, DASAParser.TOARRCHAR, DASAParser.NULL, DASAParser.LPAREN, DASAParser.LBRACK, DASAParser.PLUS, DASAParser.MINUS, DASAParser.CCHAR, DASAParser.CARRCHAR, DASAParser.CFLOAT, DASAParser.CINT, DASAParser.CBOOL, DASAParser.ID]:
@@ -4496,23 +4490,23 @@ class DASAParser ( Parser ):
         localctx = DASAParser.Fact2Context(self, self._ctx, self.state)
         self.enterRule(localctx, 136, self.RULE_fact2)
         try:
-            self.state = 519
+            self.state = 518
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.LPAREN]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 512
+                self.state = 511
                 self.match(DASAParser.LPAREN)
-                self.state = 513
+                self.state = 512
                 self.expresion()
-                self.state = 514
+                self.state = 513
                 self.match(DASAParser.RPAREN)
                 pass
             elif token in [DASAParser.ISNULL, DASAParser.TOINT, DASAParser.TOFLOAT, DASAParser.TOARRCHAR, DASAParser.NULL, DASAParser.LBRACK, DASAParser.PLUS, DASAParser.MINUS, DASAParser.CCHAR, DASAParser.CARRCHAR, DASAParser.CFLOAT, DASAParser.CINT, DASAParser.CBOOL, DASAParser.ID]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 516
+                self.state = 515
                 self.fact3()
-                self.state = 517
+                self.state = 516
                 self.valor()
                 pass
             else:
@@ -4557,17 +4551,17 @@ class DASAParser ( Parser ):
         localctx = DASAParser.Fact3Context(self, self._ctx, self.state)
         self.enterRule(localctx, 138, self.RULE_fact3)
         try:
-            self.state = 524
+            self.state = 523
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.PLUS]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 521
+                self.state = 520
                 self.match(DASAParser.PLUS)
                 pass
             elif token in [DASAParser.MINUS]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 522
+                self.state = 521
                 self.match(DASAParser.MINUS)
                 pass
             elif token in [DASAParser.ISNULL, DASAParser.TOINT, DASAParser.TOFLOAT, DASAParser.TOARRCHAR, DASAParser.NULL, DASAParser.LBRACK, DASAParser.CCHAR, DASAParser.CARRCHAR, DASAParser.CFLOAT, DASAParser.CINT, DASAParser.CBOOL, DASAParser.ID]:
@@ -4645,56 +4639,56 @@ class DASAParser ( Parser ):
         localctx = DASAParser.ValorContext(self, self._ctx, self.state)
         self.enterRule(localctx, 140, self.RULE_valor)
         try:
-            self.state = 535
+            self.state = 534
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,39,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 526
+                self.state = 525
                 self.cte()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 527
+                self.state = 526
                 self.arreglo()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 528
+                self.state = 527
                 self.funcion()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 529
+                self.state = 528
                 self.vacio()
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 530
+                self.state = 529
                 self.castint()
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 531
+                self.state = 530
                 self.castfloat()
                 pass
 
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
-                self.state = 532
+                self.state = 531
                 self.castarrchar()
                 pass
 
             elif la_ == 8:
                 self.enterOuterAlt(localctx, 8)
-                self.state = 533
+                self.state = 532
                 self.match(DASAParser.ID)
-                self.state = 534
+                self.state = 533
                 self.valor1()
                 pass
 
@@ -4746,18 +4740,18 @@ class DASAParser ( Parser ):
         localctx = DASAParser.Valor1Context(self, self._ctx, self.state)
         self.enterRule(localctx, 142, self.RULE_valor1)
         try:
-            self.state = 543
+            self.state = 542
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.LBRACK]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 537
+                self.state = 536
                 self.match(DASAParser.LBRACK)
-                self.state = 538
+                self.state = 537
                 self.expresion()
-                self.state = 539
+                self.state = 538
                 self.match(DASAParser.RBRACK)
-                self.state = 540
+                self.state = 539
                 self.valor2()
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK, DASAParser.DIFF, DASAParser.EQUALS, DASAParser.GREATEQ, DASAParser.LESSEQ, DASAParser.GREAT, DASAParser.LESS, DASAParser.PLUS, DASAParser.MINUS, DASAParser.MULT, DASAParser.DIVIDE, DASAParser.MOD, DASAParser.AND, DASAParser.OR]:
@@ -4810,16 +4804,16 @@ class DASAParser ( Parser ):
         localctx = DASAParser.Valor2Context(self, self._ctx, self.state)
         self.enterRule(localctx, 144, self.RULE_valor2)
         try:
-            self.state = 550
+            self.state = 549
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.LBRACK]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 545
+                self.state = 544
                 self.match(DASAParser.LBRACK)
-                self.state = 546
+                self.state = 545
                 self.expresion()
-                self.state = 547
+                self.state = 546
                 self.match(DASAParser.RBRACK)
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK, DASAParser.DIFF, DASAParser.EQUALS, DASAParser.GREATEQ, DASAParser.LESSEQ, DASAParser.GREAT, DASAParser.LESS, DASAParser.PLUS, DASAParser.MINUS, DASAParser.MULT, DASAParser.DIVIDE, DASAParser.MOD, DASAParser.AND, DASAParser.OR]:
@@ -4876,13 +4870,13 @@ class DASAParser ( Parser ):
         self.enterRule(localctx, 146, self.RULE_vacio)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 552
+            self.state = 551
             self.match(DASAParser.ISNULL)
-            self.state = 553
+            self.state = 552
             self.match(DASAParser.LPAREN)
-            self.state = 554
+            self.state = 553
             self.expresion()
-            self.state = 555
+            self.state = 554
             self.match(DASAParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -4931,13 +4925,13 @@ class DASAParser ( Parser ):
         self.enterRule(localctx, 148, self.RULE_castint)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 557
+            self.state = 556
             self.match(DASAParser.TOINT)
-            self.state = 558
+            self.state = 557
             self.match(DASAParser.LPAREN)
-            self.state = 559
+            self.state = 558
             self.expresion()
-            self.state = 560
+            self.state = 559
             self.match(DASAParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -4986,13 +4980,13 @@ class DASAParser ( Parser ):
         self.enterRule(localctx, 150, self.RULE_castfloat)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 562
+            self.state = 561
             self.match(DASAParser.TOFLOAT)
-            self.state = 563
+            self.state = 562
             self.match(DASAParser.LPAREN)
-            self.state = 564
+            self.state = 563
             self.expresion()
-            self.state = 565
+            self.state = 564
             self.match(DASAParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -5041,13 +5035,13 @@ class DASAParser ( Parser ):
         self.enterRule(localctx, 152, self.RULE_castarrchar)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 567
+            self.state = 566
             self.match(DASAParser.TOARRCHAR)
-            self.state = 568
+            self.state = 567
             self.match(DASAParser.LPAREN)
-            self.state = 569
+            self.state = 568
             self.expresion()
-            self.state = 570
+            self.state = 569
             self.match(DASAParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re

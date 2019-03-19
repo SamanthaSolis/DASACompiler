@@ -16,7 +16,7 @@ func add() : Int {
 
 main() {
     add();
-    ;print("Hello world!");
+    print("Hello world!");
     input(arr[0]);
     i1 = toInt(s);
     s = toArrChar(f);

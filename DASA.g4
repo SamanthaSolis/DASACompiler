@@ -119,7 +119,7 @@ reg1: COMMA expresion |   ;
 
 clustering: CLUSTER LPAREN expresion COMMA expresion RPAREN SCOLON ;
 
-funcion: ID LPAREN func1 RPAREN SCOLON ;
+funcion: ID LPAREN func1 RPAREN ;
 
 func1: expresion func2 |   ;
 
