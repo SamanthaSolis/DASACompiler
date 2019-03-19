@@ -3,33 +3,31 @@ grammar DASA;
 
 programa: prog1 prog2 main ;
 
-prog1: vars_st |   ;
+prog1: vars_st prog1 |   ;
 
-prog2: metodos |   ;
+prog2: metodos prog2 |   ;
 
 main: MAIN LPAREN RPAREN LCURLY main1 main2 RCURLY ;
 
-main1: vars_st |   ;
+main1: vars_st main1 |   ;
 
 main2: estatuto main2 |   ;
 
-metodos: FUNC ID LPAREN met1 RPAREN met2 LCURLY met3 met4 RCURLY met5 ;
+metodos: FUNC ID LPAREN met1 RPAREN met2 LCURLY met3 met4 RCURLY ;
 
 met1: params |   ;
 
 met2: COLON tipo |   ;
 
-met3: vars_st |   ;
+met3: vars_st met3 |   ;
 
 met4: estatuto met4 |   ;
 
-met5: metodos |   ;
-
 params: tipo COLON ID params1 ;
 
-params1: params |   ;
+params1: COMMA params |   ;
 
-vars_st: DEFINE tipo vars1 COLON vars3 SCOLON vars7 ;
+vars_st: DEFINE tipo vars1 COLON vars3 SCOLON ;
 
 vars1: LBRACK CINT RBRACK vars2 |   ;
 
@@ -42,8 +40,6 @@ vars4: ASSIGN vars5 |   ;
 vars5: cte | arreglo ;
 
 vars6: COMMA vars3 |   ;
-
-vars7: vars_st|   ;
 
 estatuto: asignacion
         | durante
@@ -210,7 +206,7 @@ IF:         'if';
 ELSE:       'else';
 NULL:       'Null';
 
-COLON	  :':';
+COLON	:':';
 SCOLON    :';';
 COMMA     :',';
 LCURLY    :'{';

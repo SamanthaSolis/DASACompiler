@@ -107,15 +107,6 @@ class DASAListener(ParseTreeListener):
         pass
 
 
-    # Enter a parse tree produced by DASAParser#met5.
-    def enterMet5(self, ctx:DASAParser.Met5Context):
-        pass
-
-    # Exit a parse tree produced by DASAParser#met5.
-    def exitMet5(self, ctx:DASAParser.Met5Context):
-        pass
-
-
     # Enter a parse tree produced by DASAParser#params.
     def enterParams(self, ctx:DASAParser.ParamsContext):
         pass
@@ -194,15 +185,6 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#vars6.
     def exitVars6(self, ctx:DASAParser.Vars6Context):
-        pass
-
-
-    # Enter a parse tree produced by DASAParser#vars7.
-    def enterVars7(self, ctx:DASAParser.Vars7Context):
-        pass
-
-    # Exit a parse tree produced by DASAParser#vars7.
-    def exitVars7(self, ctx:DASAParser.Vars7Context):
         pass
 
 
