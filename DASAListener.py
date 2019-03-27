@@ -8,14 +8,36 @@ else:
 # This class defines a complete listener for a parse tree produced by DASAParser.
 class DASAListener(ParseTreeListener):
 
+    def __init__(self):
+        self.functionsTable = []
+        self.varsTable = []
+        self.function = {}
+        self.var = {}
+        self.globVars = []
+        self.contFunc = 0
+        self.currType = ""
+        self.contVars = 0
+        self.currScope = ""
+
     # Enter a parse tree produced by DASAParser#programa.
     def enterPrograma(self, ctx:DASAParser.ProgramaContext):
-        pass
+        self.currScope= "Global"
 
     # Exit a parse tree produced by DASAParser#programa.
     def exitPrograma(self, ctx:DASAParser.ProgramaContext):
+        self.function = {"Id" : "Global",
+                         "Params" : 0,
+                         "TiposParams" : [],
+                         "Return" : "Void",
+                         # "Address" : algo,
+                         "SymTable" : self.globVars
+                         }
+        self.functionsTable.append(self.function)
+        for x in self.functionsTable:
+            print("{", x["Id"], x["Params"], x["TiposParams"], x["Return"], "}")
+            for y in x["SymTable"]:
+                print("\t", y)
         pass
-
 
     # Enter a parse tree produced by DASAParser#prog1.
     def enterProg1(self, ctx:DASAParser.Prog1Context):
@@ -23,8 +45,7 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#prog1.
     def exitProg1(self, ctx:DASAParser.Prog1Context):
-        pass
-
+        self.globVars = self.varsTable
 
     # Enter a parse tree produced by DASAParser#prog2.
     def enterProg2(self, ctx:DASAParser.Prog2Context):
@@ -37,11 +58,19 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#main.
     def enterMain(self, ctx:DASAParser.MainContext):
-        pass
+        self.varsTable = []
+        self.function = {"Id" : "main",
+                         "Params" : 0,
+                         "TiposParams" : [],
+                         "Return" : "Void",
+                         # "Address" : algo,
+                         "SymTable" : []}
+        self.currScope= "Local"
 
     # Exit a parse tree produced by DASAParser#main.
     def exitMain(self, ctx:DASAParser.MainContext):
-        pass
+        self.function["SymTable"] = self.varsTable
+        self.functionsTable.append(self.function)
 
 
     # Enter a parse tree produced by DASAParser#main1.
@@ -64,12 +93,21 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#metodos.
     def enterMetodos(self, ctx:DASAParser.MetodosContext):
-        pass
+        self.varsTable = []
+        self.function = {"Id" : "",
+                         "Params" : 0,
+                         "TiposParams" : [],
+                         "Return" : "Void",
+                         # "Address" : algo,
+                         "SymTable" : []}
+        self.currScope= "Local"
 
     # Exit a parse tree produced by DASAParser#metodos.
     def exitMetodos(self, ctx:DASAParser.MetodosContext):
-        pass
-
+        self.function["SymTable"] = self.varsTable
+        self.function["Id"] = ctx.ID().getText()
+        # print(self.function)
+        self.functionsTable.append(self.function)
 
     # Enter a parse tree produced by DASAParser#met1.
     def enterMet1(self, ctx:DASAParser.Met1Context):
@@ -82,7 +120,8 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#met2.
     def enterMet2(self, ctx:DASAParser.Met2Context):
-        pass
+        if ctx.getChildCount() > 0:
+            self.function["Return"] = ctx.tipo().getText()
 
     # Exit a parse tree produced by DASAParser#met2.
     def exitMet2(self, ctx:DASAParser.Met2Context):
@@ -107,31 +146,53 @@ class DASAListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by DASAParser#met5.
+    def enterMet5(self, ctx:DASAParser.Met5Context):
+        pass
+
+    # Exit a parse tree produced by DASAParser#met5.
+    def exitMet5(self, ctx:DASAParser.Met5Context):
+        pass
+
+
     # Enter a parse tree produced by DASAParser#params.
     def enterParams(self, ctx:DASAParser.ParamsContext):
-        pass
+        self.function["Params"] += 1
+        self.function["TiposParams"].append(ctx.tipo().getText())
+        self.var = {"Name" : ctx.ID().getText(),
+                    "Type" : ctx.tipo().getText(),
+                    "Dims" : 0,
+                    "SizeD1" : -1,
+                    "SizeD2" : -1,
+                    "HasValue" : False,
+                    "Scope" : self.currScope
+                    # "Weight" :
+                    #"Address" : xxx}
+        }
+        self.varsTable.append(self.var)
 
     # Exit a parse tree produced by DASAParser#params.
     def exitParams(self, ctx:DASAParser.ParamsContext):
         pass
 
 
-    # Enter a parse tree produced by DASAParser#params1.
-    def enterParams1(self, ctx:DASAParser.Params1Context):
-        pass
-
-    # Exit a parse tree produced by DASAParser#params1.
-    def exitParams1(self, ctx:DASAParser.Params1Context):
-        pass
-
-
     # Enter a parse tree produced by DASAParser#vars_st.
     def enterVars_st(self, ctx:DASAParser.Vars_stContext):
-        pass
+        self.var = {"Name" : "",
+                    "Type" : ctx.tipo().getText(),
+                    "Dims" : 0,
+                    "SizeD1" : -1,
+                    "SizeD2" : -1,
+                    "HasValue" : False,
+                    "Scope" : self.currScope
+                    # "Weight" :
+                    #"Address" : xxx
+                    }
+
 
     # Exit a parse tree produced by DASAParser#vars_st.
     def exitVars_st(self, ctx:DASAParser.Vars_stContext):
-        pass
+        self.varsTable.append(self.var)
 
 
     # Enter a parse tree produced by DASAParser#vars1.
@@ -140,12 +201,16 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#vars1.
     def exitVars1(self, ctx:DASAParser.Vars1Context):
-        pass
+        if ctx.getChildCount() > 0:
+            self.var["Dims"] += 1
+            self.var["SizeD1"] = int(ctx.CINT().getText())
 
 
     # Enter a parse tree produced by DASAParser#vars2.
     def enterVars2(self, ctx:DASAParser.Vars2Context):
-        pass
+        if ctx.getChildCount() > 0:
+            self.var["Dims"] += 1
+            self.var["SizeD2"] = int(ctx.CINT().getText())
 
     # Exit a parse tree produced by DASAParser#vars2.
     def exitVars2(self, ctx:DASAParser.Vars2Context):
@@ -154,7 +219,7 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#vars3.
     def enterVars3(self, ctx:DASAParser.Vars3Context):
-        pass
+        self.var["Name"] = ctx.ID().getText()
 
     # Exit a parse tree produced by DASAParser#vars3.
     def exitVars3(self, ctx:DASAParser.Vars3Context):
@@ -365,8 +430,7 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#tipo.
     def exitTipo(self, ctx:DASAParser.TipoContext):
-        pass
-
+        self.currType = ctx.getChild(0)
 
     # Enter a parse tree produced by DASAParser#bloque.
     def enterBloque(self, ctx:DASAParser.BloqueContext):

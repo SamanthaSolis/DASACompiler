@@ -1,0 +1,13 @@
+define Int : i1, i2;
+
+func add(Int:i1, Float:f1) : Int {
+}
+
+func sub() {
+}
+
+main() {
+    add();
+    define Char : c = 'D';
+    print("Hello world!");
+}

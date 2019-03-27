@@ -1,0 +1,54 @@
+def __init__(self):
+        self.functionsTable = []
+        self.varsTable = []
+        self.function = {}
+        self.var = {}
+        self.globVars = {}
+        self.contFunc = 0
+        self.currType = ""
+        self.contVars = 0
+
+def enterPrograma(self, ctx:DASAParser.ProgramaContext):
+    self.function = {"Id" : "global",
+                    "Params" : 0,
+                    "TiposParams" : [],
+                    "Return" : "void",
+                    #"Address" : algo,
+                    "SymTable" : []}
+            self.functionsTable.append(function)
+            print(self.functionsTable)
+
+def enterMain(self, ctx:DASAParser.MainContext):
+    self.contFunc += 1
+    self.varsTable = []
+    self.contVars = 0
+    self.var = {}
+    function = {"Id" : "main",
+        "Params" : 0,
+        "TiposParams" : [],
+        "Return" : "Void",
+        #"Address" : algo,
+        "SymTable" : []}
+    self.functionsTable.append(function)
+
+
+def enterMetodos(self, ctx:DASAParser.MetodosContext):
+    self.contFunc += 1
+    self.contVars = 0
+    self.varsTable = []
+    self.var = {}
+    self.function = {"Id" : "",
+        "Params" : 0,
+        "TiposParams" : [],
+        "Return" : "Void",
+        #"Address" : algo,
+        "SymTable" : []}
+
+def enterMet2(self, ctx:DASAParser.Met2Context):
+    if ctx.getChildCount() > 0:
+        self.function["Return"] = self.currType
+    print("Tipo funcion:", self.function["Return"])
+
+def exitTipo(self, ctx:DASAParser.TipoContext):
+        self.currType = ctx.getChild(0)
+        print(self.currType)

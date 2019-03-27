@@ -1,0 +1,11 @@
+define Int[1][3] : i1;
+
+func add(Int:i1, Float:f1) : Int {
+}
+
+func sub() {
+}
+
+main() {
+    define Char : c = 'D';
+}

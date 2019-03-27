@@ -7,7 +7,7 @@ define Char[5] : s = "Hello";
 define Bool : b1 = True;
 define Bool[3] : bools = [True, False, False];
 
-func add() : Int {
+func add(Int : i1, Int : i2) : Int {
     while(i1 > i2 && b1) {
         i1 = arrI[0][1] + 1;
     }
