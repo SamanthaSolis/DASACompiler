@@ -18,6 +18,10 @@ class DASAListener(ParseTreeListener):
         self.currType = ""
         self.contVars = 0
         self.currScope = ""
+        
+        # self.contCuadruplos = 0
+        self.cuadruplos[]
+        self.quad = {}
 
     # Enter a parse tree produced by DASAParser#programa.
     def enterPrograma(self, ctx:DASAParser.ProgramaContext):
