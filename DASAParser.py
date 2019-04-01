@@ -1253,7 +1253,6 @@ class DASAParser ( Parser ):
         def vars3(self):
             return self.getTypedRuleContext(DASAParser.Vars3Context,0)
 
-
         def SCOLON(self):
             return self.getToken(DASAParser.SCOLON, 0)
 

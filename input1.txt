@@ -1,13 +1,31 @@
-define Int : i1, i2;
+define Int : i1;
+define Float : f1 = 1.23;
+define Char : c = 'A';
+define Bool : b1 = True;
 
-func add(Int:i1, Float:f1) : Int {
-}
 
-func sub() {
+func add(Int : i1, Int : i2) : Int {
+    define Int : david = 2;
+    define Int : david = 3;
+    define Char : l = 'A';
+    define Bool : sam = False;
+    while(i1 > i2 && b1) {
+        i1 = i1 + 1;
+    }
+    return i1 + i2 ;
 }
 
 main() {
     add();
-    define Char : c = 'D';
     print("Hello world!");
+    i1 = 4;
+    s = toArrChar(f);
+    f = toFloat(s);
+    if(isNull(i2)) {
+        plot(arrI, "file.png");
+        regression(arrI);
+    } else {
+        regression(arrI, 0.5);
+        describe(arrF);
+    }
 }
