@@ -3,7 +3,6 @@ define Float : f1 = 1.23;
 define Char : c = 'A';
 define Bool : b1 = True;
 
-
 func add(Int : i1, Int : i2) : Int {
     define Int : david = 2;
     define Int : david = 3;

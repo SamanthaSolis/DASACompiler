@@ -1,0 +1,14 @@
+// to generate parser and lexer
+antlr4 -Dlanguage=Python3 DASA.g4
+// to execute the program
+// there will be nothing on stdout: read output.html to see the results
+python3 main.py input1.txt
+// to run the tests
+python3 -m unittest discover -s . -p Tests.py
+
+
+//arbol
+antlr4 DASA.g4
+java org.antlr.v4.Tool DASA.g4
+javac DASA*.java
+grun DASA programa testInput.txt -gui
