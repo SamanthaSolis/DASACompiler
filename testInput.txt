@@ -8,13 +8,25 @@ func add(Int:i1, Float:f1) : Int {
 
 func sub() {
     define Int: a;
+    define Int: b;
     define Int: alex;
-    alex = 1 + a;
+    define Bool: x;
+    define Bool: y;
+    define Bool: david;
+    david = y && x;
+    david = !david;
+    a = 1 + 4 * 2;
+    alex = 1 * a;
+    
+
 }
 
 main() {
-    define Int : c = 15;
-    define Int : i = 3;
+    define Int : c;
+    define Float : i;
+    c = 15;
+    i = 3;
+    i = i + c;
     c = 1 - 2;
     c = c + i;
 }

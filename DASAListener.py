@@ -5,7 +5,7 @@ if __name__ is not None and "." in __name__:
 else:
     from DASAParser import DASAParser
 
-from Objetos import CuadroSemantico as sSquare
+from Objetos import CuadroSemantico
 from Objetos import CuboSemantico
 from Objetos import Tipos as dTypes
 from Objetos import Operadores as dOper
@@ -284,11 +284,11 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#vars5.
     def enterVars5(self, ctx:DASAParser.Vars5Context):
-      #  print("")
-     #   print(self.currScope)
+        #  print("")
+        #   print(self.currScope)
         val = ctx.cte().getText()
-   #     print("val", type(val))
-    #    print("type", type(self.currType))
+        #     print("val", type(val))
+        #    print("type", type(self.currType))
 
         # if self.currScope == "Local":
         #     #print(self.currType)
@@ -365,7 +365,7 @@ class DASAListener(ParseTreeListener):
             self.quad = {}
             self.contCuadruplos += 1
         else:
-            print("you cannot assign those different types")    
+            raise Exception("you cannot assign those different types")
 
         
 
@@ -533,8 +533,8 @@ class DASAListener(ParseTreeListener):
                 tmpType = 0
             else:
                 tmpType = 1
-
             self.stackTypes.append(tmpType)
+            
     # Exit a parse tree produced by DASAParser#cte.
     def exitCte(self, ctx:DASAParser.CteContext):
         pass
@@ -671,7 +671,28 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#expres1.
     def exitExpres1(self, ctx:DASAParser.Expres1Context):
-        pass
+        if self.stackOper:
+            top = self.stackOper[len(self.stackOper)-1]
+            if top == 14 or top == 15:
+                self.quad["Op2"]=self.stackOP.pop()
+                self.quad["Op1"]=self.stackOP.pop()
+                self.quad["Oper"]= self.stackOper.pop()
+                type2 = self.stackTypes.pop()
+                type1 = self.stackTypes.pop()
+                typeRes = CuboSemantico.semCube[type1][type2][top]
+                if(typeRes != -1):
+                    temp = mem.memTemp[self.contTemp]
+                    self.quad["Res"] = temp
+                    self.contTemp += 1
+                    self.stackOP.append(temp)
+                    self.stackTypes.append(typeRes)
+                    self.cuadruplos.append(self.quad)
+                    print("temp cuad", self.quad)
+                    self.quad = {}
+                    self.contCuadruplos += 1
+                else:
+                    raise Exception("error: not possible") 
+                
 
 
     # Enter a parse tree produced by DASAParser#expres2.
@@ -699,7 +720,28 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#comp1.
     def exitComp1(self, ctx:DASAParser.Comp1Context):
-        pass
+        if self.stackOper:
+            top = self.stackOper[len(self.stackOper)-1]
+            if top == 8 or top == 9 or top == 10 or top == 11 or top == 12 or top == 13:
+                self.quad["Op2"]=self.stackOP.pop()
+                self.quad["Op1"]=self.stackOP.pop()
+                self.quad["Oper"]= self.stackOper.pop()
+                type2 = self.stackTypes.pop()
+                type1 = self.stackTypes.pop()
+                typeRes = CuboSemantico.semCube[type1][type2][top]
+                if(typeRes != -1):
+                    temp = mem.memTemp[self.contTemp]
+                    self.quad["Res"] = temp
+                    self.contTemp += 1
+                    self.stackOP.append(temp)
+                    self.stackTypes.append(typeRes)
+                    self.cuadruplos.append(self.quad)
+                    print("temp cuad", self.quad)
+                    self.quad = {}
+                    self.contCuadruplos += 1
+                else:
+                    raise Exception("error: not possible") 
+                    
 
 
     # Enter a parse tree produced by DASAParser#comp2.
@@ -743,11 +785,12 @@ class DASAListener(ParseTreeListener):
                     self.stackOP.append(temp)
                     self.stackTypes.append(typeRes)
                     self.cuadruplos.append(self.quad)
+                    print("temp cuad", self.quad)                   
                     self.quad = {}
                     self.contCuadruplos += 1
-                    print("temp cuad", self.quad)
+
                 else:
-                    print("error: not possible") 
+                    raise Exception("error: not possible") 
                     
 
     # Enter a parse tree produced by DASAParser#exp2.
@@ -774,7 +817,29 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#term1.
     def exitTerm1(self, ctx:DASAParser.Term1Context):
-        pass
+        if self.stackOper:
+            top = self.stackOper[len(self.stackOper)-1]
+            if top == 3 or top == 4 or top == 5:
+                self.quad["Op2"]=self.stackOP.pop()
+                self.quad["Op1"]=self.stackOP.pop()
+                self.quad["Oper"]= self.stackOper.pop()
+                type2 = self.stackTypes.pop()
+                type1 = self.stackTypes.pop()
+                typeRes = CuboSemantico.semCube[type1][type2][top]
+                if(typeRes != -1):
+                    temp = mem.memTemp[self.contTemp]
+                    self.quad["Res"] = temp
+                    self.contTemp += 1
+                    self.stackOP.append(temp)
+                    self.stackTypes.append(typeRes)
+                    self.cuadruplos.append(self.quad)
+                    print("temp cuad", self.quad)
+                    self.quad = {}
+                    self.contCuadruplos += 1
+
+                else:
+                    raise Exception("error: not possible") 
+                
 
 
     # Enter a parse tree produced by DASAParser#term2.
@@ -793,16 +858,37 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#factor.
     def exitFactor(self, ctx:DASAParser.FactorContext):
+        if self.stackOper:
+            top = self.stackOper[len(self.stackOper)-1]
+            if top == 0 or top == 1 or top == 2:
+                self.quad["Op1"]=self.stackOP.pop()
+                self.quad["Oper"]= self.stackOper.pop()
+                type1 = self.stackTypes.pop()
+                typeRes = CuadroSemantico.semSquare[type1][top]
+                if(typeRes != -1):
+                    temp = mem.memTemp[self.contTemp]
+                    self.quad["Res"] = temp
+                    self.contTemp += 1
+                    self.stackOP.append(temp)
+                    self.stackTypes.append(typeRes)
+                    self.cuadruplos.append(self.quad)
+                    print("temp cuad", self.quad)
+                    self.quad = {}
+                    self.contCuadruplos += 1
+                else:
+                    raise Exception("error: not possible")
         pass
 
 
     # Enter a parse tree produced by DASAParser#fact1.
     def enterFact1(self, ctx:DASAParser.Fact1Context):
-        pass
+        pass 
 
     # Exit a parse tree produced by DASAParser#fact1.
     def exitFact1(self, ctx:DASAParser.Fact1Context):
-        pass
+        if ctx.getChildCount():
+            opttemp= ctx.getChild(0).getText()
+            self.stackOper.append(dOper.dicOperations[opttemp])
 
 
     # Enter a parse tree produced by DASAParser#fact2.
