@@ -58,11 +58,15 @@ asig1: LBRACK expresion RBRACK asig2 |   ;
 
 asig2: LBRACK CINT RBRACK |   ;
 
-durante: WHILE LPAREN expresion RPAREN bloque ;
+durante: WHILE LPAREN expresion RPAREN duro1 ;
 
-condicion: IF LPAREN expresion RPAREN bloque con1 ;
+duro1: bloque ;
 
-con1: ELSE bloque |   ;
+condicion: IF LPAREN expresion RPAREN con1 ;
+
+con1: bloque con2 ;
+
+con2: ELSE bloque |   ;
 
 lectura: INPUT LPAREN ID lec1 RPAREN SCOLON ;
 
