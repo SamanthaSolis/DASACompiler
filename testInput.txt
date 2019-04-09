@@ -7,17 +7,14 @@ func add(Int:i1, Float:f1) : Int {
 
 func sub() {
     define Int: a;
-    define Int: b;
     define Int: alex;
     define Bool: x;
     define Bool: y;
     define Bool: david;
     david = y && x;
     david = !david;
-    a = +1 + 4 * 2;
-    alex = -1 * -a;
-
-
+    a = 1 + 4 * 2;
+    alex = -1 * a;
 }
 
 main() {
@@ -37,6 +34,8 @@ main() {
         
     if(b1){
         b1 = False;
+    } else {
+        b1 = True;
     }
 
 }

@@ -269,6 +269,14 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#vars3.
     def enterVars3(self, ctx:DASAParser.Vars3Context):
         self.var["Name"] = ctx.ID().getText()
+        #tempname = ctx.ID().getText()
+        # print("tempname:", tempname)
+        # for v in self.varsTable:
+        #     print("nameeee", v["Name"])
+        #     if v["Name"] == tempname:
+        #         raise Exception("Variable already defined")
+        #     else:
+        #         self.var["Name"] = tempname
 
     # Exit a parse tree produced by DASAParser#vars3.
     def exitVars3(self, ctx:DASAParser.Vars3Context):
@@ -432,31 +440,28 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#condicion.
     def exitCondicion(self, ctx:DASAParser.CondicionContext):
-        print(self.stackPJ)
         end=self.stackPJ.pop()
         self.cuadruplos[end]["Res"] = self.contCuadruplos
 
     # Enter a parse tree produced by DASAParser#con1.
     def enterCon1(self, ctx:DASAParser.Con1Context):
-        print("ENTRE2")
         contemp = self.stackTypes.pop()
         if contemp != 3: 
             raise Exception("Expected Boolean expression in if condition")
         else:
-            print("ENTRE")
             self.quad["Op1"]= self.stackOP.pop()
             self.quad["Op2"]= None
             self.quad["Oper"]= "GOTOF"
-            self.stackPJ.append(self.contCuadruplos-1)
-            
             self.cuadruplos.append(self.quad)
             self.contCuadruplos = self.contCuadruplos + 1
             self.quad={}
+            self.stackPJ.append(self.contCuadruplos-1)
 
 
     # Exit a parse tree produced by DASAParser#con1.
     def exitCon1(self, ctx:DASAParser.Con1Context):
         pass
+
 
 
     # Enter a parse tree produced by DASAParser#con2.
@@ -475,14 +480,6 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#con2.
     def exitCon2(self, ctx:DASAParser.Con2Context):
-        pass
-
-    # Enter a parse tree produced by DASAParser#con1.
-    def enterCon1(self, ctx:DASAParser.Con1Context):
-        pass
-
-    # Exit a parse tree produced by DASAParser#con1.
-    def exitCon1(self, ctx:DASAParser.Con1Context):
         pass
 
 
