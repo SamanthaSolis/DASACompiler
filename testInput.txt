@@ -1,10 +1,4 @@
 
-func add(Int:i1, Float:f1) : Int {
-    define Int: m;
-    define Float: may;
-    may = 1 - m;
-}
-
 func sub() {
     define Int: a;
     define Int: alex;
@@ -17,11 +11,21 @@ func sub() {
     alex = -1 * a;
 }
 
+func add(Int:i1, Float:f1) : Int {
+    define Int: m;
+    define Float: may;
+    may = 1 - m;
+    sub();
+}
+
 main() {
     define Int : c;
     define Float : i;
     define Bool: b1;
     define Int: i1;
+
+    add(i1,i);
+
 
     c = 15;
     i = 3;

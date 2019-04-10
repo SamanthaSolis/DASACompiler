@@ -2,7 +2,7 @@
 antlr4 -Dlanguage=Python3 DASA.g4
 // to execute the program
 // there will be nothing on stdout: read output.html to see the results
-python3 main.py input1.txt
+python3 main.py testInput.txt
 // to run the tests
 python3 -m unittest discover -s . -p Tests.py
 
