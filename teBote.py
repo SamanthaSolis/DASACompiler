@@ -25,3 +25,17 @@
                         self.quad["Res"] = (13,len(mem.memTemp[2])-1)
                 else:
                     print("error: not possible")
+
+
+# Memoria
+if(self.currType == "Bool"):
+                if(val == "True"):
+                    mem.memLocal[3][len(mem.memLocal[3])-1] = True
+                else:
+                    mem.memLocal[3][len(mem.memLocal[3])-1] = False
+            if(self.currType == "Char"):
+                mem.memLocal[4][len(mem.memLocal[4])-1] = val.replace("'","")
+            if(self.currType == "Float"):
+                mem.memLocal[2][len(mem.memLocal[2])-1] = float(val)
+            if(self.currType == "Int"):
+                mem.memLocal[1][len(mem.memLocal[1])-1] = int(val)

@@ -1,11 +1,31 @@
 class Memoria():
-    memGlobal = [0, [], [], [], []] # [0, [Bool], [Char], [Float], [Int]]    
-    memLocal = [0, [], [], [], []] # [0, [Bool], [Char], [Float], [Int]]
-    ##memTemp = [0, [], [], [], []] # [0, [Bool], [Char], [Float], [Int]]
-    memConst = [0, [], [], [], []] # [0, [Bool], [Char], [Float], [Int]]
-    memTemp = []
-    for i in range(0, 500):
-        memTemp.append("t"+str(i))
+
+    memStack = [0,
+                [0,[],[],[],[]], #Local = 1
+                [0,[],[],[],[]]] #Global = 2
+
+    BaseINT = 1000
+    BaseFLOAT = 2000
+    BaseBOOL = 3000
+    BaseCHAR = 4000
+
+    BaseLOCAL= 10000
+    BaseGLOBAL= 20000
+
+
+class Cuadruplos():
+
+    cuadruplos  = []
+    
+    # def __init__(self):
+    #     self.cuadruplos = []
+
+    # def printQuads(self):
+    #     index = 0
+    #     for y in self.cuadruplos:
+    #         print("\t",index, ".", "{Oper:", y["Oper"], ", Op1:", y["Op1"], ", Op2:", y["Op2"], ", Res:", y["Res"], "}")
+    #         index += 1
+        
 
 class Operadores():
     dicOperations = {"!"  : 0,
@@ -42,6 +62,13 @@ class Tipos():
                 "Bool[][]"  : 11,
                 "Char[][]"  : 12}
 
+class Scopes():
+    dicScopes = {
+        "Global" : 1,
+        "Local"  : 2,
+        "Const"  : 3,
+        "Temp"   : 4
+    }
 
 class CuadroSemantico():
     semSquare = [[-1 for y in range(3)] for x in range(13)]
