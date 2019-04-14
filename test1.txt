@@ -1,0 +1,5 @@
+main() {
+    define Int: i;
+    i = 1 + 2;
+    i = 1 + 3;
+}
