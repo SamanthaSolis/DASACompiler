@@ -14,8 +14,6 @@ from Objetos import Quadruples as quads
 class DASAListener(ParseTreeListener):
 
     def __init__(self):
-        self.functionsTable = []
-
         self.currType = 0
         self.currScope = 0
         self.ongoingFunc = 0
@@ -46,7 +44,7 @@ class DASAListener(ParseTreeListener):
             "Signature" : [0, 0, 0, 0, 0],
             "SymTable" : []
         }
-        self.functionsTable.append(function)
+        mem.dirFunctions.append(function)
         self.ongoingFunc = 0
         self.ongoingVar = -1
 
@@ -58,7 +56,7 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#programa.
     def exitPrograma(self, ctx:DASAParser.ProgramaContext):
-        for x in self.functionsTable:
+        for x in mem.dirFunctions:
             print("{function:", x["Id"], "Parameters:", x["Params"], "Param types:", x["ParamTypes"], "Return type:", x["Return"], "Start quad:", x["StartQuad"], "}")
             for y in x["SymTable"]:
                 print("\t", y)
@@ -122,7 +120,7 @@ class DASAListener(ParseTreeListener):
         }
         self.currScope= 1
         # self.currFunction= "main"
-        self.functionsTable.append(function)
+        mem.dirFunctions.append(function)
         self.ongoingFunc += 1
         self.ongoingVar = -1
         quads.stack[0]["Res"] = self.contCuadruplos
@@ -141,7 +139,7 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#main1.
     def exitMain1(self, ctx:DASAParser.Main1Context):
-        #self.functionsTable[len(self.functionsTable)-1]["SymTable"] = self.varsTable
+        #mem.dirFunctions[len(mem.dirFunctions)-1]["SymTable"] = self.varsTable
         pass
 
     # Enter a parse tree produced by DASAParser#main2.
@@ -165,7 +163,7 @@ class DASAListener(ParseTreeListener):
             "SymTable" : []
         }
         self.currScope= 1
-        self.functionsTable.append(function)
+        mem.dirFunctions.append(function)
         self.ongoingFunc += 1
         self.ongoingVar = -1
 
@@ -192,7 +190,7 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#met2.
     def enterMet2(self, ctx:DASAParser.Met2Context):
         if ctx.getChildCount() > 0:
-            self.functionsTable[self.ongoingFunc]["Return"] = dic.types[ctx.tipo().getText()]
+            mem.dirFunctions[self.ongoingFunc]["Return"] = dicc.types[ctx.tipo().getText()]
 
     # Exit a parse tree produced by DASAParser#met2.
     def exitMet2(self, ctx:DASAParser.Met2Context):
@@ -202,7 +200,7 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#met3.
     def enterMet3(self, ctx:DASAParser.Met3Context):
         self.inBody = False
-        # self.functionsTable[ongoingFunc]["SymTable"] = self.varsTable
+        # mem.dirFunctions[ongoingFunc]["SymTable"] = self.varsTable
 
     # Exit a parse tree produced by DASAParser#met3.
     def exitMet3(self, ctx:DASAParser.Met3Context):
@@ -227,9 +225,9 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#params.
     def enterParams(self, ctx:DASAParser.ParamsContext):
-        self.functionsTable[self.ongoingFunc]["Params"] += 1
+        mem.dirFunctions[self.ongoingFunc]["Params"] += 1
         tmpType = dicc.types[ctx.tipo().getText()]
-        self.functionsTable[self.ongoingFunc]["ParamTypes"].append(dicc.types[ctx.tipo().getText()])
+        mem.dirFunctions[self.ongoingFunc]["ParamTypes"].append(dicc.types[ctx.tipo().getText()])
         var = {
             "Id" : ctx.ID().getText(),
             "Type" : tmpType,
@@ -240,8 +238,8 @@ class DASAListener(ParseTreeListener):
             "Scope" : self.currScope,
             "Address" : "param"# genAddress(self.currScope, tmpType,len(self.function["Signature"][self.currType]))
         }
-        self.functionsTable[self.ongoingFunc]["Signature"][tmpType] += 1
-        self.functionsTable[self.ongoingFunc]["SymTable"].append(var)
+        mem.dirFunctions[self.ongoingFunc]["Signature"][tmpType] += 1
+        mem.dirFunctions[self.ongoingFunc]["SymTable"].append(var)
         self.ongoingVar += 1
 
 
@@ -264,8 +262,8 @@ class DASAListener(ParseTreeListener):
             "Scope" : self.currScope,
             "Address" : "var" # genAddress(self.currScope,self.currType,len(self.function["Signature"][self.currType]))
         }
-        self.functionsTable[self.ongoingFunc]["Signature"][self.currType] += 1
-        self.functionsTable[self.ongoingFunc]["SymTable"].append(var)
+        mem.dirFunctions[self.ongoingFunc]["Signature"][self.currType] += 1
+        mem.dirFunctions[self.ongoingFunc]["SymTable"].append(var)
         self.ongoingVar += 1
 
 
@@ -281,15 +279,15 @@ class DASAListener(ParseTreeListener):
     # Exit a parse tree produced by DASAParser#vars1.
     def exitVars1(self, ctx:DASAParser.Vars1Context):
         if ctx.getChildCount() > 0:
-            self.functionsTable[self.ongoingFunc]["SymTable"][self.ongoingVar]["Dims"] += 1
-            self.functionsTable[self.ongoingFunc]["SymTable"][self.ongoingVar]["SizeD1"] = int(ctx.CINT().getText())
+            mem.dirFunctions[self.ongoingFunc]["SymTable"][self.ongoingVar]["Dims"] += 1
+            mem.dirFunctions[self.ongoingFunc]["SymTable"][self.ongoingVar]["SizeD1"] = int(ctx.CINT().getText())
 
 
     # Enter a parse tree produced by DASAParser#vars2.
     def enterVars2(self, ctx:DASAParser.Vars2Context):
         if ctx.getChildCount() > 0:
-            self.functionsTable[self.ongoingFunc]["SymTable"][self.ongoingVar]["Dims"] += 1
-            self.functionsTable[self.ongoingFunc]["SymTable"][self.ongoingVar]["SizeD2"] = int(ctx.CINT().getText())
+            mem.dirFunctions[self.ongoingFunc]["SymTable"][self.ongoingVar]["Dims"] += 1
+            mem.dirFunctions[self.ongoingFunc]["SymTable"][self.ongoingVar]["SizeD2"] = int(ctx.CINT().getText())
 
     # Exit a parse tree produced by DASAParser#vars2.
     def exitVars2(self, ctx:DASAParser.Vars2Context):
@@ -298,7 +296,7 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#vars3.
     def enterVars3(self, ctx:DASAParser.Vars3Context):
-        self.functionsTable[self.ongoingFunc]["SymTable"][self.ongoingVar]["Id"] = ctx.ID().getText()
+        mem.dirFunctions[self.ongoingFunc]["SymTable"][self.ongoingVar]["Id"] = ctx.ID().getText()
         # tempname = ctx.ID().getText()
         # print("tempname:", tempname)
         # for v in self.varsTable:
@@ -325,10 +323,10 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#vars5.
     def enterVars5(self, ctx:DASAParser.Vars5Context):
         val = ctx.cte().getText()
-        self.functionsTable[self.ongoingFunc]["SymTable"][self.ongoingVar]["Value"] = val
+        mem.dirFunctions[self.ongoingFunc]["SymTable"][self.ongoingVar]["Value"] = val
         #mem.memStack[dScope.dicScopes[self.currScope][dTypes.dicTypes[self.currType]] = val
         if(val != "Null"):
-            self.functionsTable[self.ongoingFunc]["SymTable"][self.ongoingVar]["HasValue"] = True
+            mem.dirFunctions[self.ongoingFunc]["SymTable"][self.ongoingVar]["HasValue"] = True
 
     # Exit a parse tree produced by DASAParser#vars5.
     def exitVars5(self, ctx:DASAParser.Vars5Context):
@@ -360,22 +358,27 @@ class DASAListener(ParseTreeListener):
         var = ctx.getChild(0).getText()
         exists = False
         address = 0
-        for v in self.functionsTable[self.ongoingFunc]["SymTable"]:
+        tmpType = 0
+        for v in mem.dirFunctions[self.ongoingFunc]["SymTable"]:
             if v["Id"] == var:
                 exists = True
                 address = v["Address"]
+                tmpType = v["Type"]
         if exists:
-            self.stackTypes.append(v["Type"])
+            self.stackTypes.append(tmpType)
+            self.stackOP.append(address)
             self.stackOper.append(var) # Hacer append de la memoria
             self.stackOper.append(dicc.operators['='])
         else:
-            for v in self.functionsTable[0]["SymTable"]:
+            for v in mem.dirFunctions[0]["SymTable"]:
                 if v["Id"] == var:
                     exists = True
                     address = v["Address"]
+                    tmpType = v["Type"]
             if exists:
-                self.stackTypes.append(v["Type"])
+                self.stackTypes.append(tmpType)
                 self.stackOper.append(var) # Hacer append de la memoria
+                self.stackOP.append(address)
                 self.stackOper.append(dicc.operators['='])
             else:
                 raise Exception("Error: Variable " + var + " hasn't been defined.")
@@ -683,7 +686,7 @@ class DASAListener(ParseTreeListener):
         exists = False
         id = ctx.getChild(0).getText()
         index = 0
-        for f in self.functionsTable:
+        for f in mem.dirFunctions:
             if f["Id"] == id:
                 exists = True
                 self.ongoingFunc = index
@@ -704,8 +707,8 @@ class DASAListener(ParseTreeListener):
     def exitFuncion(self, ctx:DASAParser.FuncionContext):
         quad = {
             "Oper" : "GOSUB",
-            "Op1" : self.functionsTable[self.ongoingFunc]["Id"],
-            "Res" : self.functionsTable[self.ongoingFunc]["StartQuad"]
+            "Op1" : mem.dirFunctions[self.ongoingFunc]["Id"],
+            "Res" : mem.dirFunctions[self.ongoingFunc]["StartQuad"]
         }
         quads.stack.append(quad)
         self.contCuadruplos += 1
@@ -723,8 +726,8 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#func2.
     def enterFunc2(self, ctx:DASAParser.Func2Context):
-        tipoParam = self.functionsTable[self.ongoingFunc]["ParamTypes"][self.paramCounter]
-        if self.paramCounter >= self.functionsTable[self.ongoingFunc]["Params"]:
+        tipoParam = mem.dirFunctions[self.ongoingFunc]["ParamTypes"][self.paramCounter]
+        if self.paramCounter >= mem.dirFunctions[self.ongoingFunc]["Params"]:
             raise Exception("Error: Method was given more parameters than expected.")
         else:
             if self.stackTypes.pop() != tipoParam:
@@ -774,24 +777,18 @@ class DASAListener(ParseTreeListener):
             if top == 14 or top == 15:
                 op2 = self.stackOP.pop()
                 op1 = self.stackOP.pop()
-                quad = {
-
-                }
-                # self.quad["Op2"]=
-                # self.quad["Op1"]=self.stackOP.pop()
-                # self.quad["Oper"]= self.stackOper.pop()
                 type2 = self.stackTypes.pop()
                 type1 = self.stackTypes.pop()
                 typeRes = sem.cube[type1][type2][top]
                 if(typeRes != -1):
-                    res = "temp" # genAddress(self.currScope,typeRes,len(self.functionsTable[self.ongoingFunc]["Signature"][typeRes]))
+                    res = "temp" # genAddress(self.currScope,typeRes,len(mem.dirFunctions[self.ongoingFunc]["Signature"][typeRes]))
                     quad = {
                         "Oper" : self.stackOper.pop(),
                         "Op1"  : op1,
                         "Op2"  : op2,
                         "Res"  : res
                     }
-                    self.functionsTable[self.ongoingFunc]["Signature"][typeRes] += 1
+                    mem.dirFunctions[self.ongoingFunc]["Signature"][typeRes] += 1
                     self.stackOP.append(res)
                     self.stackTypes.append(typeRes)
                     quads.stack.append(quad)
@@ -830,7 +827,7 @@ class DASAListener(ParseTreeListener):
                 if(typeRes != -1):
                     op1 = self.stackOP.pop()
                     op2 = self.stackOP.pop()
-                    res = "temp" # genAddress(self.currScope,typeRes,len(self.functionsTable[self.ongoingFunc]["Signature"][typeRes]))
+                    res = "temp" # genAddress(self.currScope,typeRes,len(mem.dirFunctions[self.ongoingFunc]["Signature"][typeRes]))
                     quad = {
                         "Oper" : self.stackOper.pop(),
                         "Op1"  : op1,
@@ -877,7 +874,7 @@ class DASAListener(ParseTreeListener):
                 if(typeRes != -1):
                     op2 = self.stackOP.pop()
                     op1 = self.stackOP.pop()
-                    res = "temp" # genAddress(self.currScope,typeRes,len(self.functionsTable[self.ongoingFunc]["Signature"][typeRes]))
+                    res = "temp" # genAddress(self.currScope,typeRes,len(mem.dirFunctions[self.ongoingFunc]["Signature"][typeRes]))
                     quad = {
                         "Oper" : self.stackOper.pop(),
                         "Op1"  : op1,
@@ -923,7 +920,7 @@ class DASAListener(ParseTreeListener):
                 if(typeRes != -1):
                     op2 = self.stackOP.pop()
                     op1 = self.stackOP.pop()
-                    res = "temp" # genAddress(self.currScope,typeRes,len(self.functionsTable[self.ongoingFunc]["Signature"][typeRes]))
+                    res = "temp" # genAddress(self.currScope,typeRes,len(mem.dirFunctions[self.ongoingFunc]["Signature"][typeRes]))
                     quad = {
                         "Oper" : self.stackOper.pop(),
                         "Op1"  : op1,
@@ -958,7 +955,7 @@ class DASAListener(ParseTreeListener):
                 type1 = self.stackTypes.pop()
                 typeRes = sem.square[type1][top]
                 if(typeRes != -1):
-                    res = "temp" # genAddress(self.currScope,typeRes,len(self.functionsTable[self.ongoingFunc]["Signature"][typeRes]))
+                    res = "temp" # genAddress(self.currScope,typeRes,len(mem.dirFunctions[self.ongoingFunc]["Signature"][typeRes]))
                     quad = {
                         "Oper" : self.stackOper.pop(),
                         "Op1"  : self.stackOP.pop(),
@@ -1010,7 +1007,7 @@ class DASAListener(ParseTreeListener):
             #print("leyendo id:", ctx.getChild(0).getText())
             self.stackOP.append(ctx.getChild(0).getText())
             tmpType = 0
-            for v in self.functionsTable[self.ongoingFunc]["SymTable"]:
+            for v in mem.dirFunctions[self.ongoingFunc]["SymTable"]:
                 if v["Id"] == ctx.getChild(0).getText():
                     tmpType = v["Type"]
             self.stackTypes.append(tmpType)

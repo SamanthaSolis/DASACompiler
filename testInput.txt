@@ -24,7 +24,6 @@ main() {
     define Bool: b1;
     define Int: i1;
 
-    add(i1,i);
 
 
     c = 15;
