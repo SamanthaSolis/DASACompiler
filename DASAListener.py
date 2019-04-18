@@ -14,10 +14,13 @@ from Objetos import Cuadruplos as quad
 
 from Objetos import CuadroSemantico
 from Objetos import CuboSemantico
+from Objetos import Calc
 
 
 # This class defines a complete listener for a parse tree produced by DASAParser.
 class DASAListener(ParseTreeListener):
+
+
 
     def __init__(self):
         self.functionsTable = []
@@ -44,7 +47,7 @@ class DASAListener(ParseTreeListener):
 #        self.cuadruplos
         self.quad = {} # {Oper, Op1, Op2, Res}
         self.contCuadruplos = 0
-        self.contTemp = [0, 0, 0, 0, 0]
+#        self.contTemp = [0, 0, 0, 0, 0]
         
         self.OnGoingFunc = 0
         self.paramCounter = 0
@@ -76,7 +79,7 @@ class DASAListener(ParseTreeListener):
                          }
         self.functionsTable.append(self.function)
         for x in self.functionsTable:
-            print("{", x["Id"], x["Params"], x["TiposParams"], x["Return"], x["StartQuad"], "}")
+            print("{", x["Id"], x["Params"], x["TiposParams"], x["Return"], x["StartQuad"], x["Signature"], "}")
             for y in x["SymTable"]:
                 print("\t", y)
         #print("Memoria local:", mem.memLocal)
@@ -114,7 +117,7 @@ class DASAListener(ParseTreeListener):
                          "TiposParams" : [],
                          "Return" : 0,
                          "StartQuad" : self.contCuadruplos,
-                         "SignatureVars" : [0, 0, 0, 0, 0],
+                         "Signature" : [0, 0, 0, 0, 0],
                          "SymTable" : []}
         self.currScope= 1
         self.currFunction= "main"
@@ -160,7 +163,7 @@ class DASAListener(ParseTreeListener):
                          "TiposParams" : [],
                          "Return" : 0,
                          "StartQuad" : self.contCuadruplos,
-                         "SignatureVars" : [0, 0, 0, 0, 0],
+                         "Signature" : [0, 0, 0, 0, 0],
                          "SymTable" : []}
         self.currScope= 1
         self.currFunction= ctx.ID().getText()
@@ -239,9 +242,9 @@ class DASAListener(ParseTreeListener):
                     "SizeD2" : -1,
                     "HasValue" : False,
                     "Scope" : self.currScope,
-                    "Address" : genAddress(self.currScope, tmpType,len(self.function["SignatureVars"][self.currType]))
+                    "Address" : Calc.genAddress(self.currScope, tmpType,self.function["Signature"][self.currType])
         }
-        self.function["SignatureVars"][tmpType] += 1
+        self.function["Signature"][tmpType] += 1
         self.varsTable.append(self.var)
 
 
@@ -255,15 +258,16 @@ class DASAListener(ParseTreeListener):
         self.currType = dTypes.dicTypes[ctx.tipo().getText()]
        # print(type(self.currType))
         self.var = {"Name" : "",
-                    "Type" : self.currType
+                    "Type" : self.currType,
                     "Dims" : 0,
                     "SizeD1" : -1,
                     "SizeD2" : -1,
                     "HasValue" : False,
-                    "Scope" : self.currScope
-                    "Address" : genAddress(self.currScope,self.currType,len(self.function["SignatureVars"][self.currType]))
+                    "Scope" : self.currScope,
+                    "Address" : Calc.genAddress(self.currScope, self.currType, self.function["Signature"][self.currType])
                     }
-        self.function["SignatureVars"][self.currType] += 1
+        self.function["Signature"][self.currType] += 1
+        
 
 
     # Exit a parse tree produced by DASAParser#vars_st.
@@ -356,32 +360,57 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#asignacion.
     def enterAsignacion(self, ctx:DASAParser.AsignacionContext):
-        self.stackOP.append(ctx.getChild(0).getText())
-        tempvalType = ""
+        var = ctx.getChild(0).getText()
+        exists = False
+        address = 0
+        tmp = 0
+        print("cur",self.currFunction)
         for f in self.functionsTable:
             if f["Id"] == self.currFunction:
-                for v in f["SymTable"]:
-                    if v["Name"] == ctx.getChild(0).getText():
-                        tempvalType = v["Type"]
-        self.stackTypes.append(dTypes.dicTypes[tempvalType])
-        self.stackOper.append(dOper.dicOperations['='])
+                func = self.functionsTable.index(f)
+
+        for v in self.functionsTable[func]["SymTable"]:
+            if v["Name"] == var:
+                exists = True
+                address = v["Address"]
+                tmp = v["Type"]
+        if exists:
+            self.stackTypes.append(tmp)
+            self.stackOP.append(var) # Hacer append de la memoria
+            self.stackOper.append(dOper.dicOperations['='])
+        else:
+            for v in self.functionsTable[0]["SymTable"]:
+                if v["Name"] == var:
+                    exists = True
+                    address = v["Address"]
+            if exists:
+                self.stackTypes.append(v["Type"])
+                self.stackOP.append(var) # Hacer append de la memoria
+                self.stackOper.append(dOper.dicOperations['='])
+            else:
+                raise Exception("Error: Variable " + var + " hasn't been defined.")
 
     # Exit a parse tree produced by DASAParser#asignacion.
     def exitAsignacion(self, ctx:DASAParser.AsignacionContext):
-        self.quad["Oper"] = self.stackOper.pop()
-        self.quad["Op1"] = self.stackOP.pop()
-        self.quad["Op2"] = None
-        self.quad["Res"] = self.stackOP.pop()
+        print("hola",self.stackTypes)
         type1 = self.stackTypes.pop()
         res = self.stackTypes.pop()
         typeRes = CuboSemantico.semCube[type1][res][16]
+
         if(typeRes != -1):
+            op1 = self.stackOP.pop()
+            res = self.stackOP.pop()
+            self.quad = {
+                "Oper" : self.stackOper.pop(),
+                "Op1"  : op1,
+                "Res"  : res,
+                "Op2" : None
+            }
             quad.cuadruplos.append(self.quad)
             self.quad = {}
             self.contCuadruplos += 1
         else:
-            raise Exception("you cannot assign those different types")
-
+            raise Exception("Error: Type mismatch in assign operation (" + str(type1) + ", " + str(type1) + ")")
 
 
 
@@ -798,7 +827,7 @@ class DASAListener(ParseTreeListener):
                 type1 = self.stackTypes.pop()
                 typeRes = CuboSemantico.semCube[type1][type2][top]
                 if(typeRes != -1):
-                    Res = genAddress(self.currScope,typeRes,len(self.functionsTable[self.OnGoingFunc]["Signature"][typeRes]))
+                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.OnGoingFunc]["Signature"][typeRes])
                     self.functionsTable[self.OnGoingFunc]["Signature"][typeRes] += 1
                     self.quad["Res"] = Res
                     self.stackOP.append(Res)
@@ -847,10 +876,9 @@ class DASAListener(ParseTreeListener):
                 type1 = self.stackTypes.pop()
                 typeRes = CuboSemantico.semCube[type1][type2][top]
                 if(typeRes != -1):
-                    temp = mem.memTemp[self.contTemp]
-                    self.quad["Res"] = temp
-                    self.contTemp += 1
-                    self.stackOP.append(temp)
+                    self.quad["Res"] = "temp"
+                   # self.contTemp += 1
+                    self.stackOP.append("temp")
                     self.stackTypes.append(typeRes)
                     quad.cuadruplos.append(self.quad)
                     print("temp cuad", self.quad)
@@ -896,10 +924,9 @@ class DASAListener(ParseTreeListener):
                 type1 = self.stackTypes.pop()
                 typeRes = CuboSemantico.semCube[type1][type2][top]
                 if(typeRes != -1):
-                    temp = mem.memTemp[self.contTemp]
-                    self.quad["Res"] = temp
-                    self.contTemp += 1
-                    self.stackOP.append(temp)
+                    self.quad["Res"] = "temp"
+                    #self.contTemp += 1
+                    self.stackOP.append("temp")
                     self.stackTypes.append(typeRes)
                     quad.cuadruplos.append(self.quad)
                     print("temp cuad", self.quad)
@@ -944,10 +971,9 @@ class DASAListener(ParseTreeListener):
                 type1 = self.stackTypes.pop()
                 typeRes = CuboSemantico.semCube[type1][type2][top]
                 if(typeRes != -1):
-                    temp = mem.memTemp[self.contTemp]
-                    self.quad["Res"] = temp
-                    self.contTemp += 1
-                    self.stackOP.append(temp)
+                    self.quad["Res"] = "temp"
+                    #self.contTemp += 1
+                    self.stackOP.append("temp")
                     self.stackTypes.append(typeRes)
                     quad.cuadruplos.append(self.quad)
                     print("temp cuad", self.quad)
@@ -984,10 +1010,9 @@ class DASAListener(ParseTreeListener):
                 type1 = self.stackTypes.pop()
                 typeRes = CuadroSemantico.semSquare[type1][top]
                 if(typeRes != -1):
-                    temp = mem.memTemp[self.contTemp]
-                    self.quad["Res"] = temp
-                    self.contTemp += 1
-                    self.stackOP.append(temp)
+                    self.quad["Res"] = "temp"
+                    #self.contTemp += 1
+                    self.stackOP.append("temp")
                     self.stackTypes.append(typeRes)
                     quad.cuadruplos.append(self.quad)
                     print("temp cuad", self.quad)
@@ -1042,7 +1067,7 @@ class DASAListener(ParseTreeListener):
                     for v in f["SymTable"]:
                         if v["Name"] == ctx.getChild(0).getText():
                             tempvalType = v["Type"]
-            self.stackTypes.append(dTypes.dicTypes[tempvalType])
+            self.stackTypes.append(tempvalType)
             
 
 
@@ -1098,7 +1123,4 @@ class DASAListener(ParseTreeListener):
     # Exit a parse tree produced by DASAParser#castarrchar.
     def exitCastarrchar(self, ctx:DASAParser.CastarrcharContext):
         pass
-
-    def genAddress(scope,type,pos):
-        return scope*10000 + type*1000 + pos
 

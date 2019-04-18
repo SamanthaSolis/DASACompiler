@@ -5,8 +5,8 @@ func sub() {
     define Bool: x;
     define Bool: y;
     define Bool: david;
-    david = y && x;
-    david = !david;
+    y = y && x;
+
     a = 1 + 4 * 2;
     alex = -1 * a;
 }

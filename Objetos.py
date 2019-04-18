@@ -1,3 +1,8 @@
+class Calc():
+    def genAddress(scope,type,pos):
+        return scope*10000 + type*1000 + pos
+
+
 class Memoria():
 
     memStack = [0,
