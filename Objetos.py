@@ -7,8 +7,10 @@ class Memoria():
 
     memStack = [0,
                 [0,[],[],[],[]], #Local = 1
-                [0,[],[],[],[]]] #Global = 2
-
+                [0,[],[],[],[]], #Global = 2
+                [[None], [], [], [True, False], [],] #Constante = 3
+                ] 
+    
     BaseINT = 1000
     BaseFLOAT = 2000
     BaseBOOL = 3000
@@ -16,6 +18,7 @@ class Memoria():
 
     BaseLOCAL= 10000
     BaseGLOBAL= 20000
+    BaseCTE = 30000
 
 
 class Cuadruplos():

@@ -23,9 +23,9 @@ class DASAListener(ParseTreeListener):
         self.inBody = False
 
         self.stackPJ = [] #Brincos pendientes
-        self.stackOP = []  # Operandos
+        self.stackOP = []  # Operandos numeros
         self.stackTypes = []
-        self.stackOper = [] # Operaciones
+        self.stackOper = [] # Operaciones simbolo
         # self.stackMem = []
 
         self.contCuadruplos = 0
@@ -1092,4 +1092,3 @@ class DASAListener(ParseTreeListener):
             else:
                 res += "-"
             res += "}"
-....

@@ -20,8 +20,6 @@ from Objetos import Calc
 # This class defines a complete listener for a parse tree produced by DASAParser.
 class DASAListener(ParseTreeListener):
 
-
-
     def __init__(self):
         self.functionsTable = []
         self.function = {}
@@ -74,7 +72,7 @@ class DASAListener(ParseTreeListener):
                          "TiposParams" : [],
                          "StartQuad" : 0,
                          "Return" : 0,
-                         "Signature" : [0 for r in range(13)],
+                         "Signature" : [0 for r in range(5)],
                          "SymTable" : self.globVars
                          }
         self.functionsTable.append(self.function)
@@ -92,6 +90,8 @@ class DASAListener(ParseTreeListener):
         for y in quad.cuadruplos:
             print("\t",self.printIndex, ".", "{Oper:", y["Oper"], ", Op1:", y["Op1"], ", Op2:", y["Op2"], ", Res:", y["Res"], "}")
             self.printIndex = self.printIndex + 1
+        print("Memoria:")
+        print(mem.memStack)
 
     # Enter a parse tree produced by DASAParser#prog1.
     def enterProg1(self, ctx:DASAParser.Prog1Context):
@@ -392,7 +392,6 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#asignacion.
     def exitAsignacion(self, ctx:DASAParser.AsignacionContext):
-        print("hola",self.stackTypes)
         type1 = self.stackTypes.pop()
         res = self.stackTypes.pop()
         typeRes = CuboSemantico.semCube[type1][res][16]
@@ -618,22 +617,44 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#cte.
     def enterCte(self, ctx:DASAParser.CteContext):
         if self.inBody:
-            self.stackOP.append(ctx.getChild(0).getText())
             ctetemp = ctx.getChild(0).getText()
             tmpType = -1
+            tmpval = 0
 
             if ctetemp.find('"') >= 0:
                 tmpType = 8
+                tmpval = ctetemp
             elif ctetemp.find("'") >= 0:
                 tmpType = 4
-            elif ctetemp == "True" or ctetemp == "False":
+                tmpval = ctetemp[1]
+            elif ctetemp == "True":
                 tmpType = 3
+                tmpval = True
+            elif ctetemp == "False":
+                tmpType = 3
+                tmpval = False
             elif ctetemp.find('.') >= 0:
                 tmpType = 2
+                tmpval = float(ctetemp)
             elif ctetemp == "Null":
                 tmpType = 0
+                tmpval = None
             else:
                 tmpType = 1
+                tmpval = int(ctetemp)
+            
+            exists = False
+            pos = 0
+            index = 0
+            for c in mem.memStack[3][tmpType]:
+                if tmpval == c:
+                    exists = True
+                    pos = mem.memStack[3][tmpType].index(tmpval)
+            if not exists:
+                mem.memStack[3][tmpType].append(tmpval)
+                pos = len(mem.memStack[3][tmpType])
+                
+            self.stackOP.append(Calc.genAddress(3, tmpType, pos))          
             self.stackTypes.append(tmpType)
 
     # Exit a parse tree produced by DASAParser#cte.
@@ -724,10 +745,10 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#funcion.
     def enterFuncion(self, ctx:DASAParser.FuncionContext):
         exists = False
-        id = ctx.getChild(0).getText()
+        idtemp = ctx.getChild(0).getText()
         index = 0
         for f in self.functionsTable:
-            if f["Id"] == id:
+            if f["Id"] == idtemp:
                 exists = True
                 self.OnGoingFunc = index
             index += 1
@@ -736,7 +757,7 @@ class DASAListener(ParseTreeListener):
         else:
             self.quad = {
                 "Oper" : "ERA",
-                "Op1" : id,
+                "Op1" : idtemp,
                 "Op2" : None,
                 "Res" : None
             }
@@ -1059,14 +1080,17 @@ class DASAListener(ParseTreeListener):
     # Exit a parse tree produced by DASAParser#valor.
     def exitValor(self, ctx:DASAParser.ValorContext):
         if ctx.getChildCount() == 2:
-            #print("leyendo id:", ctx.getChild(0).getText())
-            self.stackOP.append(ctx.getChild(0).getText())
+            tempaddress=""
             tempvalType = ""
+
             for f in self.functionsTable:
                 if f["Id"] == self.currFunction:
                     for v in f["SymTable"]:
                         if v["Name"] == ctx.getChild(0).getText():
                             tempvalType = v["Type"]
+                            tempaddress = v["Address"]
+
+            self.stackOP.append(tempaddress)       
             self.stackTypes.append(tempvalType)
             
 
