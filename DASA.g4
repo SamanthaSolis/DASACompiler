@@ -84,7 +84,7 @@ arr3: COMMA arr2 |   ;
 
 arr4: LBRACK arr5 RBRACK arr7 ;
 
-arr5: expresion arr6 |   ;
+arr5: cte arr6 |   ;
 
 arr6: COMMA arr5|   ;
 
