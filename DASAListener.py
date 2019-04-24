@@ -367,7 +367,7 @@ class DASAListener(ParseTreeListener):
         if exists:
             self.stackTypes.append(tmpType)
             self.stackOP.append(address)
-            self.stackOper.append(var) # Hacer append de la memoria
+            #self.stackOper.append(var) # Hacer append de la memoria
             self.stackOper.append(dicc.operators['='])
         else:
             for v in mem.dirFunctions[0]["SymTable"]:
@@ -377,7 +377,7 @@ class DASAListener(ParseTreeListener):
                     tmpType = v["Type"]
             if exists:
                 self.stackTypes.append(tmpType)
-                self.stackOper.append(var) # Hacer append de la memoria
+                #self.stackOper.append(var) # Hacer append de la memoria
                 self.stackOP.append(address)
                 self.stackOper.append(dicc.operators['='])
             else:
