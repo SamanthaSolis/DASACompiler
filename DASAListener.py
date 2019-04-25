@@ -306,7 +306,6 @@ class DASAListener(ParseTreeListener):
         exists = False
         
         for v in self.varsTable:
-            #print("HAAAA", tempname, self.functionsTable[self.OnGoingFunc]["SymTable"])
             if v["Name"] == tempname:
                 exists = True
             else:
@@ -529,13 +528,23 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#lectura.
     def exitLectura(self, ctx:DASAParser.LecturaContext):
+
+        var = ctx.ID().getText()
+
+        for f in self.functionsTable:
+            if f["Id"] == self.currFunction:
+                func = self.functionsTable.index(f)
+
+        for v in self.functionsTable[func]["SymTable"]:
+            if v["Name"] == var:
+                address = v["Address"]
+
         self.quad = {
             "Oper" : 26, #INPUT
-            "Op1" : self.stackOP.pop(),
+            "Op1" : address,
             "Op2" : None,
             "Res" : None
         }
-        self.stackTypes.pop()
         quad.cuadruplos.append(self.quad)
         self.quad = {}
         self.contCuadruplos += 1

@@ -1,6 +1,11 @@
 
 main() {
-    define Int : a;
-
+    define Float : a;
+    define Int : b;
+    define Bool: p;
     
+    a = 16;
+    b = 3;
+
+
 }

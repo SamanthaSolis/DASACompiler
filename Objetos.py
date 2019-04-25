@@ -119,7 +119,7 @@ class CuboSemantico():
     semCube = [[[-1 for z in range(17)] for y in range(13)] for x in range(13)]
     
     semCube[1][1][3] = 1
-    semCube[1][1][4] = 2
+    semCube[1][1][4] = 1
     semCube[1][1][5] = 1
     semCube[1][1][6] = 1
     semCube[1][1][7] = 1
