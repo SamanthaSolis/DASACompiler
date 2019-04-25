@@ -39,39 +39,53 @@ class Cuadruplos():
         
 
 class Operadores():
-    dicOperations = {"!"  : 0,
-                     "+u"  : 1,
-                     "-u"  : 2,
-                     "*"  : 3,
-                     "/"  : 4,
-                     "%"  : 5,
-                     "+"  : 6,
-                     "-"  : 7,
-                     "<"  : 8,
-                     "<=" : 9,
-                     ">"  : 10,
-                     ">=" : 11,
-                     "==" : 12,
-                     "!=" : 13,
-                     "&&" : 14,
-                     "||" : 15,
-                     "=" :16}
+    dicOperations = {
+        "!"  : 0,
+        "+u" : 1,
+        "-u" : 2,
+        "*"  : 3,
+        "/"  : 4,
+        "%"  : 5,
+        "+"  : 6,
+        "-"  : 7,
+        "<"  : 8,
+        "<=" : 9,
+        ">"  : 10,
+        ">=" : 11,
+        "==" : 12,
+        "!=" : 13,
+        "&&" : 14,
+        "||" : 15,
+        "=" :16,
+        "GOTO" : 17,
+        "GOTOF": 18,
+        "GOSUB": 19,
+        "END": 20,
+        "ENDPROC": 21,
+        "PARAM": 22,
+        "ERA": 23,
+        "RETURN": 24,
+        "PRINT": 25,
+    }
+
 
 class Tipos():
-    dicTypes = {"Error"     : -1,
-                "Null"      : 0,
-                "Int"       : 1,
-                "Float"     : 2,
-                "Bool"      : 3,
-                "Char"      : 4,
-                "Int[]"     : 5,
-                "Float[]"   : 6,
-                "Bool[]"    : 7,
-                "Char[]"    : 8,
-                "Int[][]"   : 9,
-                "Float[][]" : 10,
-                "Bool[][]"  : 11,
-                "Char[][]"  : 12}
+    dicTypes = {
+        "Error"     : -1,
+        "Null"      : 0,
+        "Int"       : 1,
+        "Float"     : 2,
+        "Bool"      : 3,
+        "Char"      : 4,
+        "Int[]"     : 5,
+        "Float[]"   : 6,
+        "Bool[]"    : 7,
+        "Char[]"    : 8,
+        "Int[][]"   : 9,
+        "Float[][]" : 10,
+        "Bool[][]"  : 11,
+        "Char[][]"  : 12
+    }
 
 class Scopes():
     dicScopes = {

@@ -1,7 +1,118 @@
 from Objetos import Memoria as mem
 from Objetos import Cuadruplos as quads
 
+#Definicion de funciones 
+
+def operNot(op1, op2, res):#uses Op1
+    print("HE",op1, op2, res)
+
+def operPos(op1, op2, res):#uses Op1
+    print("HE",op1, op2, res)
+
+def operNeg(op1, op2, res):#uses Op1
+    print("HE",op1, op2, res)
+
+def operMult(op1, op2, res):
+    print("HE",op1, op2, res)
+
+def operDiv(op1, op2, res):
+    print("HE",op1, op2, res)
+
+def operMod(op1, op2, res):
+    print("HE",op1, op2, res)
+    
+def operSum(op1, op2, res):
+    print("HE",op1, op2, res)
+        
+def operSubs(op1, op2, res):
+    print("HE",op1, op2, res)
+    
+def operLess(op1, op2, res):
+    print("HE",op1, op2, res)
+        
+def operLessEqual(op1, op2, res):
+    print("HE",op1, op2, res)
+    
+def operGreater(op1, op2, res):
+    print("HE",op1, op2, res)
+    
+def operGreaterEqual(op1, op2, res):
+    print("HE",op1, op2, res)
+    
+def operEqual(op1, op2, res):
+    print("HE",op1, op2, res)
+    
+def operNotEqual(op1, op2, res):
+    print("HE",op1, op2, res)
+    
+def operAnd(op1, op2, res):
+    print("HE",op1, op2, res)
+    
+def operOr(op1, op2, res):
+    print("HE",op1, op2, res)
+    
+def operAssig(op1, op2, res):
+    print("HE",op1, op2, res)
+
+def operGOTO(op1, op2, res):
+    print("HE",op1, op2, res)
+
+def operGOTOF(op1, op2, res):
+    print("HE",op1, op2, res)    
+
+def operGOSUB(op1, op2, res):
+    print("HE",op1, op2, res)
+    
+def operEND(op1, op2, res):
+    print("HE",op1, op2, res)
+    
+def operENDPROC(op1, op2, res):
+    print("HE",op1, op2, res)
+
+def operPARAM(op1, op2, res):
+    print("HE",op1, op2, res)
+
+def operERA(op1, op2, res):
+    print("HE",op1, op2, res)
+
+def operRETURN(op1, op2, res):
+    print("HE",op1, op2, res)
+
+def operPRINT(op1, op2, res):
+    print("HE",op1, op2, res)
+
+OperationsDir = [operNot,
+                operPos,
+                operNeg,
+                operMult,
+                operDiv,
+                operMod,
+                operSum,
+                operSubs,
+                operLess,
+                operLessEqual,
+                operGreater,
+                operGreaterEqual,
+                operEqual,
+                operNotEqual,
+                operAnd,
+                operOr,
+                operAssig,
+                operGOTO,
+                operGOTOF,
+                operGOSUB,
+                operEND,
+                operENDPROC,
+                operPARAM,
+                operERA,
+                operRETURN,
+                operPRINT]
+
 def run():
+    for q in quads.cuadruplos:
+        opType=q["Oper"] #Obtiene el tipo de operacion y llama esa funcion
+        OperationsDir[opType] (q["Op1"], q["Op2"], q["Res"])
+
     print('-----------Memoria------------')
     print(mem.memStack)
     print('----------Funciones-----------')
@@ -33,97 +144,14 @@ def run():
             res += "-"
         res += "}"
         print(res)
-    
-    for ind, q in enumerate(quads.cuadruplos):
 
-def operNot(op1, op2, res):
-
-def operSum(op1, op2, res):
-    
-def operSubs(op1, op2, res):
-
-def operMult(op1, op2, res):
-
-def operDiv(op1, op2, res):
+def setValor(res,adress):
+    if (adress < 10000):
+        raise Exception("Invalid Address")
+    iUno = int(adress/10000) #local(1) global(2) cte(3)
+    iDos = int((adress-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
+    iTres = int(int((adress-10000*iUno)-(iDos*1000)))
+    mem.memStack[iUno][iDos][iTres]=res #asigna valor en la posición de memoria
 
 
 
-
-
-
-
-    OperationsDir = [not,
-                        ,
-                        ,
-                        ]
-
-                        
-
-def Operacion(arregloCuadruplos):
-	global FuncionActiva
-	op = arregloCuadruplos[0]
-	op1 = arregloCuadruplos[1]
-	op2 = arregloCuadruplos[2]
-	res = arregloCuadruplos[3]
-	if(op == 0):
-		Suma(op1,op2,res)
-	elif(op == 1):
-		Resta(op1,op2,res)
-	elif(op == 2):
-		Multiplicacion(op1,op2,res)
-	elif(op == 3):
-		Division(op1,op2,res)
-	elif(op == 4):
-		MenorQue(op1,op2,res)
-	elif(op == 5):
-		MayorQue(op1,op2,res)
-	elif(op == 6):
-		Asignacion(op1,res)
-	elif(op == 7):
-		Diferente(op1,op2,res)
-	elif(op == 8):
-		IgualQue(op1,op2,res)
-	elif(op == 9):
-		And(op1,op2,res)
-	elif(op == 10):
-		Or(op1,op2,res)
-	elif(op == 11):
-		MenorIgual(op1,op2,res)
-	elif(op == 12):
-		MayorIgual(op1,op2,res)
-	elif(op == 13):
-		Print(op1)
-	elif(op == 14):
-		Read(op1)
-	elif(op == 15):
-		End()
-	elif(op == 16):
-		Goto(op1)
-	elif(op == 17):
-		GotoF(op1,res)
-	elif(op == 18):
-		Era(op1)
-	elif(op == 19):
-		Gosub(op1)
-	elif(op == 20):
-		Param(op1,res)
-	elif(op == 21):
-		Ver(op1,op2,res)
-	elif(op == 22):
-		Ret()
-	elif(op == 23):
-		Return(op1)
-	elif(op == 24):
-		move()
-	elif(op == 25):
-		checkwall()
-	elif(op == 26):
-		turnRight()
-	elif(op == 27):
-		turnLeft()
-	elif(op == 28):
-		pickBeeper()
-	elif(op == 29):
-		putBeeper()
-	elif(op == 30):
-		SumVer(op1,op2,res)

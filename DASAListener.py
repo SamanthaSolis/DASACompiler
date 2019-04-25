@@ -57,7 +57,7 @@ class DASAListener(ParseTreeListener):
     def enterPrograma(self, ctx:DASAParser.ProgramaContext):
         self.currScope= 2
         self.quad = {
-            "Oper" : "GOTO",
+            "Oper" : 17, #GOTO
             "Op1" : None,
             "Op2" : None,
         }
@@ -107,6 +107,7 @@ class DASAListener(ParseTreeListener):
         pass
 
     # Exit a parse tree produced by DASAParser#prog2.
+
     def exitProg2(self, ctx:DASAParser.Prog2Context):
         pass
 
@@ -129,7 +130,7 @@ class DASAListener(ParseTreeListener):
     # Exit a parse tree produced by DASAParser#main.
     def exitMain(self, ctx:DASAParser.MainContext):
         self.quad = {
-            "Oper" : "END",
+            "Oper" : 20, #END
             "Op1" : None,
             "Op2" : None,
             "Res" : None
@@ -174,7 +175,7 @@ class DASAListener(ParseTreeListener):
     # Exit a parse tree produced by DASAParser#metodos.
     def exitMetodos(self, ctx:DASAParser.MetodosContext):
         self.quad = {
-            "Oper" : "ENDPROC",
+            "Oper" : 21, #ENDPROC
             "Op1" : None,
             "Op2" : None,
             "Res" : None
@@ -445,7 +446,7 @@ class DASAListener(ParseTreeListener):
     # Exit a parse tree produced by DASAParser#durante.
     def exitDurante(self, ctx:DASAParser.DuranteContext):
         end = self.stackPJ.pop()
-        self.quad["Oper"] = "GOTO"
+        self.quad["Oper"] = 17 #GOTO
         self.quad["Op1"]= None
         self.quad["Op2"]= None
         self.quad["Res"]= self.stackPJ.pop()
@@ -460,7 +461,7 @@ class DASAListener(ParseTreeListener):
         if contemp != 3:
             raise Exception("Expected Boolean expression in while condition")
         else:
-            self.quad["Oper"]= "GOTOF"
+            self.quad["Oper"]= 18 #GOTOF
             self.quad["Op1"]= self.stackOP.pop()
             self.quad["Op2"]= None
             quad.cuadruplos.append(self.quad)
@@ -490,7 +491,7 @@ class DASAListener(ParseTreeListener):
         else:
             self.quad["Op1"]= self.stackOP.pop()
             self.quad["Op2"]= None
-            self.quad["Oper"]= "GOTOF"
+            self.quad["Oper"]= 18 #GOTOF
             quad.cuadruplos.append(self.quad)
             self.contCuadruplos = self.contCuadruplos + 1
             self.quad={}
@@ -506,7 +507,7 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#con2.
     def enterCon2(self, ctx:DASAParser.Con2Context):
         if ctx.getChildCount():
-            self.quad["Oper"]= "GOTO"
+            self.quad["Oper"]= 17 #GOTO
             self.quad["Op1"]= None
             self.quad["Op2"]= None
             quad.cuadruplos.append(self.quad)
@@ -701,8 +702,12 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#escritura.
     def exitEscritura(self, ctx:DASAParser.EscrituraContext):
-        self.quad["Oper"]="PRINT"
-        self.quad["Res"]=self.stackOP.pop()
+        self.quad = {
+            "Oper" : 25, #PRINT
+            "Op1" : None,
+            "Op2" : None,
+            "Res" : self.stackOP.pop()
+        }
         self.stackTypes.pop()
         quad.cuadruplos.append(self.quad)
         self.quad = {}
@@ -768,7 +773,7 @@ class DASAListener(ParseTreeListener):
             raise Exception("Error: Method called does not exist.")
         else:
             self.quad = {
-                "Oper" : "ERA",
+                "Oper" : 23, #ERA
                 "Op1" : idtemp,
                 "Op2" : None,
                 "Res" : None
@@ -781,7 +786,7 @@ class DASAListener(ParseTreeListener):
     # Exit a parse tree produced by DASAParser#funcion.
     def exitFuncion(self, ctx:DASAParser.FuncionContext):
         self.quad = {
-            "Oper" : "GOSUB",
+            "Oper" : 19, #GOSUB
             "Op1" : self.functionsTable[self.OnGoingFunc]["Id"],
             "Op2" : None,
             "Res" : self.functionsTable[self.OnGoingFunc]["StartQuad"]
@@ -811,7 +816,7 @@ class DASAListener(ParseTreeListener):
                 raise Exception("Error. Parameter not of expected type.")
             else:
                 self.quad = {
-                    "Oper" : "PARAM",
+                    "Oper" : 22, # PARAM
                     "Op1" : self.stackOP.pop(),
                     "Op2" : None,
                     "Res" : "param" + str(self.paramCounter)
@@ -834,7 +839,7 @@ class DASAListener(ParseTreeListener):
     def exitRegresa(self, ctx:DASAParser.RegresaContext):
         self.quad["Op1"]=None
         self.quad["Op2"]= None
-        self.quad["Oper"]="RETURN"
+        self.quad["Oper"]= 24 #RETURN
         self.quad["Res"]=self.stackOP.pop()
         self.stackTypes.pop()
         quad.cuadruplos.append(self.quad)

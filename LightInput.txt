@@ -1,0 +1,12 @@
+main() {
+    define Int : c;
+    define Float : i;
+    define Bool: b1;
+    define Int: i1;
+
+    c = 15;
+    i = 3;
+    i = i + c;
+    c = c + i;
+    
+}
