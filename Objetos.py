@@ -5,11 +5,14 @@ class Calc():
 
 class Memoria():
 
-    memStack = [0,
-                [0,[],[],[],[]], #Local = 1
-                [0,[],[],[],[]], #Global = 2
-                [[None], [], [], [True, False], [],] #Constante = 3
-                ] 
+    memStack = [
+        0,
+        [0,[],[],[],[]], #Local = 1
+        [0,[],[],[],[]], #Global = 2
+        [[None], [], [], [True, False], [],] #Constante = 3
+    ]
+
+    funcTable = []
     
     BaseINT = 1000
     BaseFLOAT = 2000

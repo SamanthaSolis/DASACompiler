@@ -1,8 +1,10 @@
 import sys
+import VirtualMachine as vm
 from antlr4 import *
 from DASALexer import DASALexer
 from DASAParser import DASAParser
 from DASAListener import DASAListener
+
 
 
 def main(argv):
@@ -15,6 +17,7 @@ def main(argv):
     dasa = DASAListener()
     walker = ParseTreeWalker()
     walker.walk(dasa, tree)
+    vm.run()
 
 if __name__ == '__main__':
     main(sys.argv)
