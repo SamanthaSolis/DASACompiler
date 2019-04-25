@@ -410,8 +410,8 @@ class DASAListener(ParseTreeListener):
             self.quad = {
                 "Oper" : self.stackOper.pop(),
                 "Op1"  : op1,
-                "Res"  : res,
-                "Op2" : None
+                "Op2" : None,
+                "Res"  : res
             }
             quad.cuadruplos.append(self.quad)
             self.quad = {}
@@ -531,9 +531,9 @@ class DASAListener(ParseTreeListener):
     def exitLectura(self, ctx:DASAParser.LecturaContext):
         self.quad = {
             "Oper" : 26, #INPUT
-            "Op1" : None,
+            "Op1" : self.stackOP.pop(),
             "Op2" : None,
-            "Res" : self.stackOP.pop()
+            "Res" : None
         }
         self.stackTypes.pop()
         quad.cuadruplos.append(self.quad)
@@ -713,9 +713,9 @@ class DASAListener(ParseTreeListener):
     def exitEscritura(self, ctx:DASAParser.EscrituraContext):
         self.quad = {
             "Oper" : 25, #PRINT
-            "Op1" : None,
+            "Op1" : self.stackOP.pop(),
             "Op2" : None,
-            "Res" : self.stackOP.pop()
+            "Res" : None
         }
         self.stackTypes.pop()
         quad.cuadruplos.append(self.quad)

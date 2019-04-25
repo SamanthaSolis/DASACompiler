@@ -13,6 +13,8 @@ class Memoria():
     ]
 
     funcTable = []
+
+    offsetStack = []
     
     BaseINT = 1000
     BaseFLOAT = 2000
