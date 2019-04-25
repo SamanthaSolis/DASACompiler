@@ -529,7 +529,16 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#lectura.
     def exitLectura(self, ctx:DASAParser.LecturaContext):
-        pass
+        self.quad = {
+            "Oper" : 26, #INPUT
+            "Op1" : None,
+            "Op2" : None,
+            "Res" : self.stackOP.pop()
+        }
+        self.stackTypes.pop()
+        quad.cuadruplos.append(self.quad)
+        self.quad = {}
+        self.contCuadruplos += 1
 
 
     # Entera parse tree produced by DASAParser#lec1.
@@ -655,12 +664,12 @@ class DASAListener(ParseTreeListener):
             pos = 0
             index = 0
             for c in mem.memStack[3][tmpType]:
-                if tmpval == c:
+                if  c == tmpval:
                     exists = True
                     pos = mem.memStack[3][tmpType].index(tmpval)
             if not exists:
                 mem.memStack[3][tmpType].append(tmpval)
-                pos = len(mem.memStack[3][tmpType])
+                pos = len(mem.memStack[3][tmpType])-1
                 
             self.stackOP.append(Calc.genAddress(3, tmpType, pos))          
             self.stackTypes.append(tmpType)
@@ -720,7 +729,16 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#estdesc.
     def exitEstdesc(self, ctx:DASAParser.EstdescContext):
-        pass
+        self.quad = {
+            "Oper" : 27, #DESCRIBE
+            "Op1" : None,
+            "Op2" : None,
+            "Res" : self.stackOP.pop()
+        }
+        self.stackTypes.pop()
+        quad.cuadruplos.append(self.quad)
+        self.quad = {}
+        self.contCuadruplos += 1
 
 
     # Enter a parse tree produced by DASAParser#dibujar.
@@ -729,7 +747,16 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#dibujar.
     def exitDibujar(self, ctx:DASAParser.DibujarContext):
-        pass
+        self.quad = {
+            "Oper" : 28, #PLOT
+            "Op1" : None,
+            "Op2" : None,
+            "Res" : self.stackOP.pop()
+        }
+        self.stackTypes.pop()
+        quad.cuadruplos.append(self.quad)
+        self.quad = {}
+        self.contCuadruplos += 1
 
 
     # Enter a parse tree produced by DASAParser#regresion.
@@ -738,7 +765,16 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#regresion.
     def exitRegresion(self, ctx:DASAParser.RegresionContext):
-        pass
+        self.quad = {
+            "Oper" : 29, #REGRESION
+            "Op1" : None,
+            "Op2" : None,
+            "Res" : self.stackOP.pop()
+        }
+        self.stackTypes.pop()
+        quad.cuadruplos.append(self.quad)
+        self.quad = {}
+        self.contCuadruplos += 1
 
 
     # Enter a parse tree produced by DASAParser#reg1.
@@ -756,7 +792,16 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#clustering.
     def exitClustering(self, ctx:DASAParser.ClusteringContext):
-        pass
+        self.quad = {
+            "Oper" : 31, #CLUSTER
+            "Op1" : None,
+            "Op2" : None,
+            "Res" : self.stackOP.pop()
+        }
+        self.stackTypes.pop()
+        quad.cuadruplos.append(self.quad)
+        self.quad = {}
+        self.contCuadruplos += 1
 
 
     # Enter a parse tree produced by DASAParser#funcion.
@@ -1145,7 +1190,16 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#vacio.
     def exitVacio(self, ctx:DASAParser.VacioContext):
-        pass
+        self.quad = {
+            "Oper" : 30, #VACIO
+            "Op1" : None,
+            "Op2" : None,
+            "Res" : self.stackOP.pop()
+        }
+        self.stackTypes.pop()
+        quad.cuadruplos.append(self.quad)
+        self.quad = {}
+        self.contCuadruplos += 1
 
 
     # Enter a parse tree produced by DASAParser#castint.
@@ -1154,7 +1208,16 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#castint.
     def exitCastint(self, ctx:DASAParser.CastintContext):
-        pass
+        self.quad = {
+            "Oper" : 32, #CASTINT
+            "Op1" : None,
+            "Op2" : None,
+            "Res" : self.stackOP.pop()
+        }
+        self.stackTypes.pop()
+        quad.cuadruplos.append(self.quad)
+        self.quad = {}
+        self.contCuadruplos += 1
 
 
     # Enter a parse tree produced by DASAParser#castfloat.
@@ -1163,7 +1226,16 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#castfloat.
     def exitCastfloat(self, ctx:DASAParser.CastfloatContext):
-        pass
+        self.quad = {
+            "Oper" : 33, #CASTFLOAT
+            "Op1" : None,
+            "Op2" : None,
+            "Res" : self.stackOP.pop()
+        }
+        self.stackTypes.pop()
+        quad.cuadruplos.append(self.quad)
+        self.quad = {}
+        self.contCuadruplos += 1
 
 
     # Enter a parse tree produced by DASAParser#castarrchar.
@@ -1172,5 +1244,14 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#castarrchar.
     def exitCastarrchar(self, ctx:DASAParser.CastarrcharContext):
-        pass
+        self.quad = {
+            "Oper" : 34, #CASTSTR
+            "Op1" : None,
+            "Op2" : None,
+            "Res" : self.stackOP.pop()
+        }
+        self.stackTypes.pop()
+        quad.cuadruplos.append(self.quad)
+        self.quad = {}
+        self.contCuadruplos += 1
 

@@ -66,6 +66,15 @@ class Operadores():
         "ERA": 23,
         "RETURN": 24,
         "PRINT": 25,
+        "INPUT": 26,
+        "DESCRIBE": 27,
+        "PLOT": 28,
+        "REGRESION": 29,
+        "VACIO": 30,
+        "CLUSTER": 31,
+        "CASTINT": 32,
+        "CASTFLOAT": 33,
+        "CASTSTR": 34
     }
 
 
