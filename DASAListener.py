@@ -395,7 +395,7 @@ class DASAListener(ParseTreeListener):
                 exists = True
                 address = v["Address"]
                 tmp = self.currVarType = v["Type"]
-                self.currVar = self.functionsTable[0]["SymTable"].index(v)
+                self.currVar = self.functionsTable[self.currFun]["SymTable"].index(v)
                 
         if exists:
             self.stackTypes.append(tmp)
@@ -407,7 +407,7 @@ class DASAListener(ParseTreeListener):
                     exists = True
                     address = v["Address"]
                     tmp = self.currVarType = v["Type"]
-                    self.currVar = self.functionsTable[0]["SymTable"].index(v)
+                    self.currVar = self.functionsTable[self.currFun]["SymTable"].index(v)
             if exists:
                 self.stackTypes.append(tmp)
                 self.stackOP.append(address) # Hacer append de la memoria
@@ -696,7 +696,7 @@ class DASAListener(ParseTreeListener):
         #print("TIPO variable", self.currVarType, "\nTIPO input", tmpType)
         if tmpType != 0:
             if (self.currVarType-tmpType) != 1  and self.currVarType != tmpType:
-                raise Exception("Mismatch in assign types")
+                raise Exception("Mismatch in assign types", ctetemp)
 
         exists = False
         pos = 0

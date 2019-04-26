@@ -1,36 +1,28 @@
-
 func sub() {
-    define Int: a;
-    define Int: alex;
-    define Bool: x;
-    define Bool: y;
-    define Bool: david;
-    y = y && x;
+    define Int: a=0;
+    define Int: alex=0;
+    define Bool: x = True;
+    define Bool: y = False;
 
+    y = y && x;
     a = 1 + 4 * 2;
     alex = -1 * a;
 }
 
 func add(Int:i1, Float:f1) : Int {
-    define Int: m;
+    define Int: m = 1;
     define Float: may;
-    may = 1 - m;
-    sub();
-
+    may = 10 - m;
     return may;
 }
 
+
 main() {
-    define Int : c;
-    define Float : i;
-    define Bool: b1;
-    define Int: i1;
+    define Int : c = 15;
+    define Float : i = 3;
+    define Bool: b1 = True;
+    define Int: i1=1;
 
-    add(i1,i);
-
-
-    c = 15;
-    i = 3;
     i = i + c;
     c = c + i;
     
@@ -44,7 +36,5 @@ main() {
         b1 = True;
     }
 
-    print (4);
-    print(1 + 2);
 
 }

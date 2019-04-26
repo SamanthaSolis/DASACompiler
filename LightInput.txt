@@ -1,8 +1,30 @@
+
 main() {
-    define Int : a = 10;
-    define Float : x=Null;
-    define Bool: b = True;
+    define Int : c = 15;
+    define Int: i1 = 1;
+    define Int: m = 1;
+    define Int: a = 0;
+    define Int: alex = 0;
+    define Float: may;
+    define Float : i = 3;
+    define Bool: b1 = True;
+    define Bool: x = True;
+    define Bool: y = False;
 
-    print(a+x);
-
+    may = 10 - m;
+    y = y && x;
+    a = 1 + 4 * 2;
+    alex = -1 * a;
+    i = i + c;
+    c = c + i;
+    
+    while(1 > 2 && b1) {
+        i1 = i1 + 1;
+    }
+        
+    if(b1){
+        b1 = False;
+    } else {
+        b1 = True;
+    }
 }
