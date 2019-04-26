@@ -33,6 +33,10 @@ class DASAListener(ParseTreeListener):
         self.currType = ""
         self.currScope = ""
         self.currFunction = ""
+        self.currVarType = ""
+        self.currNull = True
+        self.currVar = "" #mecadas de sam - assign
+        self.currFun = "" #mecadas de sam - assign
 
         self.inBody = False
 
@@ -269,8 +273,6 @@ class DASAListener(ParseTreeListener):
                     "Address" : Calc.genAddress(self.currScope, self.currType, self.function["Signature"][self.currType])
                     }
         self.function["Signature"][self.currType] += 1
-        
-
 
     # Exit a parse tree produced by DASAParser#vars_st.
     def exitVars_st(self, ctx:DASAParser.Vars_stContext):
@@ -323,7 +325,7 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#vars4.
     def enterVars4(self, ctx:DASAParser.Vars4Context):
-        pass
+        self.stackOper.append(16)
 
     # Exit a parse tree produced by DASAParser#vars4.
     def exitVars4(self, ctx:DASAParser.Vars4Context):
@@ -332,20 +334,31 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#vars5.
     def enterVars5(self, ctx:DASAParser.Vars5Context):
-        # print("")
-        # print(self.currScope)
-        val = ctx.cte().getText()
-        # print("val", dTypes.dicTypes[val])
-        # print("type", self.currType)
-
-        #mem.memStack[dScope.dicScopes[self.currScope][dTypes.dicTypes[self.currType]] = val
-        ("Global", 3)
-        if(val != "Null"):
-            self.var["HasValue"] = True
+        self.currVarType = self.var["Type"]
 
     # Exit a parse tree produced by DASAParser#vars5.
     def exitVars5(self, ctx:DASAParser.Vars5Context):
-        pass
+        #update hasvalue
+        self.var["HasValue"]=self.currNull
+        self.currNull=True
+
+        #creates quad
+        type1 = self.stackTypes.pop()
+        res = self.var["Type"]
+        typeRes = CuboSemantico.semCube[type1][res][16]
+        if(typeRes != -1):
+            self.quad = {
+                "Oper" : self.stackOper.pop(),
+                "Op1"  : self.stackOP.pop(),
+                "Op2" : None,
+                "Res"  : self.var["Address"]
+            }
+            quad.cuadruplos.append(self.quad)
+            self.quad = {}
+            self.contCuadruplos += 1
+        else:
+            raise Exception("Error: Type mismatch in assign operation (" + str(type1) + ", " + str(type1) + ")")
+
 
     # Enter a parse tree produced by DASAParser#vars6.
     def enterVars6(self, ctx:DASAParser.Vars6Context):
@@ -372,37 +385,46 @@ class DASAListener(ParseTreeListener):
         address = 0
         tmp = 0
         #print("cur",self.currFunction)
+
         for f in self.functionsTable:
             if f["Id"] == self.currFunction:
-                func = self.functionsTable.index(f)
+                self.currFun = self.functionsTable.index(f)
 
-        for v in self.functionsTable[func]["SymTable"]:
+        for v in self.functionsTable[self.currFun]["SymTable"]:
             if v["Name"] == var:
                 exists = True
                 address = v["Address"]
-                tmp = v["Type"]
+                tmp = self.currVarType = v["Type"]
+                self.currVar = self.functionsTable[0]["SymTable"].index(v)
+                
         if exists:
             self.stackTypes.append(tmp)
             self.stackOP.append(address) # Hacer append de la memoria
-            self.stackOper.append(dOper.dicOperations['='])
+            self.stackOper.append(16)
         else:
             for v in self.functionsTable[0]["SymTable"]:
                 if v["Name"] == var:
                     exists = True
                     address = v["Address"]
+                    tmp = self.currVarType = v["Type"]
+                    self.currVar = self.functionsTable[0]["SymTable"].index(v)
             if exists:
-                self.stackTypes.append(v["Type"])
+                self.stackTypes.append(tmp)
                 self.stackOP.append(address) # Hacer append de la memoria
-                self.stackOper.append(dOper.dicOperations['='])
+                self.stackOper.append(16)
             else:
                 raise Exception("Error: Variable " + var + " hasn't been defined.")
 
     # Exit a parse tree produced by DASAParser#asignacion.
     def exitAsignacion(self, ctx:DASAParser.AsignacionContext):
+        #update hasvalue
+        self.functionsTable[self.currFun]["SymTable"][self.currVar]["HasValue"]=self.currNull
+        self.currNull=True
+
+        #creates quad
         type1 = self.stackTypes.pop()
         res = self.stackTypes.pop()
         typeRes = CuboSemantico.semCube[type1][res][16]
-
         if(typeRes != -1):
             op1 = self.stackOP.pop()
             res = self.stackOP.pop()
@@ -642,46 +664,53 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#cte.
     def enterCte(self, ctx:DASAParser.CteContext):
-        if self.inBody:
-            ctetemp = ctx.getChild(0).getText()
-            tmpType = -1
-            tmpval = 0
+        #if self.inBody:
+        ctetemp = ctx.getChild(0).getText()
+        tmpType = -1
+        tmpval = 0
 
-            if ctetemp.find('"') >= 0:
-                tmpType = 8
-                tmpval = ctetemp
-            elif ctetemp.find("'") >= 0:
-                tmpType = 4
-                tmpval = ctetemp[1]
-            elif ctetemp == "True":
-                tmpType = 3
-                tmpval = True
-            elif ctetemp == "False":
-                tmpType = 3
-                tmpval = False
-            elif ctetemp.find('.') >= 0:
-                tmpType = 2
-                tmpval = float(ctetemp)
-            elif ctetemp == "Null":
-                tmpType = 0
-                tmpval = None
-            else:
-                tmpType = 1
-                tmpval = int(ctetemp)
+        if ctetemp.find('"') >= 0:
+            tmpType = 8
+            tmpval = ctetemp
+        elif ctetemp.find("'") >= 0:
+            tmpType = 4
+            tmpval = ctetemp[1]
+        elif ctetemp == "True":
+            tmpType = 3
+            tmpval = True
+        elif ctetemp == "False":
+            tmpType = 3
+            tmpval = False
+        elif ctetemp.find('.') >= 0:
+            tmpType = 2
+            tmpval = float(ctetemp)
+        elif ctetemp == "Null":
+            tmpType = 0
+            tmpval = None
+            self.currNull = False
+        else:
+            tmpType = 1
+            tmpval = int(ctetemp)
+
+        #Comprobar que si se puedan asignar
+        #print("TIPO variable", self.currVarType, "\nTIPO input", tmpType)
+        if tmpType != 0:
+            if (self.currVarType-tmpType) != 1  and self.currVarType != tmpType:
+                raise Exception("Mismatch in assign types")
+
+        exists = False
+        pos = 0
+        index = 0
+        for c in mem.memStack[3][tmpType]:
+            if  c == tmpval:
+                exists = True
+                pos = mem.memStack[3][tmpType].index(tmpval)
+        if not exists:
+            mem.memStack[3][tmpType].append(tmpval)
+            pos = len(mem.memStack[3][tmpType])-1
             
-            exists = False
-            pos = 0
-            index = 0
-            for c in mem.memStack[3][tmpType]:
-                if  c == tmpval:
-                    exists = True
-                    pos = mem.memStack[3][tmpType].index(tmpval)
-            if not exists:
-                mem.memStack[3][tmpType].append(tmpval)
-                pos = len(mem.memStack[3][tmpType])-1
-                
-            self.stackOP.append(Calc.genAddress(3, tmpType, pos))          
-            self.stackTypes.append(tmpType)
+        self.stackOP.append(Calc.genAddress(3, tmpType, pos))          
+        self.stackTypes.append(tmpType)
 
     # Exit a parse tree produced by DASAParser#cte.
     def exitCte(self, ctx:DASAParser.CteContext):

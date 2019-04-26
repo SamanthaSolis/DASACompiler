@@ -141,7 +141,7 @@ def operINPUT(op1, op2, res):
     if (tipo-itype) == 1  or tipo == itype:
         setValue(valor,op1)
     else:
-        raise Exception("Incompatible data types")
+        raise Exception("Mismatch in assign types")
 
 def operDESCRIBE(op1, op2, res):
     pass
@@ -296,6 +296,8 @@ def getValue(address):
     #print(iUno,iDos,iTres)
     value = mem.memStack[iUno][iDos][iTres] #obtiene el valor de la posición de memoria
     #print("getvalue--->", value)
+    if value == None:
+        raise Exception("You can't make operations with a Null variable")
     return value
 
 #Regresa el contexto, el tipo o la posicion de una variable
@@ -311,5 +313,4 @@ def getData(address,key):
         "type": iDos,
         "pos": iTres
     }
- 
     return switcher[key]

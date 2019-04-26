@@ -118,6 +118,11 @@ class CuadroSemantico():
 class CuboSemantico():
     semCube = [[[-1 for z in range(17)] for y in range(13)] for x in range(13)]
     
+    semCube[0][1][16] = 1
+    semCube[0][2][16] = 1
+    semCube[0][3][16] = 1
+    semCube[0][4][16] = 1
+
     semCube[1][1][3] = 1
     semCube[1][1][4] = 1
     semCube[1][1][5] = 1
@@ -142,6 +147,7 @@ class CuboSemantico():
     semCube[1][2][12] = 3
     semCube[1][2][13] = 3
     semCube[1][2][16] = 1
+
     semCube[2][1][3] = 2
     semCube[2][1][4] = 2
     semCube[2][1][5] = 2
@@ -166,16 +172,22 @@ class CuboSemantico():
     semCube[2][2][12] = 3
     semCube[2][2][13] = 3
     semCube[2][2][16] = 2
+
+
     semCube[3][3][12] = 3
     semCube[3][3][13] = 3
     semCube[3][3][14] = 3
     semCube[3][3][15] = 3
     semCube[3][3][16] = 3
+
+
     semCube[4][4][6] = 8
     semCube[4][4][12] = 3
     semCube[4][4][13] = 3
     semCube[4][4][16] = 4
     semCube[4][8][6] = 8
+
+
     semCube[5][5][12] = 3
     semCube[5][5][13] = 3
     semCube[5][6][12] = 3
