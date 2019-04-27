@@ -114,12 +114,12 @@ def operPRINT(op1, op2, res):
 def operINPUT(op1, op2, res):
     valor = input("Enter your input: ")
     itype = -1
+    tipo = getData(op1,"type") 
 
-    if valor.find('"') >= 0:
-        itype = 8
-    elif valor.find("'") >= 0:
+    if tipo == 4:
         itype = 4
-        valor = int(valor[1])
+        if valor.find('"') >= 0: 
+            valor = valor[1:len(valor)-1]
     elif valor == "True":
         itype = 3
         valor = True
@@ -136,7 +136,7 @@ def operINPUT(op1, op2, res):
         itype = 1
         valor = int(valor)
     
-    tipo = getData(op1,"type") 
+
 
     if (tipo-itype) == 1  or tipo == itype:
         setValue(valor,op1)

@@ -19,7 +19,7 @@ class Memoria():
     BaseINT = 1000
     BaseFLOAT = 2000
     BaseBOOL = 3000
-    BaseCHAR = 4000
+    BaseSTRING = 4000
 
     BaseLOCAL= 10000
     BaseGLOBAL= 20000
@@ -87,15 +87,15 @@ class Tipos():
         "Int"       : 1,
         "Float"     : 2,
         "Bool"      : 3,
-        "Char"      : 4,
+        "String"    : 4,
         "Int[]"     : 5,
         "Float[]"   : 6,
         "Bool[]"    : 7,
-        "Char[]"    : 8,
+        "String[]"  : 8,
         "Int[][]"   : 9,
         "Float[][]" : 10,
         "Bool[][]"  : 11,
-        "Char[][]"  : 12
+        "String[][]": 12
     }
 
 class Scopes():

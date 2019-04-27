@@ -92,14 +92,13 @@ arr7: COMMA arr4 |   ;
 
 cte: CINT
    | CFLOAT
-   | CCHAR
-   | CARRCHAR
+   | CSTRING
    | CBOOL
    | NULL;
 
 tipo: TINT
     | TFLOAT
-    | TCHAR
+    | TSTRING
     | TBOOL ;
 
 bloque: LCURLY bloque1 RCURLY ;
@@ -169,8 +168,10 @@ valor: cte
      | vacio
      | castint
      | castfloat
-     | castarrchar
+     | caststring
+     | tamaño
      | ID valor1 ;
+
 
 valor1:  LBRACK expresion RBRACK valor2 |   ;
 
@@ -182,7 +183,14 @@ castint: TOINT LPAREN expresion RPAREN ;
 
 castfloat: TOFLOAT LPAREN expresion RPAREN ;
 
-castarrchar: TOARRCHAR LPAREN expresion RPAREN ;
+caststring: TOSTRING LPAREN expresion RPAREN ;
+
+tamaño: SIZE LPAREN tamaño1 RPAREN ;
+
+tamaño1: CSTRING
+       | ID tamaño2;
+
+tamaño2: LBRACK expresion RBRACK | ; 
 
 
 DEFINE:     'define';
@@ -191,14 +199,14 @@ MAIN:       'main';
 TINT:       'Int';
 TFLOAT:     'Float';
 TBOOL:      'Bool';
-TCHAR:      'Char';
 TSTRING:    'String';
 PRINT:      'print';
 INPUT:      'input';
 ISNULL:     'isNull';
 TOINT:      'toInt';
 TOFLOAT:    'toFloat';
-TOARRCHAR:  'toArrChar';
+TOSTRING:   'toString';
+SIZE:       'size';
 PLOT:       'plot';
 DESCRIBE:   'describe';
 REGRESSION: 'regression';
@@ -236,9 +244,11 @@ OR        :'||';
 
 IGNORE: [ \t\r\f\n]+ -> skip;
 
-CCHAR: ['].['];
+LINE_COMMENT: '#' ~[\r\n]* -> skip;
 
-CARRCHAR: ["].*? ["];
+COMMENT: '##' .*? '##' -> skip;
+
+CSTRING: ["] ~["\r\n]* ["];
 
 CFLOAT: [0-9]+[.][0-9]+;
 

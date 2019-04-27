@@ -1,5 +1,6 @@
 
 main() {
+    ##
     define Int : c = 15;
     define Int: i1 = 1;
     define Int: m = 1;
@@ -27,4 +28,10 @@ main() {
     } else {
         b1 = True;
     }
+    ##
+    
+    define String[50]: na = ["c", "a", "b"];
+    define String : x = "Que Pedo";
+   define Int[1]: i = [3];
+
 }
