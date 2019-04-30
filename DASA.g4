@@ -1,10 +1,12 @@
 grammar DASA;
 
-programa: prog1 prog2 main ;
+programa: prog1 prog3 prog2 main ;
 
 prog1: vars_st prog1 |   ;
 
 prog2: metodos prog2 |   ;
+
+prog3: ;
 
 main: MAIN LPAREN RPAREN LCURLY main1 main2 RCURLY ;
 
@@ -56,7 +58,7 @@ asignacion: ID asig1 ASSIGN expresion SCOLON ;
 
 asig1: LBRACK expresion RBRACK asig2 |   ;
 
-asig2: LBRACK CINT RBRACK |   ;
+asig2: LBRACK expresion RBRACK |   ;
 
 durante: WHILE LPAREN expresion RPAREN duro1 ;
 
@@ -169,7 +171,7 @@ valor: cte
      | castint
      | castfloat
      | caststring
-     | tamaño
+     | tamano
      | ID valor1 ;
 
 
@@ -185,12 +187,12 @@ castfloat: TOFLOAT LPAREN expresion RPAREN ;
 
 caststring: TOSTRING LPAREN expresion RPAREN ;
 
-tamaño: SIZE LPAREN tamaño1 RPAREN ;
+tamano: SIZE LPAREN tamano1 RPAREN ;
 
-tamaño1: CSTRING
-       | ID tamaño2;
+tamano1: CSTRING
+       | ID tamano2;
 
-tamaño2: LBRACK expresion RBRACK | ; 
+tamano2: LBRACK expresion RBRACK | ; 
 
 
 DEFINE:     'define';

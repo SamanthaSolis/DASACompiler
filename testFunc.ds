@@ -1,0 +1,32 @@
+define Int: a=10;
+define Bool: x=True;
+
+func ff1(Float: b1, Float: b2) : Float {
+    return b1+b2;
+}
+
+func f1(Int: i1, Int: i2) : Int {
+    return i1;
+}
+
+func f2(Int: i1, Int: i2, Int: i3) : Bool{
+    #define Int : res;
+    #res = i1 + f1(i2, i3);
+    #return res;
+}
+
+func f3(Int: i1, Int: i2, Int: i3) : Bool{
+    #define Int : res;
+    #res = i1 + f1(i2, i3);
+    #return res;
+}
+
+main() {
+    define Int[2] : calc = [11, 22];
+    define Int: x=10000;
+    print(x);
+    #AQUI HAY UN PEDO CON EL STACK HELP
+    print(f1(4,3));
+    calc[1]=44;
+    print(x);
+}

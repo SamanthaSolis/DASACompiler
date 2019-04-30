@@ -1,191 +1,3 @@
-from Objetos import Memoria as mem
-from Objetos import Cuadruplos as quads
-from Objetos import Operadores as ops
-
-#Definicion de funciones
-def operNot(op1, op2, res):#uses Op1
-    quads.quadCount += 1
-
-def operPos(op1, op2, res):#uses Op1
-    quads.quadCount += 1
-
-def operNeg(op1, op2, res):#uses Op1
-    quads.quadCount += 1
-
-def operMult(op1, op2, res):
-    quads.quadCount += 1
-
-def operDiv(op1, op2, res):
-    quads.quadCount += 1
-
-def operMod(op1, op2, res):
-    quads.quadCount += 1
-
-def operSum(op1, op2, res):
-    quads.quadCount += 1
-
-def operSubs(op1, op2, res):
-    quads.quadCount += 1
-
-def operLess(op1, op2, res):
-    quads.quadCount += 1
-
-def operLessEqual(op1, op2, res):
-    quads.quadCount += 1
-
-def operGreater(op1, op2, res):
-    quads.quadCount += 1
-
-def operGreaterEqual(op1, op2, res):
-    quads.quadCount += 1
-
-def operEqual(op1, op2, res):
-    quads.quadCount += 1
-
-def operNotEqual(op1, op2, res):
-    quads.quadCount += 1
-
-def operAnd(op1, op2, res):
-    quads.quadCount += 1
-
-def operOr(op1, op2, res):
-    quads.quadCount += 1
-
-def operAssig(op1, op2, res):
-    quads.quadCount += 1
-
-def operGOTO(op1, op2, res):
-    quads.quadCount = res
-
-def operGOTOF(op1, op2, res):
-    quads.quadCount = res
-
-def operGOSUB(op1, op2, res):
-    mem.funcStack.append(quads.quadCount+1)
-    for f in mem.funcTable:
-        if f["Id"] == op1:
-            quads.quadCount = f["StartQuad"]
-
-def operEND(op1, op2, res):
-    quads.quadCount += 1
-
-def operENDPROC(op1, op2, res):
-    sig = mem.offsetStack.pop()
-    for i in range(1,5):
-        sig[i] -= mem.offsetStack[len(mem.offsetStack)-1][i]
-    for i in range(1,5):
-        for tot in range(sig[i]):
-            mem.memStack[1][i].pop()
-    quads.quadCount = mem.funcStack.pop()
-
-def operPARAM(op1, op2, res):
-    quads.quadCount += 1
-
-def operERA(op1, op2, res):
-    sig = [0,0,0,0,0]
-    for f in mem.funcTable:
-        if f["Id"] == op1:
-            for i in range(1,5):
-                sig[i] = f["Signature"][i]
-    for i in range(1,5):
-        for n in range(sig[i]):
-            mem.memStack[1][i].append(None)
-        sig[i] += mem.offsetStack[len(mem.offsetStack)-1][i]
-    mem.offsetStack.append(sig)
-    quads.quadCount += 1
-
-def operRETURN(op1, op2, res):
-    quads.quadCount += 1
-
-def operPRINT(op1, op2, res):
-    quads.quadCount += 1
-
-OperationsDir = [operNot,
-                operPos,
-                operNeg,
-                operMult,
-                operDiv,
-                operMod,
-                operSum,
-                operSubs,
-                operLess,
-                operLessEqual,
-                operGreater,
-                operGreaterEqual,
-                operEqual,
-                operNotEqual,
-                operAnd,
-                operOr,
-                operAssig,
-                operGOTO,
-                operGOTOF,
-                operGOSUB,
-                operEND,
-                operENDPROC,
-                operPARAM,
-                operERA,
-                operRETURN,
-                operPRINT]
-
-def run():
-    mem.offsetStack.append([0,0,0,0,0])
-    OperationsDir[23]("main", None, None)
-    # for q in quads.cuadruplos:
-    #     opType=q["Oper"] #Obtiene el tipo de operacion y llama esa funcion
-    #     OperationsDir[opType] (q["Op1"], q["Op2"], q["Res"])
-
-    # print('-----------Memoria------------')
-    # print(mem.memStack)
-    # print('----------Funciones-----------')
-    # for x in mem.funcTable:
-    #     print("{", x["Id"], x["Params"], x["TiposParams"], x["Return"], x["StartQuad"], x["Signature"], "}")
-    #     for y in x["SymTable"]:
-    #         print("\t", y)
-    print('----------Cuadruplos----------')
-    for ind, q in enumerate(quads.cuadruplos):
-        # print(ind, '-', q)
-        res = str(ind) + "- {Oper: "
-        if "Oper" in q:
-            res += ops.arrOperations[q["Oper"]]
-        else:
-            res += "-"
-        res += ", Op1: "
-        if "Op1" in q:
-            res += str(q["Op1"])
-        else:
-            res += "-"
-        res += ", Op2: "
-        if "Op2" in q:
-            res += str(q["Op2"])
-        else:
-            res += "-"
-        res += ", Res: "
-        if "Res" in q:
-            res += str(q["Res"])
-        else:
-            res += "-"
-        res += "}"
-        print(res)
-
-    quads.quadCount = 0
-    print('----------Ejecucion----------')
-    while not quads.cuadruplos[quads.quadCount]["Oper"] == 20:
-        print('Ejecutando quad', quads.quadCount)
-        opType=quads.cuadruplos[quads.quadCount]["Oper"] #Obtiene el tipo de operacion y llama esa funcion
-        print(ops.arrOperations[opType])
-        OperationsDir[opType] (quads.cuadruplos[quads.quadCount]["Op1"], quads.cuadruplos[quads.quadCount]["Op2"], quads.cuadruplos[quads.quadCount]["Res"])
-
-    print('----------Offset----------')
-    for i in mem.offsetStack:
-        print(i)
-
-def setValor(res,adress):
-    if (adress < 10000):
-        raise Exception("Invalid Address")
-    iUno = int(adress/10000) #local(1) global(2) cte(3)
-    iDos = int((adress-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
-    iTres = int(int((adress-10000*iUno)-(iDos*1000)))
-    mem.memStack[iUno][iDos][iTres]=res #asigna valor en la posición de memoria
 # Generated from DASA.g4 by ANTLR 4.7.2
 from antlr4 import *
 if __name__ is not None and "." in __name__:
@@ -253,7 +65,7 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#programa.
     def enterPrograma(self, ctx:DASAParser.ProgramaContext):
         self.function = {
-            "Id" : "global",
+            "Id" : "Global",
             "Params" : 0,
             "TiposParams" : [],
             "StartQuad" : 0,
@@ -262,6 +74,16 @@ class DASAListener(ParseTreeListener):
             "Signature" : [0 for r in range(5)],
             "SymTable" : []
         }
+        self.quad = {
+            "Oper" : 17, #GOTO
+            "Op1" : None,
+            "Op2" : None,
+            "Res" : None
+        }
+        self.cuadruplos.append(self.quad)
+        self.quad = {}
+        self.stackPJ.append(self.contCuadruplos)
+        self.contCuadruplos += 1
         self.functionsTable.append(self.function)
         self.currScope= 2
         self.currFunction = 0
@@ -336,16 +158,7 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#prog3.
     def enterProg3(self, ctx:DASAParser.Prog3Context):
-        self.quad = {
-            "Oper" : 17, #GOTO
-            "Op1" : None,
-            "Op2" : None,
-            "Res" : None
-        }
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
-        self.stackPJ.append(self.contCuadruplos)
-        self.contCuadruplos += 1
+        pass
 
     # Exit a parse tree produced by DASAParser#prog3.
     def exitProg3(self, ctx:DASAParser.Prog3Context):
@@ -1200,37 +1013,22 @@ class DASAListener(ParseTreeListener):
     # Exit a parse tree produced by DASAParser#funcion.
     def exitFuncion(self, ctx:DASAParser.FuncionContext):
         f = self.functionsTable[self.OnGoingFunc]
+        if f['Return'] != 0:
+            self.stackOP.append(f["Address"])
+            self.stackTypes.append(f['Return'])
 
         self.quad = {
             "Oper" : 19, #GOSUB
-            "Op1" : f["Id"],
+            "Op1" : self.functionsTable[self.OnGoingFunc]["Id"],
             "Op2" : None,
-            "Res" : f["StartQuad"]
+            "Res" : self.functionsTable[self.OnGoingFunc]["StartQuad"]
         }
         self.cuadruplos.append(self.quad)
         self.quad = {}
         self.contCuadruplos += 1
-
-        if f['Return'] != 0:
-
-            typeRes = self.stackTypes.pop()
-            temp = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.currFunction]["Signature"][typeRes])
-            self.functionsTable[self.currFunction]["Signature"][typeRes] += 1
-
-            self.quad = {
-                "Oper" : 16,
-                "Op1" : f["Address"],
-                "Op2" : None,
-                "Res" : temp,
-            }
-
-            self.stackOP.append(temp)
-            self.stackTypes.append(typeRes)
-            self.cuadruplos.append(self.quad)
-            self.quad = {}
-            self.contCuadruplos += 1
-
         
+
+
     # Enter a parse tree produced by DASAParser#func1.
     def enterFunc1(self, ctx:DASAParser.Func1Context):
         pass
@@ -1273,13 +1071,10 @@ class DASAListener(ParseTreeListener):
     # Exit a parse tree produced by DASAParser#regresa.
     def exitRegresa(self, ctx:DASAParser.RegresaContext):
         res = self.stackOP.pop()
-
-        f = self.functionsTable[self.currFunction]
-        print("THIS IS F", f)
-        resType = self.stackTypes.pop()
+        f = self.functionsTable[self.OnGoingFunc]
         
-        if f['Return'] != resType:
-            raise Exception("Mismatch return value", resType,f['Return'])
+        if f['Return'] != self.stackTypes.pop():
+            raise Exception("Mismatch return value")
         else:
             self.quad = {
                 "Oper" : 24, #RETURN
@@ -1291,7 +1086,6 @@ class DASAListener(ParseTreeListener):
             self.cuadruplos.append(self.quad)
             self.quad = {}
             self.contCuadruplos += 1
-            self.stackTypes.append(resType)
 
 
     # Enter a parse tree produced by DASAParser#expresion.
@@ -1319,8 +1113,8 @@ class DASAListener(ParseTreeListener):
                 type1 = self.stackTypes.pop()
                 typeRes = CuboSemantico.semCube[type1][type2][top]
                 if(typeRes != -1):
-                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.currFunction]["Signature"][typeRes])
-                    self.functionsTable[self.currFunction]["Signature"][typeRes] += 1
+                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.OnGoingFunc]["Signature"][typeRes])
+                    self.functionsTable[self.OnGoingFunc]["Signature"][typeRes] += 1
                     self.quad["Res"] = Res
                     self.stackOP.append(Res)
                     self.stackTypes.append(typeRes)
@@ -1367,8 +1161,8 @@ class DASAListener(ParseTreeListener):
                 type1 = self.stackTypes.pop()
                 typeRes = CuboSemantico.semCube[type1][type2][top]
                 if(typeRes != -1):
-                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.currFunction]["Signature"][typeRes])
-                    self.functionsTable[self.currFunction]["Signature"][typeRes] += 1
+                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.OnGoingFunc]["Signature"][typeRes])
+                    self.functionsTable[self.OnGoingFunc]["Signature"][typeRes] += 1
                     self.quad["Res"] = Res
                     self.stackOP.append(Res)
                     self.stackTypes.append(typeRes)
@@ -1416,8 +1210,8 @@ class DASAListener(ParseTreeListener):
                 type1 = self.stackTypes.pop()
                 typeRes = CuboSemantico.semCube[type1][type2][top]
                 if(typeRes != -1):
-                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.currFunction]["Signature"][typeRes])
-                    self.functionsTable[self.currFunction]["Signature"][typeRes] += 1
+                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.OnGoingFunc]["Signature"][typeRes])
+                    self.functionsTable[self.OnGoingFunc]["Signature"][typeRes] += 1
                     self.quad["Res"] = Res
                     self.stackOP.append(Res)
                     self.stackTypes.append(typeRes)
@@ -1463,8 +1257,8 @@ class DASAListener(ParseTreeListener):
                 type1 = self.stackTypes.pop()
                 typeRes = CuboSemantico.semCube[type1][type2][top]
                 if(typeRes != -1):
-                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.currFunction]["Signature"][typeRes])
-                    self.functionsTable[self.currFunction]["Signature"][typeRes] += 1
+                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.OnGoingFunc]["Signature"][typeRes])
+                    self.functionsTable[self.OnGoingFunc]["Signature"][typeRes] += 1
                     self.quad["Res"] = Res
                     self.stackOP.append(Res)
                     self.stackTypes.append(typeRes)
@@ -1503,8 +1297,8 @@ class DASAListener(ParseTreeListener):
                 type1 = self.stackTypes.pop()
                 typeRes = CuadroSemantico.semSquare[type1][top]
                 if(typeRes != -1):
-                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.currFunction]["Signature"][typeRes])
-                    self.functionsTable[self.currFunction]["Signature"][typeRes] += 1
+                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.OnGoingFunc]["Signature"][typeRes])
+                    self.functionsTable[self.OnGoingFunc]["Signature"][typeRes] += 1
                     self.quad["Res"] = Res
                     self.stackOP.append(Res)
                     self.stackTypes.append(typeRes)
@@ -1728,3 +1522,5 @@ class DASAListener(ParseTreeListener):
     # Exit a parse tree produced by DASAParser#tamano2.
     def exitTamano2(self, ctx:DASAParser.Tamano2Context):
         pass
+
+

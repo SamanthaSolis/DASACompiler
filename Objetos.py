@@ -9,11 +9,12 @@ class Memoria():
         0,
         [0,[],[],[],[]], #Local = 1
         [0,[],[],[],[]], #Global = 2
-        [[None], [], [], [True, False], [],] #Constante = 3
+        [[None], [], [], [True, False], [],], #Constante = 3
+        [[]]  #Apuntadores = 4
     ]
 
     funcTable = []
-
+    funcStack = []
     offsetStack = []
     
     BaseINT = 1000
@@ -24,11 +25,14 @@ class Memoria():
     BaseLOCAL= 10000
     BaseGLOBAL= 20000
     BaseCTE = 30000
+    BasePNTR = 40000
 
 
 class Cuadruplos():
 
     cuadruplos  = []
+    quadCount = 0
+
     
     # def __init__(self):
     #     self.cuadruplos = []
@@ -76,8 +80,19 @@ class Operadores():
         "CLUSTER": 31,
         "CASTINT": 32,
         "CASTFLOAT": 33,
-        "CASTSTR": 34
+        "CASTSTR": 34,
+        "VER": 35
     }
+
+    arrOperations = [
+        "!", "+u", "-u", "*", "/", "%",
+        "+", "-", "<", "<=", ">", ">=",
+        "==", "!=", "&&", "||", "=", "GOTO",
+        "GOTOF", "GOSUB", "END", "ENDPROC",
+        "PARAM", "ERA", "RETURN", "PRINT",
+        "INPUT", "DESCRIBE", "PLOT", "REGRESION", 
+        "VACIO", "CLUSTER", "CASTINT", "CASTFLOAT", "CASTSTR", "VER"
+    ]
 
 
 class Tipos():
@@ -97,6 +112,8 @@ class Tipos():
         "Bool[][]"  : 11,
         "String[][]": 12
     }
+
+    arrTypes = ["Null", "Int", "Float", "Bool", "String", "Int[]", "Float[]", "Bool[]", "Char[]", "Int[][]", "Float[][]", "Bool[][]", "String[][]" ]
 
 class Scopes():
     dicScopes = {

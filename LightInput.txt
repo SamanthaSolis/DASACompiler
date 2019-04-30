@@ -1,6 +1,6 @@
 
 main() {
-    ##
+
     define Int : c = 15;
     define Int: i1 = 1;
     define Int: m = 1;
@@ -19,19 +19,51 @@ main() {
     i = i + c;
     c = c + i;
     
-    while(1 > 2 && b1) {
-        i1 = i1 + 1;
-    }
-        
-    if(b1){
-        b1 = False;
-    } else {
-        b1 = True;
-    }
-    ##
-    
     define String[50]: na = ["c", "a", "b"];
     define String : x = "Que Pedo";
-   define Int[1]: i = [3];
+    define Int[1]: i = [3];
+
+} 
+
+##
+func add(Int: a, Int: b) : Int{
+    print(a);
+}
+
+func conc(String: a, String: b) : String{
+    return "abcde";
+}
+
+main() {
+    define Int: a=1;
+    define Int: b=2;
+    define Int: c=3;
+    define Int: d;
+    define Int: e;
+    define Int[2][2] : arrDos = [[1, 2], [3, 4]];
+
+
+   d = add(a, b);
+   e = add(b, c);
+
+
+} 
+
+
+
+main(){
+    define String[2]: arrUno = ["uno","dos"];
+
+    define Int[5] : arr = [5,3,4];
+    define Bool[3] : arrB = [True,False,True];
+    define String: a = "HERE IS YOUR INPUT";
+    define Int: x = 4.5;
+    define Int: y = 2;
+    arrUno[1]="Mayra";
+    arr[4]=97;
+    arrB[2]=False;
+    
+    print(a);
 
 }
+##
