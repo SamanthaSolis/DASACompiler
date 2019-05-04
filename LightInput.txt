@@ -62,7 +62,6 @@ main(){
     arrUno[1]="Mayra";
     arr[4]=97;
     arrB[2]=False;
-    
     print(a);
 
 }

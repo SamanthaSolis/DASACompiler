@@ -1,0 +1,15 @@
+func factorial(Int: i) : Int{
+    define Int: x = 0;
+    if(i == 0) {
+        return 1;
+    } else {
+        x = factorial(i-1);
+        return i * x;
+    }
+}
+
+main(){
+    
+    print(factorial(100));
+    print("ESTE ES EL NUMERO")
+}

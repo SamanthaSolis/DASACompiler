@@ -7,7 +7,7 @@ class Memoria():
 
     memStack = [
         0,
-        [0,[],[],[],[]], #Local = 1
+        [], #Local = 1 para cada funcion
         [0,[],[],[],[]], #Global = 2
         [[None], [], [], [True, False], [],], #Constante = 3
         [[]]  #Apuntadores = 4
@@ -16,6 +16,8 @@ class Memoria():
     funcTable = []
     funcStack = []
     offsetStack = []
+    globalVars = []
+    offsetCont = 0
     
     BaseINT = 1000
     BaseFLOAT = 2000

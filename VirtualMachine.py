@@ -99,48 +99,46 @@ def operGOTO(op1, op2, res):
     quads.quadCount = res
 
 def operGOTOF(op1, op2, res):
-    
-    quads.quadCount = res 
+    value= getValue(op1)
+    if value == False:
+        quads.quadCount = res
+    else:
+        quads.quadCount += 1 
 
 def operGOSUB(op1, op2, res):
     mem.funcStack.append(quads.quadCount+1)
     for f in mem.funcTable:
         if f["Id"] == op1:
             quads.quadCount = f["StartQuad"]
+    mem.offsetCont += 1
     
 def operEND(op1, op2, res):
     quads.quadCount += 1
     
 def operENDPROC(op1, op2, res):
-    sig = mem.offsetStack.pop()
-    for i in range(1,5):
-        sig[i] -= mem.offsetStack[len(mem.offsetStack)-1][i]
-    for i in range(1,5):
-        for tot in range(sig[i]):
-            mem.memStack[1][i].pop()
+    mem.memStack[1].pop()
+    mem.offsetCont -= 1
     quads.quadCount = mem.funcStack.pop()
 
 def operPARAM(op1, op2, res):
     valor = getValue(op1)
+    mem.offsetCont += 1
     setValue(valor,res)
+    mem.offsetCont -= 1
     quads.quadCount += 1
 
 def operERA(op1, op2, res):
     sig = [0,0,0,0,0]
-    scope = 1
-    if op1 == 'global':
-        scope = 2
     for f in mem.funcTable:
         if f["Id"] == op1:
-            for i in range(1,5):
-                sig[i] = f["Signature"][i]
+            sig = f["Signature"]
+
+    func = [0, [], [], [], []]
     for i in range(1,5):
         for n in range(sig[i]):
-            mem.memStack[scope][i].append(None)
-        sig[i] += mem.offsetStack[len(mem.offsetStack)-1][i]
-    
-    if scope != 2:
-        mem.offsetStack.append(sig)
+            func[i].append(None)
+
+    mem.memStack[1].append(func)
     quads.quadCount += 1
 
 def operRETURN(op1, op2, res):
@@ -253,10 +251,17 @@ OperationsDir = [operNot,
                 operVER]
 
 def run():
-    mem.offsetStack.append([0,0,0,0,0])
+    # Abrir espacios en memoria global
+    sig = mem.funcTable[0]["Signature"]
+    for i in range(1,5):
+        for n in range(sig[i]):
+            mem.memStack[2][i].append(None)
+        
+    # Agregar main a memoria
+    print("count",mem.offsetCont)
     OperationsDir[23]("main", None, None)
-    OperationsDir[23]("global", None, None)
-
+    #mem.offsetCont -= 1
+    print("count",mem.offsetCont)
 
     # print('\n-----------Memoria------------')
     # for m in mem.memStack:
@@ -306,7 +311,7 @@ def run():
     quads.quadCount = 0
     #print('\n----------Ejecucion----------')
     while not quads.cuadruplos[quads.quadCount]["Oper"] == 20:
-       # print('Ejecutando quad', quads.quadCount)
+        print('******Ejecutando quad', quads.quadCount)
         opType=quads.cuadruplos[quads.quadCount]["Oper"] #Obtiene el tipo de operacion y llama esa funcion
         #print(ops.arrOperations[opType])
         OperationsDir[opType] (quads.cuadruplos[quads.quadCount]["Op1"], quads.cuadruplos[quads.quadCount]["Op2"], quads.cuadruplos[quads.quadCount]["Res"])
@@ -321,28 +326,45 @@ def run():
 
 
 def setValue(value,address):
-    #print("setvalue", address,value)
+    # print("setvalue", address,value)
+    # for m in mem.memStack:
+    #     print(m)
+    # print(mem.offsetStack)
+    
     if (address < 10000):
         raise Exception("Invalid Address")
     else:
         iUno = int(address/10000) #local(1) global(2) cte(3)
         iDos = int((address-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
-        iTres = int((address-10000*iUno)-(iDos*1000)) 
-        mem.memStack[iUno][iDos][iTres]=value #asigna valor en la posición de memoria
+        iTres = int((address-10000*iUno)-(iDos*1000))
+        #print("----->>",iUno,iDos,iTres)
+        if iUno != 1:
+            mem.memStack[iUno][iDos][iTres]=value
+        else:
+            mem.memStack[iUno][mem.offsetCont][iDos][iTres]=value 
+        #+ mem.offsetStack[len(mem.offsetStack)-2][iDos] #asigna valor en la posición de memoria
         #print ( mem.memStack[iUno][iDos][iTres])
 
 
 def getValue(address):
-    #print("getvalue", address)
+    print("getvalue", address)
+    for m in mem.memStack:
+        print(m)
+    print("countdos",mem.offsetCont)
+    print(mem.offsetStack)
     if (address < 10000):
         raise Exception("Invalid Address") 
     else:
         iUno = int(address/10000) #local(1) global(2) cte(3)
         iDos = int((address-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
-        iTres = int((address-10000*iUno)-(iDos*1000)) 
+        iTres = int((address-10000*iUno)-(iDos*1000))
         #print("----->>",iUno,iDos,iTres)
-        value = mem.memStack[iUno][iDos][iTres] #obtiene el valor de la posición de memoria
-        #print("getvalue--->", value)
+        #obtiene el valor de la posición de memoria
+        if iUno != 1:
+            value = mem.memStack[iUno][iDos][iTres]
+        else:
+            value= mem.memStack[iUno][mem.offsetCont][iDos][iTres]
+
         if value == None:
             raise Exception("You can't make operations with a Null variable")
         return value
@@ -356,10 +378,9 @@ def getData(address,key):
     iUno = int(address/10000) #local(1) global(2) cte(3)
     iDos = int((address-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
     iTres = int((address-10000*iUno)-(iDos*1000)) 
-#    + mem.offsetStack[len(mem.offsetStack)-2][iDos]
 
     switcher = {
-        "cxt": iUno,
+        "ctx": iUno,
         "type": iDos,
         "pos": iTres
     }
