@@ -314,7 +314,7 @@ def run():
     quads.quadCount = 0
     #print('\n----------Ejecucion----------')
     while not quads.cuadruplos[quads.quadCount]["Oper"] == 20:
-        print('******Ejecutando quad', quads.quadCount)
+        #print('******Ejecutando quad', quads.quadCount)
         opType=quads.cuadruplos[quads.quadCount]["Oper"] #Obtiene el tipo de operacion y llama esa funcion
         #print(ops.arrOperations[opType])
         OperationsDir[opType] (quads.cuadruplos[quads.quadCount]["Op1"], quads.cuadruplos[quads.quadCount]["Op2"], quads.cuadruplos[quads.quadCount]["Res"])
@@ -346,7 +346,7 @@ def setValue(value,address):
 def getValue(address):
     # print("getvalue", address)
     # for m in mem.memStack:
-    #     print(m)
+    #      print(m)
     # print("countdos",mem.offsetCont)
     # print(mem.offsetStack)
 

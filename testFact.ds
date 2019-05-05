@@ -10,15 +10,14 @@ func f2(Int: i1) : Bool{
 main(){
     define Int[6]: arr = [1,2,3,4,5,6];
     define Int : x = 10;
-    define Int : y;
-##
+    define Int : y=6;
+
     print(arr[2]);
     
     x = arr[3];
 
     print(x);
     f1();
-    print (100+arr[5]);
-##
+    print(arr[arr[2]]);
 
 }

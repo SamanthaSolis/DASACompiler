@@ -1225,30 +1225,30 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#exp1.
     def exitExp1(self, ctx:DASAParser.Exp1Context):
-        print("---------------")
-        for ind, q in enumerate(self.cuadruplos):
-            res = str(ind) + "- {Oper: "
-            if "Oper" in q:
-                res += ops.arrOperations[q["Oper"]]
-            else:
-                res += "-"
-            res += ", Op1: "
-            if "Op1" in q:
-                res += str(q["Op1"])
-            else:
-                res += "-"
-            res += ", Op2: "
-            if "Op2" in q:
-                res += str(q["Op2"])
-            else:
-                res += "-"
-            res += ", Res: "
-            if "Res" in q:
-                res += str(q["Res"])
-            else:
-                res += "-"
-            res += "}"
-            print(res)
+        # print("---------------")
+        # for ind, q in enumerate(self.cuadruplos):
+        #     res = str(ind) + "- {Oper: "
+        #     if "Oper" in q:
+        #         res += ops.arrOperations[q["Oper"]]
+        #     else:
+        #         res += "-"
+        #     res += ", Op1: "
+        #     if "Op1" in q:
+        #         res += str(q["Op1"])
+        #     else:
+        #         res += "-"
+        #     res += ", Op2: "
+        #     if "Op2" in q:
+        #         res += str(q["Op2"])
+        #     else:
+        #         res += "-"
+        #     res += ", Res: "
+        #     if "Res" in q:
+        #         res += str(q["Res"])
+        #     else:
+        #         res += "-"
+        #     res += "}"
+        #     print(res)
 
         if self.stackOper:
             top = self.stackOper[len(self.stackOper)-1]
@@ -1395,8 +1395,8 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#valor.
     def enterValor(self, ctx:DASAParser.ValorContext):
         if ctx.getChildCount() == 2:
-            tempaddress=""
-            tempvalType = ""
+            tempAddress = ""
+            tempValType = ""
             var = ctx.getChild(0).getText()
             func = self.currFunction
             exists = False
@@ -1412,12 +1412,19 @@ class DASAListener(ParseTreeListener):
                         self.currVar = self.functionsTable[0]["SymTable"].index(v)
                         func = 0
 
-            if exists:
-                
-                self.stackOP.append(self.functionsTable[func]["SymTable"][self.currVar]["Address"])
-                self.stackTypes.append(self.functionsTable[func]["SymTable"][self.currVar]["Type"])
-            else:
+            if not exists:
                 raise Exception("Error: Variable " + var + " hasn't been defined.")
+            else:
+                tempAddress = self.functionsTable[func]["SymTable"][self.currVar]["Address"]
+                tempValType = self.functionsTable[func]["SymTable"][self.currVar]["Type"]
+                if tempValType < 5: #Checa que no es un arreglo
+                    self.stackOP.append(tempAddress)
+                    self.stackTypes.append(tempValType)
+                else:
+                    self.stackOP.append(tempAddress)
+                    self.stackTypes.append(tempValType-4)
+
+
             
 
     # Exit a parse tree produced by DASAParser#valor.
@@ -1427,7 +1434,7 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#valor1.
     def enterValor1(self, ctx:DASAParser.Valor1Context):
-        pass
+        self.stackOper.append('(')
 
     # Exit a parse tree produced by DASAParser#valor1.
     def exitValor1(self, ctx:DASAParser.Valor1Context):
@@ -1475,7 +1482,8 @@ class DASAListener(ParseTreeListener):
                 self.stackTypes.append(v["Type"]-4)
                 self.cuadruplos.append(self.quad)
                 self.quad = {}
-                self.contCuadruplos += 1    
+                self.contCuadruplos += 1  
+                self.stackOper.pop()  
 
 
 
