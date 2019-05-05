@@ -1,15 +1,24 @@
-func factorial(Int: i) : Int{
-    define Int: x = 0;
-    if(i == 0) {
-        return 1;
-    } else {
-        x = factorial(i-1);
-        return i * x;
-    }
+
+func f1(){
+    print("True");
+}
+
+func f2(Int: i1) : Bool{
+    return False;
 }
 
 main(){
+    define Int[5]: arr = [1,2,3,4,5];
+    define Int : x;
+    define Int : y;
+
+    print(arr[2]);
     
-    print(factorial(100));
-    print("ESTE ES EL NUMERO")
+    x = arr[3];
+    f1();
+    print(x);
+
+    #print (100+arr[0]);
+
+
 }

@@ -83,7 +83,8 @@ class Operadores():
         "CASTINT": 32,
         "CASTFLOAT": 33,
         "CASTSTR": 34,
-        "VER": 35
+        "VER": 35,
+        "SETADD": 36
     }
 
     arrOperations = [
@@ -93,7 +94,7 @@ class Operadores():
         "GOTOF", "GOSUB", "END", "ENDPROC",
         "PARAM", "ERA", "RETURN", "PRINT",
         "INPUT", "DESCRIBE", "PLOT", "REGRESION", 
-        "VACIO", "CLUSTER", "CASTINT", "CASTFLOAT", "CASTSTR", "VER"
+        "VACIO", "CLUSTER", "CASTINT", "CASTFLOAT", "CASTSTR", "VER", "SETADD"
     ]
 
 
@@ -206,31 +207,37 @@ class CuboSemantico():
     semCube[4][4][16] = 4
     semCube[4][8][6] = 8
 
-
     semCube[5][5][12] = 3
     semCube[5][5][13] = 3
     semCube[5][6][12] = 3
     semCube[5][6][13] = 3
+
     semCube[6][5][12] = 3
     semCube[6][5][13] = 3
     semCube[6][6][12] = 3
     semCube[6][6][13] = 3
+
     semCube[7][7][12] = 3
     semCube[7][7][13] = 3
+
     semCube[8][4][6] = 8
     semCube[8][8][6] = 8
     semCube[8][8][12] = 3
     semCube[8][8][13] = 3
+
     semCube[9][9][12] = 3
     semCube[9][9][13] = 3
     semCube[9][10][12] = 3
     semCube[9][10][13] = 3
+
     semCube[10][9][12] = 3
     semCube[10][9][13] = 3
     semCube[10][10][12] = 3
     semCube[10][10][13] = 3
+
     semCube[11][11][12] = 3
     semCube[11][11][13] = 3
+
     semCube[12][12][12] = 3
     semCube[12][12][13] = 3
     semCube[12][4][16] = 12

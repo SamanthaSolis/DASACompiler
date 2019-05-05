@@ -89,8 +89,6 @@ def operOr(op1, op2, res):
     quads.quadCount += 1
     
 def operAssig(op1, op2, res):
-    if (res >= 40000):
-        res=getValue(res)
     value = getValue(op1)
     setValue(value,res)
     quads.quadCount += 1
@@ -147,8 +145,6 @@ def operRETURN(op1, op2, res):
     quads.quadCount += 1
 
 def operPRINT(op1, op2, res):
-    if op1 >= 40000:
-        op1 = getValue(op1)
     print(getValue(op1))
     quads.quadCount += 1
 
@@ -210,8 +206,17 @@ def operCASTSTR(op1, op2, res):
     quads.quadCount += 1
 
 def operVER(op1, op2, res):
+    value = getValue(op1)
+    if value >= op2 or value < 0:
+        raise Exception('Index out of bounds')
     quads.quadCount += 1
 
+def operSETADD(op1, op2, res):
+    iUno = int(res/10000)
+    iDos = int((res-10000*iUno)/1000)
+    iTres = int((res-10000*iUno)-(iDos*1000))
+    mem.memStack[iUno][iDos][iTres] = getValue(op1) + getValue(op2)
+    quads.quadCount += 1
 
 OperationsDir = [operNot,
                 operPos,
@@ -248,7 +253,8 @@ OperationsDir = [operNot,
                 operCASTINT,
                 operCASTFLOAT,
                 operCASTSTR,
-                operVER]
+                operVER,
+                operSETADD]
 
 def run():
     # Abrir espacios en memoria global
@@ -320,17 +326,11 @@ def run():
     for m in mem.memStack:
         print(m)
 
-    print('\n----------Offset----------')
-    for i in mem.offsetStack:
-        print(i)
-
-
 def setValue(value,address):
     # print("setvalue", address,value)
     # for m in mem.memStack:
     #     print(m)
     # print(mem.offsetStack)
-    
     if (address < 10000):
         raise Exception("Invalid Address")
     else:
@@ -347,13 +347,20 @@ def setValue(value,address):
 
 
 def getValue(address):
-    print("getvalue", address)
-    for m in mem.memStack:
-        print(m)
-    print("countdos",mem.offsetCont)
-    print(mem.offsetStack)
+    # print("getvalue", address)
+    # for m in mem.memStack:
+    #     print(m)
+    # print("countdos",mem.offsetCont)
+    # print(mem.offsetStack)
+
+    if address >= 40000:
+        iUno = 4
+        iDos = int((address-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
+        iTres = int((address-10000*iUno)-(iDos*1000))
+        address = mem.memStack[iUno][iDos][iTres]
+
     if (address < 10000):
-        raise Exception("Invalid Address") 
+        raise Exception("Invalid Addresssssss") 
     else:
         iUno = int(address/10000) #local(1) global(2) cte(3)
         iDos = int((address-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
@@ -363,7 +370,7 @@ def getValue(address):
         if iUno != 1:
             value = mem.memStack[iUno][iDos][iTres]
         else:
-            value= mem.memStack[iUno][mem.offsetCont][iDos][iTres]
+            value = mem.memStack[iUno][mem.offsetCont][iDos][iTres]
 
         if value == None:
             raise Exception("You can't make operations with a Null variable")

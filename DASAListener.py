@@ -53,7 +53,7 @@ class DASAListener(ParseTreeListener):
 #        self.contTemp = [0, 0, 0, 0, 0]
         
         self.OnGoingFunc = 0 #Index para saber que funcion es en la llamada
-        self.paramCounter = [0,0,0,0,0]
+        self.paramCounter = [] # [0,0,0,0,0]
         
         self.printIndex = 0
 
@@ -218,9 +218,16 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#metodos.
     def enterMetodos(self, ctx:DASAParser.MetodosContext):
         # !!! Verificar si no existe la funcion
+        name = ctx.ID().getText()
+        for f in self.functionsTable:
+            if f["Id"] == name:
+                raise Exception("Function already defined")
+                break
+
+
         self.varsTable = []
         self.function = {
-            "Id" : ctx.ID().getText(),
+            "Id" : name,
             "Params" : 0,
             "TiposParams" : [],
             "Return" : 0,
@@ -368,18 +375,13 @@ class DASAListener(ParseTreeListener):
     def enterVars3(self, ctx:DASAParser.Vars3Context):
         tempname = ctx.ID().getText()
         #print(self.varsTable)
-        exists = False
         #Checamos si existe
         for v in self.varsTable:
             if v["Name"] == tempname:
-                exists = True
-            else:
-                exists = False      
+                raise Exception("Variable already defined")
+                break
         
-        if exists:
-            raise Exception("Variable already defined")
-        else:
-            self.var["Name"] = tempname
+        self.var["Name"] = tempname
 
     # Exit a parse tree produced by DASAParser#vars3.
     def exitVars3(self, ctx:DASAParser.Vars3Context):
@@ -993,7 +995,7 @@ class DASAListener(ParseTreeListener):
     def enterFuncion(self, ctx:DASAParser.FuncionContext):
         exists = False
         idtemp = ctx.getChild(0).getText()
-        self.paramCounter = [0,0,0,0,0]
+        self.paramCounter.append([0,0,0,0,0])
         for f in self.functionsTable:
             if f["Id"] == idtemp:
                 exists = True
@@ -1011,6 +1013,7 @@ class DASAListener(ParseTreeListener):
             self.cuadruplos.append(self.quad)
             self.quad = {}
             self.contCuadruplos += 1
+        self.stackOper.append('(')
             
 
     # Exit a parse tree produced by DASAParser#funcion.
@@ -1045,6 +1048,8 @@ class DASAListener(ParseTreeListener):
             self.cuadruplos.append(self.quad)
             self.quad = {}
             self.contCuadruplos += 1
+        self.stackOper.pop()
+        self.paramCounter.pop()
 
         
     # Enter a parse tree produced by DASAParser#func1.
@@ -1059,8 +1064,8 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#func2.
     def enterFunc2(self, ctx:DASAParser.Func2Context):
-        tipoParam = self.functionsTable[self.OnGoingFunc]["TiposParams"][sum(self.paramCounter)]
-        if sum(self.paramCounter) > len(self.functionsTable[self.OnGoingFunc]["TiposParams"]):
+        tipoParam = self.functionsTable[self.OnGoingFunc]["TiposParams"][sum(self.paramCounter[len(self.paramCounter)-1])]
+        if sum(self.paramCounter[len(self.paramCounter)-1]) > len(self.functionsTable[self.OnGoingFunc]["TiposParams"]):
             raise Exception("Error. Method was given more parameters than expected.")
         else:
             if self.stackTypes.pop() != tipoParam:
@@ -1070,12 +1075,12 @@ class DASAListener(ParseTreeListener):
                     "Oper" : 22, # PARAM
                     "Op1" : self.stackOP.pop(),
                     "Op2" : None,
-                    "Res" : Calc.genAddress(1, tipoParam, self.paramCounter[tipoParam])
+                    "Res" : Calc.genAddress(1, tipoParam, self.paramCounter[len(self.paramCounter)-1][tipoParam])
                 }
                 self.cuadruplos.append(self.quad)
                 self.quad = {}
                 self.contCuadruplos += 1
-                self.paramCounter[tipoParam] +=1
+                self.paramCounter[len(self.paramCounter)-1][tipoParam] +=1
 
  # Exit a parse tree produced by DASAParser#func2.
     def exitFunc2(self, ctx:DASAParser.Func2Context):
@@ -1106,7 +1111,6 @@ class DASAListener(ParseTreeListener):
             self.cuadruplos.append(self.quad)
             self.quad = {}
             self.contCuadruplos += 1
-            self.stackTypes.append(resType)
 
 
     # Enter a parse tree produced by DASAParser#expresion.
@@ -1221,6 +1225,14 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#exp1.
     def exitExp1(self, ctx:DASAParser.Exp1Context):
+        #for q in self.cuadruplos:
+            #print('******Ejecutando quad', quads.quadCount)
+            #opType=quads.cuadruplos[quads.quadCount]["Oper"] #Obtiene el tipo de operacion y llama esa funcion
+        #print(ops.arrOperations[opType])
+        #OperationsDir[opType] (quads.cuadruplos[quads.quadCount]["Op1"], quads.cuadruplos[quads.quadCount]["Op2"], quads.cuadruplos[quads.quadCount]["Res"])
+
+        print("---------------")
+        print (self.cuadruplos)
         if self.stackOper:
             top = self.stackOper[len(self.stackOper)-1]
             if top == 6 or top == 7:
@@ -1343,11 +1355,13 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#fact2.
     def enterFact2(self, ctx:DASAParser.Fact2Context):
-        pass
+        if ctx.getChildCount() == 3:
+            self.stackOper.append('(')
 
     # Exit a parse tree produced by DASAParser#fact2.
     def exitFact2(self, ctx:DASAParser.Fact2Context):
-        pass
+        if ctx.getChildCount() == 3:
+            self.stackOper.pop()
 
 
     # Enter a parse tree produced by DASAParser#fact3.
