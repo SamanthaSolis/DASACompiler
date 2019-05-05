@@ -1225,14 +1225,31 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#exp1.
     def exitExp1(self, ctx:DASAParser.Exp1Context):
-        #for q in self.cuadruplos:
-            #print('******Ejecutando quad', quads.quadCount)
-            #opType=quads.cuadruplos[quads.quadCount]["Oper"] #Obtiene el tipo de operacion y llama esa funcion
-        #print(ops.arrOperations[opType])
-        #OperationsDir[opType] (quads.cuadruplos[quads.quadCount]["Op1"], quads.cuadruplos[quads.quadCount]["Op2"], quads.cuadruplos[quads.quadCount]["Res"])
-
         print("---------------")
-        print (self.cuadruplos)
+        for ind, q in enumerate(self.cuadruplos):
+            res = str(ind) + "- {Oper: "
+            if "Oper" in q:
+                res += ops.arrOperations[q["Oper"]]
+            else:
+                res += "-"
+            res += ", Op1: "
+            if "Op1" in q:
+                res += str(q["Op1"])
+            else:
+                res += "-"
+            res += ", Op2: "
+            if "Op2" in q:
+                res += str(q["Op2"])
+            else:
+                res += "-"
+            res += ", Res: "
+            if "Res" in q:
+                res += str(q["Res"])
+            else:
+                res += "-"
+            res += "}"
+            print(res)
+
         if self.stackOper:
             top = self.stackOper[len(self.stackOper)-1]
             if top == 6 or top == 7:
@@ -1396,6 +1413,7 @@ class DASAListener(ParseTreeListener):
                         func = 0
 
             if exists:
+                
                 self.stackOP.append(self.functionsTable[func]["SymTable"][self.currVar]["Address"])
                 self.stackTypes.append(self.functionsTable[func]["SymTable"][self.currVar]["Type"])
             else:

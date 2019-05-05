@@ -264,10 +264,7 @@ def run():
             mem.memStack[2][i].append(None)
         
     # Agregar main a memoria
-    print("count",mem.offsetCont)
     OperationsDir[23]("main", None, None)
-    #mem.offsetCont -= 1
-    print("count",mem.offsetCont)
 
     # print('\n-----------Memoria------------')
     # for m in mem.memStack:
