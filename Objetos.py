@@ -18,7 +18,7 @@ class Memoria():
     offsetStack = []
     globalVars = []
     offsetCont = 0
-    
+
     BaseINT = 1000
     BaseFLOAT = 2000
     BaseBOOL = 3000
@@ -35,7 +35,7 @@ class Cuadruplos():
     cuadruplos  = []
     quadCount = 0
 
-    
+
     # def __init__(self):
     #     self.cuadruplos = []
 
@@ -44,7 +44,7 @@ class Cuadruplos():
     #     for y in self.cuadruplos:
     #         print("\t",index, ".", "{Oper:", y["Oper"], ", Op1:", y["Op1"], ", Op2:", y["Op2"], ", Res:", y["Res"], "}")
     #         index += 1
-        
+
 
 class Operadores():
     dicOperations = {
@@ -93,8 +93,9 @@ class Operadores():
         "==", "!=", "&&", "||", "=", "GOTO",
         "GOTOF", "GOSUB", "END", "ENDPROC",
         "PARAM", "ERA", "RETURN", "PRINT",
-        "INPUT", "DESCRIBE", "PLOT", "REGRESION", 
-        "VACIO", "CLUSTER", "CASTINT", "CASTFLOAT", "CASTSTR", "VER", "SETADD"
+        "INPUT", "DESCRIBE", "PLOT", "REGRESION",
+        "VACIO", "CLUSTER", "CASTINT", "CASTFLOAT",
+        "CASTSTR", "VER", "SETADD"
     ]
 
 
@@ -128,7 +129,7 @@ class Scopes():
 
 class CuadroSemantico():
     semSquare = [[-1 for y in range(3)] for x in range(13)]
-    
+
     semSquare[1][1] = 1
     semSquare[1][2] = 1
     semSquare[2][1] = 2
@@ -137,7 +138,7 @@ class CuadroSemantico():
 
 class CuboSemantico():
     semCube = [[[-1 for z in range(17)] for y in range(13)] for x in range(13)]
-    
+
     semCube[0][1][16] = 1
     semCube[0][2][16] = 1
     semCube[0][3][16] = 1
@@ -207,40 +208,31 @@ class CuboSemantico():
     semCube[4][4][16] = 4
     semCube[4][8][6] = 8
 
+
     semCube[5][5][12] = 3
     semCube[5][5][13] = 3
     semCube[5][6][12] = 3
     semCube[5][6][13] = 3
-
     semCube[6][5][12] = 3
     semCube[6][5][13] = 3
     semCube[6][6][12] = 3
     semCube[6][6][13] = 3
-
     semCube[7][7][12] = 3
     semCube[7][7][13] = 3
-
     semCube[8][4][6] = 8
     semCube[8][8][6] = 8
     semCube[8][8][12] = 3
     semCube[8][8][13] = 3
-
     semCube[9][9][12] = 3
     semCube[9][9][13] = 3
     semCube[9][10][12] = 3
     semCube[9][10][13] = 3
-
     semCube[10][9][12] = 3
     semCube[10][9][13] = 3
     semCube[10][10][12] = 3
     semCube[10][10][13] = 3
-
     semCube[11][11][12] = 3
     semCube[11][11][13] = 3
-
     semCube[12][12][12] = 3
     semCube[12][12][13] = 3
     semCube[12][4][16] = 12
-    
-    
-        

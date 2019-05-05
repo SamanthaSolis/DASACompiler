@@ -1,0 +1,10 @@
+
+func fibo(Int: n): Float{
+    if((n == 0) || (n == 1)){
+        print("YEY");
+    }
+}
+
+main(){
+    print(fibo(5));
+}
