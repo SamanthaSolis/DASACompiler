@@ -1,14 +1,24 @@
 
+<<<<<<< HEAD
 func fibo(Int: n): Int{
     if((n == 1) || (n == 2)){
         return 1;
     } else{
         return fibo(n-1) + fibo(n-2);
+=======
+func fibo(Int: n): Float{
+    if((n == 0) || (n == 1)){
+        print("YEY");
+>>>>>>> 2c5732d13682b2e1d0ee730c116c243110039a7f
     }
 }
 
 main(){
+<<<<<<< HEAD
 
     print(fibo(10)));
 
+=======
+    print(fibo(5));
+>>>>>>> 2c5732d13682b2e1d0ee730c116c243110039a7f
 }

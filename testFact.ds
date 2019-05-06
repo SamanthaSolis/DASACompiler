@@ -8,6 +8,10 @@ func factorial(Int: i) : Int{
 
 main(){
 
+<<<<<<< HEAD
     print(factorial(10));
+=======
+    print(factorial(3));
+>>>>>>> 2c5732d13682b2e1d0ee730c116c243110039a7f
     print("ESTE ES EL NUMERO")
 }

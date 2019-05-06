@@ -1,7 +1,22 @@
 main(){
+<<<<<<< HEAD
     define Int[2][3] : arr = [[0, 1, 2], [0, 1, 2]];
 
     arr[1][2] = arr[arr[0][0]][arr[1][1]];
     print( arr[1][2]);
 
+=======
+    define Int[4]: arr1 = [10,20,30,40];
+    define Int[2][3] : arr = [[1,2,3], [6,7,8]];
+    arr[1][1] = 3000;
+
+    ##
+    define Int: x;
+    arr[2] = 400;
+    x= arr[1];
+    print(arr[2]);
+    x = arr[arr[0]+1];
+    print(x);
+    ##
+>>>>>>> 2c5732d13682b2e1d0ee730c116c243110039a7f
 }
