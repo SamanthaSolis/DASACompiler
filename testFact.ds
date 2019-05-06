@@ -1,23 +1,13 @@
-
-func f1(){
-    print("True");
-}
-
-func f2(Int: i1) : Bool{
-    return False;
+func factorial(Int: i) : Int{
+    if(i == 0) {
+        return 1;
+    } else {
+        return i * factorial(i-1);
+    }
 }
 
 main(){
-    define Int[6]: arr = [1,2,3,4,5,6];
-    define Int : x = 10;
-    define Int : y=6;
 
-    print(arr[2]);
-    
-    x = arr[3];
-
-    print(x);
-    f1();
-    print(arr[arr[2]]);
-
+    print(factorial(10));
+    print("ESTE ES EL NUMERO")
 }

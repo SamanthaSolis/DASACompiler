@@ -1,0 +1,23 @@
+
+main(){
+    define Int[5] : arrI = [3, 6, 1, 8, 4];
+    define Int : cont = 0, index = 0, temp = 0;
+    define Int : findY = 8, findN = 7;
+    define Bool : exists = False;
+
+    while (!exists && cont < 5){
+        if(arrI[cont] == findN){
+            exists = True;
+            index = cont;
+        }
+        cont = cont + 1 ;
+    }
+
+    if(exists){
+        print("Found it!");
+        print(index);
+    }else{
+        print ("Not found :ccc");
+    }
+
+}

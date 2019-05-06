@@ -1,0 +1,7 @@
+main(){
+    define Int[2][3] : arr = [[0, 1, 2], [0, 1, 2]];
+
+    arr[1][2] = arr[arr[0][0]][arr[1][1]];
+    print( arr[1][2]);
+
+}

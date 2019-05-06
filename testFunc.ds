@@ -1,4 +1,4 @@
-
+##
 define Int: a=10;
 define Bool: x=True;
 
@@ -9,8 +9,6 @@ func f1(Float: i1, Float: i2) : Float {
 func ff1(Float: b1, Float: b2) : Float {
     return f1(b1,b2);
 }
-
-##
 
 func f2(Int: i1, Int: i2, Int: i3) : Bool{
     #define Int : res;
@@ -23,7 +21,7 @@ func f3(Int: i1, Int: i2, Int: i3) : Bool{
     #res = i1 + f1(i2, i3);
     #return res;
 }
-##
+
 
 main() {
     define Float: x = 5.0;
@@ -31,4 +29,14 @@ main() {
 
     print(ff1(x,y));
 
+}
+##
+
+func f(Int: i): Float{
+    return 1.0;
+}
+
+main(){
+    print(f(1+1));
+    print(f(2));
 }
