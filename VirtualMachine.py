@@ -316,7 +316,7 @@ def run():
     quads.quadCount = 0
     #print('\n----------Ejecucion----------')
     while not quads.cuadruplos[quads.quadCount]["Oper"] == 20:
-        print('******Ejecutando quad', quads.quadCount)
+        #print('******Ejecutando quad', quads.quadCount)
         opType=quads.cuadruplos[quads.quadCount]["Oper"] #Obtiene el tipo de operacion y llama esa funcion
         #print(ops.arrOperations[opType],quads.cuadruplos[quads.quadCount]["Op1"], quads.cuadruplos[quads.quadCount]["Op2"], quads.cuadruplos[quads.quadCount]["Res"])
         OperationsDir[opType] (quads.cuadruplos[quads.quadCount]["Op1"], quads.cuadruplos[quads.quadCount]["Op2"], quads.cuadruplos[quads.quadCount]["Res"])
@@ -327,15 +327,9 @@ def run():
         print(m)
 
 def setValue(value,address):
-<<<<<<< HEAD
     # print("setvalue", value, address)
     # for m in mem.memStack:
     #     print(m)
-=======
-    print("setvalue", value, address)
-    for m in mem.memStack:
-        print(m)
->>>>>>> 2c5732d13682b2e1d0ee730c116c243110039a7f
     # print(mem.offsetStack)
 
     if (address < 10000):
@@ -357,15 +351,9 @@ def setValue(value,address):
 
 
 def getValue(address):
-<<<<<<< HEAD
     # print("getvalue", address)
     # for m in mem.memStack:
     #     print(m)
-=======
-    print("getvalue", address)
-    for m in mem.memStack:
-        print(m)
->>>>>>> 2c5732d13682b2e1d0ee730c116c243110039a7f
     # print("countdos",mem.offsetCont)
     # print(mem.offsetStack)
     if (address < 10000):
@@ -386,11 +374,7 @@ def getValue(address):
 
         if value == None:
             raise Exception("You can't make operations with a Null variable")
-<<<<<<< HEAD
         #print("value of address",address,":", value)
-=======
-        print("value of address",address,":", value)
->>>>>>> 2c5732d13682b2e1d0ee730c116c243110039a7f
         return value
 
 
