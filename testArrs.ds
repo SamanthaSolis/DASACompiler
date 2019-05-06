@@ -1,7 +1,19 @@
+define String[2][2] : arrS = [["Sam","Solis"],["Mayra","Ruiz"]]
+define Int: x = 10;
+define Int: y = 0;
+
 main(){
     define Int[2][3] : arr = [[0, 1, 2], [0, 1, 2]];
+    define String[2][2] : arrS = [["A","B"],["C","D"]];
+    define Int: x = 0;
+    define Int: mom = 0;
+
+    mom = 10;
+    print(x);
+    print(mom);
 
     arr[1][2] = arr[arr[0][0]][arr[1][1]];
-    print(arr[1][2]);
+    arrS[1][1]="Ron";
+    print(arrS[1][1]);
 
 }

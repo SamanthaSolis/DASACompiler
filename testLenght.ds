@@ -1,0 +1,10 @@
+main(){
+    define Int : o=40;
+    #isNull no jala
+    #print(isNull(o));
+    define Float : f = 1.5;
+    print (f);
+    o = toInt(f);
+    print (o);
+
+}

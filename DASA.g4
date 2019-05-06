@@ -107,7 +107,11 @@ bloque: LCURLY bloque1 RCURLY ;
 
 bloque1: estatuto bloque1 |   ;
 
-escritura: PRINT LPAREN expresion RPAREN SCOLON ;
+escritura: PRINT LPAREN escr1 RPAREN SCOLON ;
+
+escr1: expresion escr2 | ;
+
+escr2: COMMA escr1 | ;
 
 estdesc: DESCRIBE LPAREN expresion RPAREN SCOLON ;
 
@@ -187,13 +191,7 @@ castfloat: TOFLOAT LPAREN expresion RPAREN ;
 
 caststring: TOSTRING LPAREN expresion RPAREN ;
 
-tamano: SIZE LPAREN tamano1 RPAREN ;
-
-tamano1: CSTRING
-       | ID tamano2;
-
-tamano2: LBRACK expresion RBRACK | ; 
-
+tamano: SIZE LPAREN valor RPAREN ;
 
 DEFINE:     'define';
 FUNC:       'func';

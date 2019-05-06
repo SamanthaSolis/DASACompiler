@@ -217,6 +217,16 @@ def operSETADD(op1, op2, res):
     mem.memStack[iUno][iDos][iTres] = getValue(op1) + getValue(op2)
     quads.quadCount += 1
 
+def operLENGTH(op1, op2, res):
+    value = getValue(op1)
+    setValue(len(value),res)
+    quads.quadCount += 1
+
+def operSIZE(op1, op2, res):
+    setValue(op1, res)
+    quads.quadCount += 1
+
+
 OperationsDir = [operNot,
                 operPos,
                 operNeg,
@@ -253,7 +263,9 @@ OperationsDir = [operNot,
                 operCASTFLOAT,
                 operCASTSTR,
                 operVER,
-                operSETADD]
+                operSETADD,
+                operLENGTH,
+                operSIZE]
 
 def run():
     # Abrir espacios en memoria global

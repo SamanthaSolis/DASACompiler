@@ -1,42 +1,14 @@
-##
-define Int: a=10;
-define Bool: x=True;
-
-func f1(Float: i1, Float: i2) : Float {
-    return i1+i2;
+func f1(Int: i) : Int{
+    return -i;
 }
 
-func ff1(Float: b1, Float: b2) : Float {
-    return f1(b1,b2);
+func f2(Int: a, Int: b) : Int {
+    return a*b;
 }
-
-func f2(Int: i1, Int: i2, Int: i3) : Bool{
-    #define Int : res;
-    #res = i1 + f1(i2, i3);
-    #return res;
-}
-
-func f3(Int: i1, Int: i2, Int: i3) : Bool{
-    #define Int : res;
-    #res = i1 + f1(i2, i3);
-    #return res;
-}
-
 
 main() {
-    define Float: x = 5.0;
-    define Float: y = 2.0; 
-
-    print(ff1(x,y));
-
-}
-##
-
-func f(Int: i): Float{
-    return 1.0;
-}
-
-main(){
-    print(f(1+1));
-    print(f(2));
+    define Int: x;
+    x=f1(1);
+    x = f2(f1(f2(2,3)), 3);
+    print(x);
 }

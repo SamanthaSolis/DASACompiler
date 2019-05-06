@@ -85,6 +85,8 @@ class Operadores():
         "CASTSTR": 34,
         "VER": 35,
         "SETADD": 36,
+        "LENGTH": 37,
+        "SIZE": 38,
     }
 
     arrOperations = [
@@ -95,7 +97,7 @@ class Operadores():
         "PARAM", "ERA", "RETURN", "PRINT",
         "INPUT", "DESCRIBE", "PLOT", "REGRESION",
         "VACIO", "CLUSTER", "CASTINT", "CASTFLOAT",
-        "CASTSTR", "VER", "SETADD"
+        "CASTSTR", "VER", "SETADD", "LENGTH", "SIZE"
     ]
 
 

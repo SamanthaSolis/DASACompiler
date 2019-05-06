@@ -9,7 +9,7 @@ import sys
 def serializedATN():
     with StringIO() as buf:
         buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\39")
-        buf.write("\u0262\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
+        buf.write("\u0261\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7")
         buf.write("\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4\f\t\f\4\r\t\r\4\16")
         buf.write("\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22\4\23\t\23")
         buf.write("\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31")
@@ -44,73 +44,73 @@ def serializedATN():
         buf.write("\n&\3\'\3\'\3\'\3\'\3\'\3(\3(\3(\3(\5(\u018b\n(\3)\3)")
         buf.write("\3)\5)\u0190\n)\3*\3*\3*\5*\u0195\n*\3+\3+\3,\3,\3-\3")
         buf.write("-\3-\3-\3.\3.\3.\3.\5.\u01a3\n.\3/\3/\3/\3/\3/\3/\3\60")
-        buf.write("\3\60\3\60\3\60\3\60\3\60\3\61\3\61\3\61\3\61\3\61\3\61")
-        buf.write("\3\61\3\61\3\62\3\62\3\62\3\62\3\62\3\62\3\62\3\63\3\63")
-        buf.write("\3\63\5\63\u01c3\n\63\3\64\3\64\3\64\3\64\3\64\3\64\3")
-        buf.write("\64\3\64\3\65\3\65\3\65\3\65\3\65\3\66\3\66\3\66\3\66")
-        buf.write("\5\66\u01d6\n\66\3\67\3\67\3\67\5\67\u01db\n\67\38\38")
-        buf.write("\38\38\39\39\39\3:\3:\3:\3:\5:\u01e8\n:\3;\3;\3<\3<\3")
-        buf.write("<\3=\3=\3=\3=\5=\u01f3\n=\3>\3>\3?\3?\3?\3@\3@\3@\3@\5")
-        buf.write("@\u01fe\n@\3A\3A\3B\3B\3B\3C\3C\3C\3C\5C\u0209\nC\3D\3")
-        buf.write("D\3E\3E\3E\3F\3F\5F\u0212\nF\3G\3G\3G\3G\3G\3G\3G\5G\u021b")
-        buf.write("\nG\3H\3H\3H\5H\u0220\nH\3I\3I\3I\3I\3I\3I\3I\3I\3I\3")
-        buf.write("I\5I\u022c\nI\3J\3J\3J\3J\3J\3J\5J\u0234\nJ\3K\3K\3K\3")
-        buf.write("K\3K\5K\u023b\nK\3L\3L\3L\3L\3L\3M\3M\3M\3M\3M\3N\3N\3")
-        buf.write("N\3N\3N\3O\3O\3O\3O\3O\3P\3P\3P\3P\3P\3Q\3Q\3Q\5Q\u0259")
-        buf.write("\nQ\3R\3R\3R\3R\3R\5R\u0260\nR\3R\2\2S\2\4\6\b\n\f\16")
-        buf.write("\20\22\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDF")
-        buf.write("HJLNPRTVXZ\\^`bdfhjlnprtvxz|~\u0080\u0082\u0084\u0086")
-        buf.write("\u0088\u008a\u008c\u008e\u0090\u0092\u0094\u0096\u0098")
-        buf.write("\u009a\u009c\u009e\u00a0\u00a2\2\b\4\2\31\31\658\3\2\6")
-        buf.write("\t\3\2\60\61\4\2#$&)\3\2*+\4\2,-//\2\u024b\2\u00a4\3\2")
-        buf.write("\2\2\4\u00ad\3\2\2\2\6\u00b3\3\2\2\2\b\u00b5\3\2\2\2\n")
-        buf.write("\u00b7\3\2\2\2\f\u00c3\3\2\2\2\16\u00c9\3\2\2\2\20\u00cb")
-        buf.write("\3\2\2\2\22\u00da\3\2\2\2\24\u00df\3\2\2\2\26\u00e5\3")
-        buf.write("\2\2\2\30\u00eb\3\2\2\2\32\u00f2\3\2\2\2\34\u00f4\3\2")
-        buf.write("\2\2\36\u00f8\3\2\2\2 \u0104\3\2\2\2\"\u010a\3\2\2\2$")
-        buf.write("\u010c\3\2\2\2&\u0113\3\2\2\2(\u0117\3\2\2\2*\u011c\3")
-        buf.write("\2\2\2,\u012b\3\2\2\2.\u012d\3\2\2\2\60\u0139\3\2\2\2")
-        buf.write("\62\u0140\3\2\2\2\64\u0142\3\2\2\2\66\u0148\3\2\2\28\u014a")
-        buf.write("\3\2\2\2:\u0150\3\2\2\2<\u0156\3\2\2\2>\u0158\3\2\2\2")
-        buf.write("@\u0165\3\2\2\2B\u016c\3\2\2\2D\u016e\3\2\2\2F\u0174\3")
-        buf.write("\2\2\2H\u017a\3\2\2\2J\u017f\3\2\2\2L\u0181\3\2\2\2N\u018a")
-        buf.write("\3\2\2\2P\u018f\3\2\2\2R\u0194\3\2\2\2T\u0196\3\2\2\2")
-        buf.write("V\u0198\3\2\2\2X\u019a\3\2\2\2Z\u01a2\3\2\2\2\\\u01a4")
-        buf.write("\3\2\2\2^\u01aa\3\2\2\2`\u01b0\3\2\2\2b\u01b8\3\2\2\2")
-        buf.write("d\u01c2\3\2\2\2f\u01c4\3\2\2\2h\u01cc\3\2\2\2j\u01d5\3")
-        buf.write("\2\2\2l\u01da\3\2\2\2n\u01dc\3\2\2\2p\u01e0\3\2\2\2r\u01e7")
-        buf.write("\3\2\2\2t\u01e9\3\2\2\2v\u01eb\3\2\2\2x\u01f2\3\2\2\2")
-        buf.write("z\u01f4\3\2\2\2|\u01f6\3\2\2\2~\u01fd\3\2\2\2\u0080\u01ff")
-        buf.write("\3\2\2\2\u0082\u0201\3\2\2\2\u0084\u0208\3\2\2\2\u0086")
-        buf.write("\u020a\3\2\2\2\u0088\u020c\3\2\2\2\u008a\u0211\3\2\2\2")
-        buf.write("\u008c\u021a\3\2\2\2\u008e\u021f\3\2\2\2\u0090\u022b\3")
-        buf.write("\2\2\2\u0092\u0233\3\2\2\2\u0094\u023a\3\2\2\2\u0096\u023c")
-        buf.write("\3\2\2\2\u0098\u0241\3\2\2\2\u009a\u0246\3\2\2\2\u009c")
-        buf.write("\u024b\3\2\2\2\u009e\u0250\3\2\2\2\u00a0\u0258\3\2\2\2")
-        buf.write("\u00a2\u025f\3\2\2\2\u00a4\u00a5\5\4\3\2\u00a5\u00a6\5")
-        buf.write("\b\5\2\u00a6\u00a7\5\6\4\2\u00a7\u00a8\5\n\6\2\u00a8\3")
-        buf.write("\3\2\2\2\u00a9\u00aa\5\36\20\2\u00aa\u00ab\5\4\3\2\u00ab")
-        buf.write("\u00ae\3\2\2\2\u00ac\u00ae\3\2\2\2\u00ad\u00a9\3\2\2\2")
-        buf.write("\u00ad\u00ac\3\2\2\2\u00ae\5\3\2\2\2\u00af\u00b0\5\20")
-        buf.write("\t\2\u00b0\u00b1\5\6\4\2\u00b1\u00b4\3\2\2\2\u00b2\u00b4")
-        buf.write("\3\2\2\2\u00b3\u00af\3\2\2\2\u00b3\u00b2\3\2\2\2\u00b4")
-        buf.write("\7\3\2\2\2\u00b5\u00b6\3\2\2\2\u00b6\t\3\2\2\2\u00b7\u00b8")
-        buf.write("\7\5\2\2\u00b8\u00b9\7\37\2\2\u00b9\u00ba\7 \2\2\u00ba")
-        buf.write("\u00bb\7\35\2\2\u00bb\u00bc\5\f\7\2\u00bc\u00bd\5\16\b")
-        buf.write("\2\u00bd\u00be\7\36\2\2\u00be\13\3\2\2\2\u00bf\u00c0\5")
-        buf.write("\36\20\2\u00c0\u00c1\5\f\7\2\u00c1\u00c4\3\2\2\2\u00c2")
-        buf.write("\u00c4\3\2\2\2\u00c3\u00bf\3\2\2\2\u00c3\u00c2\3\2\2\2")
-        buf.write("\u00c4\r\3\2\2\2\u00c5\u00c6\5,\27\2\u00c6\u00c7\5\16")
-        buf.write("\b\2\u00c7\u00ca\3\2\2\2\u00c8\u00ca\3\2\2\2\u00c9\u00c5")
-        buf.write("\3\2\2\2\u00c9\u00c8\3\2\2\2\u00ca\17\3\2\2\2\u00cb\u00cc")
-        buf.write("\7\4\2\2\u00cc\u00cd\79\2\2\u00cd\u00ce\7\37\2\2\u00ce")
-        buf.write("\u00cf\5\22\n\2\u00cf\u00d0\7 \2\2\u00d0\u00d1\5\24\13")
-        buf.write("\2\u00d1\u00d2\7\35\2\2\u00d2\u00d3\5\26\f\2\u00d3\u00d4")
-        buf.write("\5\30\r\2\u00d4\u00d5\7\36\2\2\u00d5\21\3\2\2\2\u00d6")
-        buf.write("\u00d7\5\34\17\2\u00d7\u00d8\5\32\16\2\u00d8\u00db\3\2")
-        buf.write("\2\2\u00d9\u00db\3\2\2\2\u00da\u00d6\3\2\2\2\u00da\u00d9")
-        buf.write("\3\2\2\2\u00db\23\3\2\2\2\u00dc\u00dd\7\32\2\2\u00dd\u00e0")
-        buf.write("\5V,\2\u00de\u00e0\3\2\2\2\u00df\u00dc\3\2\2\2\u00df\u00de")
+        buf.write("\3\60\3\60\3\60\5\60\u01af\n\60\3\61\3\61\3\61\5\61\u01b4")
+        buf.write("\n\61\3\62\3\62\3\62\3\62\3\62\3\62\3\63\3\63\3\63\3\63")
+        buf.write("\3\63\3\63\3\63\3\63\3\64\3\64\3\64\3\64\3\64\3\64\3\64")
+        buf.write("\3\65\3\65\3\65\5\65\u01ce\n\65\3\66\3\66\3\66\3\66\3")
+        buf.write("\66\3\66\3\66\3\66\3\67\3\67\3\67\3\67\3\67\38\38\38\3")
+        buf.write("8\58\u01e1\n8\39\39\39\59\u01e6\n9\3:\3:\3:\3:\3;\3;\3")
+        buf.write(";\3<\3<\3<\3<\5<\u01f3\n<\3=\3=\3>\3>\3>\3?\3?\3?\3?\5")
+        buf.write("?\u01fe\n?\3@\3@\3A\3A\3A\3B\3B\3B\3B\5B\u0209\nB\3C\3")
+        buf.write("C\3D\3D\3D\3E\3E\3E\3E\5E\u0214\nE\3F\3F\3G\3G\3G\3H\3")
+        buf.write("H\5H\u021d\nH\3I\3I\3I\3I\3I\3I\3I\5I\u0226\nI\3J\3J\3")
+        buf.write("J\5J\u022b\nJ\3K\3K\3K\3K\3K\3K\3K\3K\3K\3K\5K\u0237\n")
+        buf.write("K\3L\3L\3L\3L\3L\3L\5L\u023f\nL\3M\3M\3M\3M\3M\5M\u0246")
+        buf.write("\nM\3N\3N\3N\3N\3N\3O\3O\3O\3O\3O\3P\3P\3P\3P\3P\3Q\3")
+        buf.write("Q\3Q\3Q\3Q\3R\3R\3R\3R\3R\3R\2\2S\2\4\6\b\n\f\16\20\22")
+        buf.write("\24\26\30\32\34\36 \"$&(*,.\60\62\64\668:<>@BDFHJLNPR")
+        buf.write("TVXZ\\^`bdfhjlnprtvxz|~\u0080\u0082\u0084\u0086\u0088")
+        buf.write("\u008a\u008c\u008e\u0090\u0092\u0094\u0096\u0098\u009a")
+        buf.write("\u009c\u009e\u00a0\u00a2\2\b\4\2\31\31\658\3\2\6\t\3\2")
+        buf.write("\60\61\4\2#$&)\3\2*+\4\2,-//\2\u024a\2\u00a4\3\2\2\2\4")
+        buf.write("\u00ad\3\2\2\2\6\u00b3\3\2\2\2\b\u00b5\3\2\2\2\n\u00b7")
+        buf.write("\3\2\2\2\f\u00c3\3\2\2\2\16\u00c9\3\2\2\2\20\u00cb\3\2")
+        buf.write("\2\2\22\u00da\3\2\2\2\24\u00df\3\2\2\2\26\u00e5\3\2\2")
+        buf.write("\2\30\u00eb\3\2\2\2\32\u00f2\3\2\2\2\34\u00f4\3\2\2\2")
+        buf.write("\36\u00f8\3\2\2\2 \u0104\3\2\2\2\"\u010a\3\2\2\2$\u010c")
+        buf.write("\3\2\2\2&\u0113\3\2\2\2(\u0117\3\2\2\2*\u011c\3\2\2\2")
+        buf.write(",\u012b\3\2\2\2.\u012d\3\2\2\2\60\u0139\3\2\2\2\62\u0140")
+        buf.write("\3\2\2\2\64\u0142\3\2\2\2\66\u0148\3\2\2\28\u014a\3\2")
+        buf.write("\2\2:\u0150\3\2\2\2<\u0156\3\2\2\2>\u0158\3\2\2\2@\u0165")
+        buf.write("\3\2\2\2B\u016c\3\2\2\2D\u016e\3\2\2\2F\u0174\3\2\2\2")
+        buf.write("H\u017a\3\2\2\2J\u017f\3\2\2\2L\u0181\3\2\2\2N\u018a\3")
+        buf.write("\2\2\2P\u018f\3\2\2\2R\u0194\3\2\2\2T\u0196\3\2\2\2V\u0198")
+        buf.write("\3\2\2\2X\u019a\3\2\2\2Z\u01a2\3\2\2\2\\\u01a4\3\2\2\2")
+        buf.write("^\u01ae\3\2\2\2`\u01b3\3\2\2\2b\u01b5\3\2\2\2d\u01bb\3")
+        buf.write("\2\2\2f\u01c3\3\2\2\2h\u01cd\3\2\2\2j\u01cf\3\2\2\2l\u01d7")
+        buf.write("\3\2\2\2n\u01e0\3\2\2\2p\u01e5\3\2\2\2r\u01e7\3\2\2\2")
+        buf.write("t\u01eb\3\2\2\2v\u01f2\3\2\2\2x\u01f4\3\2\2\2z\u01f6\3")
+        buf.write("\2\2\2|\u01fd\3\2\2\2~\u01ff\3\2\2\2\u0080\u0201\3\2\2")
+        buf.write("\2\u0082\u0208\3\2\2\2\u0084\u020a\3\2\2\2\u0086\u020c")
+        buf.write("\3\2\2\2\u0088\u0213\3\2\2\2\u008a\u0215\3\2\2\2\u008c")
+        buf.write("\u0217\3\2\2\2\u008e\u021c\3\2\2\2\u0090\u0225\3\2\2\2")
+        buf.write("\u0092\u022a\3\2\2\2\u0094\u0236\3\2\2\2\u0096\u023e\3")
+        buf.write("\2\2\2\u0098\u0245\3\2\2\2\u009a\u0247\3\2\2\2\u009c\u024c")
+        buf.write("\3\2\2\2\u009e\u0251\3\2\2\2\u00a0\u0256\3\2\2\2\u00a2")
+        buf.write("\u025b\3\2\2\2\u00a4\u00a5\5\4\3\2\u00a5\u00a6\5\b\5\2")
+        buf.write("\u00a6\u00a7\5\6\4\2\u00a7\u00a8\5\n\6\2\u00a8\3\3\2\2")
+        buf.write("\2\u00a9\u00aa\5\36\20\2\u00aa\u00ab\5\4\3\2\u00ab\u00ae")
+        buf.write("\3\2\2\2\u00ac\u00ae\3\2\2\2\u00ad\u00a9\3\2\2\2\u00ad")
+        buf.write("\u00ac\3\2\2\2\u00ae\5\3\2\2\2\u00af\u00b0\5\20\t\2\u00b0")
+        buf.write("\u00b1\5\6\4\2\u00b1\u00b4\3\2\2\2\u00b2\u00b4\3\2\2\2")
+        buf.write("\u00b3\u00af\3\2\2\2\u00b3\u00b2\3\2\2\2\u00b4\7\3\2\2")
+        buf.write("\2\u00b5\u00b6\3\2\2\2\u00b6\t\3\2\2\2\u00b7\u00b8\7\5")
+        buf.write("\2\2\u00b8\u00b9\7\37\2\2\u00b9\u00ba\7 \2\2\u00ba\u00bb")
+        buf.write("\7\35\2\2\u00bb\u00bc\5\f\7\2\u00bc\u00bd\5\16\b\2\u00bd")
+        buf.write("\u00be\7\36\2\2\u00be\13\3\2\2\2\u00bf\u00c0\5\36\20\2")
+        buf.write("\u00c0\u00c1\5\f\7\2\u00c1\u00c4\3\2\2\2\u00c2\u00c4\3")
+        buf.write("\2\2\2\u00c3\u00bf\3\2\2\2\u00c3\u00c2\3\2\2\2\u00c4\r")
+        buf.write("\3\2\2\2\u00c5\u00c6\5,\27\2\u00c6\u00c7\5\16\b\2\u00c7")
+        buf.write("\u00ca\3\2\2\2\u00c8\u00ca\3\2\2\2\u00c9\u00c5\3\2\2\2")
+        buf.write("\u00c9\u00c8\3\2\2\2\u00ca\17\3\2\2\2\u00cb\u00cc\7\4")
+        buf.write("\2\2\u00cc\u00cd\79\2\2\u00cd\u00ce\7\37\2\2\u00ce\u00cf")
+        buf.write("\5\22\n\2\u00cf\u00d0\7 \2\2\u00d0\u00d1\5\24\13\2\u00d1")
+        buf.write("\u00d2\7\35\2\2\u00d2\u00d3\5\26\f\2\u00d3\u00d4\5\30")
+        buf.write("\r\2\u00d4\u00d5\7\36\2\2\u00d5\21\3\2\2\2\u00d6\u00d7")
+        buf.write("\5\34\17\2\u00d7\u00d8\5\32\16\2\u00d8\u00db\3\2\2\2\u00d9")
+        buf.write("\u00db\3\2\2\2\u00da\u00d6\3\2\2\2\u00da\u00d9\3\2\2\2")
+        buf.write("\u00db\23\3\2\2\2\u00dc\u00dd\7\32\2\2\u00dd\u00e0\5V")
+        buf.write(",\2\u00de\u00e0\3\2\2\2\u00df\u00dc\3\2\2\2\u00df\u00de")
         buf.write("\3\2\2\2\u00e0\25\3\2\2\2\u00e1\u00e2\5\36\20\2\u00e2")
         buf.write("\u00e3\5\26\f\2\u00e3\u00e6\3\2\2\2\u00e4\u00e6\3\2\2")
         buf.write("\2\u00e5\u00e1\3\2\2\2\u00e5\u00e4\3\2\2\2\u00e6\27\3")
@@ -137,37 +137,37 @@ def serializedATN():
         buf.write("\2\2\2\u0119\u011a\7\34\2\2\u011a\u011d\5$\23\2\u011b")
         buf.write("\u011d\3\2\2\2\u011c\u0119\3\2\2\2\u011c\u011b\3\2\2\2")
         buf.write("\u011d+\3\2\2\2\u011e\u012c\5.\30\2\u011f\u012c\5\64\33")
-        buf.write("\2\u0120\u012c\58\35\2\u0121\u0122\5h\65\2\u0122\u0123")
+        buf.write("\2\u0120\u012c\58\35\2\u0121\u0122\5l\67\2\u0122\u0123")
         buf.write("\7\33\2\2\u0123\u012c\3\2\2\2\u0124\u012c\5> \2\u0125")
-        buf.write("\u012c\5\\/\2\u0126\u012c\5^\60\2\u0127\u012c\5`\61\2")
-        buf.write("\u0128\u012c\5b\62\2\u0129\u012c\5f\64\2\u012a\u012c\5")
-        buf.write("n8\2\u012b\u011e\3\2\2\2\u012b\u011f\3\2\2\2\u012b\u0120")
+        buf.write("\u012c\5\\/\2\u0126\u012c\5b\62\2\u0127\u012c\5d\63\2")
+        buf.write("\u0128\u012c\5f\64\2\u0129\u012c\5j\66\2\u012a\u012c\5")
+        buf.write("r:\2\u012b\u011e\3\2\2\2\u012b\u011f\3\2\2\2\u012b\u0120")
         buf.write("\3\2\2\2\u012b\u0121\3\2\2\2\u012b\u0124\3\2\2\2\u012b")
         buf.write("\u0125\3\2\2\2\u012b\u0126\3\2\2\2\u012b\u0127\3\2\2\2")
         buf.write("\u012b\u0128\3\2\2\2\u012b\u0129\3\2\2\2\u012b\u012a\3")
         buf.write("\2\2\2\u012c-\3\2\2\2\u012d\u012e\79\2\2\u012e\u012f\5")
-        buf.write("\60\31\2\u012f\u0130\7%\2\2\u0130\u0131\5p9\2\u0131\u0132")
+        buf.write("\60\31\2\u012f\u0130\7%\2\2\u0130\u0131\5t;\2\u0131\u0132")
         buf.write("\7\33\2\2\u0132/\3\2\2\2\u0133\u0134\7!\2\2\u0134\u0135")
-        buf.write("\5p9\2\u0135\u0136\7\"\2\2\u0136\u0137\5\62\32\2\u0137")
+        buf.write("\5t;\2\u0135\u0136\7\"\2\2\u0136\u0137\5\62\32\2\u0137")
         buf.write("\u013a\3\2\2\2\u0138\u013a\3\2\2\2\u0139\u0133\3\2\2\2")
         buf.write("\u0139\u0138\3\2\2\2\u013a\61\3\2\2\2\u013b\u013c\7!\2")
-        buf.write("\2\u013c\u013d\5p9\2\u013d\u013e\7\"\2\2\u013e\u0141\3")
+        buf.write("\2\u013c\u013d\5t;\2\u013d\u013e\7\"\2\2\u013e\u0141\3")
         buf.write("\2\2\2\u013f\u0141\3\2\2\2\u0140\u013b\3\2\2\2\u0140\u013f")
         buf.write("\3\2\2\2\u0141\63\3\2\2\2\u0142\u0143\7\26\2\2\u0143\u0144")
-        buf.write("\7\37\2\2\u0144\u0145\5p9\2\u0145\u0146\7 \2\2\u0146\u0147")
+        buf.write("\7\37\2\2\u0144\u0145\5t;\2\u0145\u0146\7 \2\2\u0146\u0147")
         buf.write("\5\66\34\2\u0147\65\3\2\2\2\u0148\u0149\5X-\2\u0149\67")
         buf.write("\3\2\2\2\u014a\u014b\7\27\2\2\u014b\u014c\7\37\2\2\u014c")
-        buf.write("\u014d\5p9\2\u014d\u014e\7 \2\2\u014e\u014f\5:\36\2\u014f")
+        buf.write("\u014d\5t;\2\u014d\u014e\7 \2\2\u014e\u014f\5:\36\2\u014f")
         buf.write("9\3\2\2\2\u0150\u0151\5X-\2\u0151\u0152\5<\37\2\u0152")
         buf.write(";\3\2\2\2\u0153\u0154\7\30\2\2\u0154\u0157\5X-\2\u0155")
         buf.write("\u0157\3\2\2\2\u0156\u0153\3\2\2\2\u0156\u0155\3\2\2\2")
         buf.write("\u0157=\3\2\2\2\u0158\u0159\7\13\2\2\u0159\u015a\7\37")
         buf.write("\2\2\u015a\u015b\79\2\2\u015b\u015c\5@!\2\u015c\u015d")
         buf.write("\7 \2\2\u015d\u015e\7\33\2\2\u015e?\3\2\2\2\u015f\u0160")
-        buf.write("\7!\2\2\u0160\u0161\5p9\2\u0161\u0162\7\"\2\2\u0162\u0163")
+        buf.write("\7!\2\2\u0160\u0161\5t;\2\u0161\u0162\7\"\2\2\u0162\u0163")
         buf.write("\5B\"\2\u0163\u0166\3\2\2\2\u0164\u0166\3\2\2\2\u0165")
         buf.write("\u015f\3\2\2\2\u0165\u0164\3\2\2\2\u0166A\3\2\2\2\u0167")
-        buf.write("\u0168\7!\2\2\u0168\u0169\5p9\2\u0169\u016a\7\"\2\2\u016a")
+        buf.write("\u0168\7!\2\2\u0168\u0169\5t;\2\u0169\u016a\7\"\2\2\u016a")
         buf.write("\u016d\3\2\2\2\u016b\u016d\3\2\2\2\u016c\u0167\3\2\2\2")
         buf.write("\u016c\u016b\3\2\2\2\u016dC\3\2\2\2\u016e\u016f\7!\2\2")
         buf.write("\u016f\u0170\5F$\2\u0170\u0171\7\"\2\2\u0171E\3\2\2\2")
@@ -191,87 +191,86 @@ def serializedATN():
         buf.write("Y\3\2\2\2\u019e\u019f\5,\27\2\u019f\u01a0\5Z.\2\u01a0")
         buf.write("\u01a3\3\2\2\2\u01a1\u01a3\3\2\2\2\u01a2\u019e\3\2\2\2")
         buf.write("\u01a2\u01a1\3\2\2\2\u01a3[\3\2\2\2\u01a4\u01a5\7\n\2")
-        buf.write("\2\u01a5\u01a6\7\37\2\2\u01a6\u01a7\5p9\2\u01a7\u01a8")
+        buf.write("\2\u01a5\u01a6\7\37\2\2\u01a6\u01a7\5^\60\2\u01a7\u01a8")
         buf.write("\7 \2\2\u01a8\u01a9\7\33\2\2\u01a9]\3\2\2\2\u01aa\u01ab")
-        buf.write("\7\22\2\2\u01ab\u01ac\7\37\2\2\u01ac\u01ad\5p9\2\u01ad")
-        buf.write("\u01ae\7 \2\2\u01ae\u01af\7\33\2\2\u01af_\3\2\2\2\u01b0")
-        buf.write("\u01b1\7\21\2\2\u01b1\u01b2\7\37\2\2\u01b2\u01b3\5p9\2")
-        buf.write("\u01b3\u01b4\7\34\2\2\u01b4\u01b5\5p9\2\u01b5\u01b6\7")
-        buf.write(" \2\2\u01b6\u01b7\7\33\2\2\u01b7a\3\2\2\2\u01b8\u01b9")
-        buf.write("\7\23\2\2\u01b9\u01ba\7\37\2\2\u01ba\u01bb\5p9\2\u01bb")
-        buf.write("\u01bc\5d\63\2\u01bc\u01bd\7 \2\2\u01bd\u01be\7\33\2\2")
-        buf.write("\u01bec\3\2\2\2\u01bf\u01c0\7\34\2\2\u01c0\u01c3\5p9\2")
-        buf.write("\u01c1\u01c3\3\2\2\2\u01c2\u01bf\3\2\2\2\u01c2\u01c1\3")
-        buf.write("\2\2\2\u01c3e\3\2\2\2\u01c4\u01c5\7\24\2\2\u01c5\u01c6")
-        buf.write("\7\37\2\2\u01c6\u01c7\5p9\2\u01c7\u01c8\7\34\2\2\u01c8")
-        buf.write("\u01c9\5p9\2\u01c9\u01ca\7 \2\2\u01ca\u01cb\7\33\2\2\u01cb")
-        buf.write("g\3\2\2\2\u01cc\u01cd\79\2\2\u01cd\u01ce\7\37\2\2\u01ce")
-        buf.write("\u01cf\5j\66\2\u01cf\u01d0\7 \2\2\u01d0i\3\2\2\2\u01d1")
-        buf.write("\u01d2\5p9\2\u01d2\u01d3\5l\67\2\u01d3\u01d6\3\2\2\2\u01d4")
-        buf.write("\u01d6\3\2\2\2\u01d5\u01d1\3\2\2\2\u01d5\u01d4\3\2\2\2")
-        buf.write("\u01d6k\3\2\2\2\u01d7\u01d8\7\34\2\2\u01d8\u01db\5j\66")
-        buf.write("\2\u01d9\u01db\3\2\2\2\u01da\u01d7\3\2\2\2\u01da\u01d9")
-        buf.write("\3\2\2\2\u01dbm\3\2\2\2\u01dc\u01dd\7\25\2\2\u01dd\u01de")
-        buf.write("\5p9\2\u01de\u01df\7\33\2\2\u01dfo\3\2\2\2\u01e0\u01e1")
-        buf.write("\5v<\2\u01e1\u01e2\5r:\2\u01e2q\3\2\2\2\u01e3\u01e4\5")
-        buf.write("t;\2\u01e4\u01e5\5v<\2\u01e5\u01e8\3\2\2\2\u01e6\u01e8")
-        buf.write("\3\2\2\2\u01e7\u01e3\3\2\2\2\u01e7\u01e6\3\2\2\2\u01e8")
-        buf.write("s\3\2\2\2\u01e9\u01ea\t\4\2\2\u01eau\3\2\2\2\u01eb\u01ec")
-        buf.write("\5|?\2\u01ec\u01ed\5x=\2\u01edw\3\2\2\2\u01ee\u01ef\5")
-        buf.write("z>\2\u01ef\u01f0\5|?\2\u01f0\u01f3\3\2\2\2\u01f1\u01f3")
+        buf.write("\5t;\2\u01ab\u01ac\5`\61\2\u01ac\u01af\3\2\2\2\u01ad\u01af")
+        buf.write("\3\2\2\2\u01ae\u01aa\3\2\2\2\u01ae\u01ad\3\2\2\2\u01af")
+        buf.write("_\3\2\2\2\u01b0\u01b1\7\34\2\2\u01b1\u01b4\5^\60\2\u01b2")
+        buf.write("\u01b4\3\2\2\2\u01b3\u01b0\3\2\2\2\u01b3\u01b2\3\2\2\2")
+        buf.write("\u01b4a\3\2\2\2\u01b5\u01b6\7\22\2\2\u01b6\u01b7\7\37")
+        buf.write("\2\2\u01b7\u01b8\5t;\2\u01b8\u01b9\7 \2\2\u01b9\u01ba")
+        buf.write("\7\33\2\2\u01bac\3\2\2\2\u01bb\u01bc\7\21\2\2\u01bc\u01bd")
+        buf.write("\7\37\2\2\u01bd\u01be\5t;\2\u01be\u01bf\7\34\2\2\u01bf")
+        buf.write("\u01c0\5t;\2\u01c0\u01c1\7 \2\2\u01c1\u01c2\7\33\2\2\u01c2")
+        buf.write("e\3\2\2\2\u01c3\u01c4\7\23\2\2\u01c4\u01c5\7\37\2\2\u01c5")
+        buf.write("\u01c6\5t;\2\u01c6\u01c7\5h\65\2\u01c7\u01c8\7 \2\2\u01c8")
+        buf.write("\u01c9\7\33\2\2\u01c9g\3\2\2\2\u01ca\u01cb\7\34\2\2\u01cb")
+        buf.write("\u01ce\5t;\2\u01cc\u01ce\3\2\2\2\u01cd\u01ca\3\2\2\2\u01cd")
+        buf.write("\u01cc\3\2\2\2\u01cei\3\2\2\2\u01cf\u01d0\7\24\2\2\u01d0")
+        buf.write("\u01d1\7\37\2\2\u01d1\u01d2\5t;\2\u01d2\u01d3\7\34\2\2")
+        buf.write("\u01d3\u01d4\5t;\2\u01d4\u01d5\7 \2\2\u01d5\u01d6\7\33")
+        buf.write("\2\2\u01d6k\3\2\2\2\u01d7\u01d8\79\2\2\u01d8\u01d9\7\37")
+        buf.write("\2\2\u01d9\u01da\5n8\2\u01da\u01db\7 \2\2\u01dbm\3\2\2")
+        buf.write("\2\u01dc\u01dd\5t;\2\u01dd\u01de\5p9\2\u01de\u01e1\3\2")
+        buf.write("\2\2\u01df\u01e1\3\2\2\2\u01e0\u01dc\3\2\2\2\u01e0\u01df")
+        buf.write("\3\2\2\2\u01e1o\3\2\2\2\u01e2\u01e3\7\34\2\2\u01e3\u01e6")
+        buf.write("\5n8\2\u01e4\u01e6\3\2\2\2\u01e5\u01e2\3\2\2\2\u01e5\u01e4")
+        buf.write("\3\2\2\2\u01e6q\3\2\2\2\u01e7\u01e8\7\25\2\2\u01e8\u01e9")
+        buf.write("\5t;\2\u01e9\u01ea\7\33\2\2\u01eas\3\2\2\2\u01eb\u01ec")
+        buf.write("\5z>\2\u01ec\u01ed\5v<\2\u01edu\3\2\2\2\u01ee\u01ef\5")
+        buf.write("x=\2\u01ef\u01f0\5z>\2\u01f0\u01f3\3\2\2\2\u01f1\u01f3")
         buf.write("\3\2\2\2\u01f2\u01ee\3\2\2\2\u01f2\u01f1\3\2\2\2\u01f3")
-        buf.write("y\3\2\2\2\u01f4\u01f5\t\5\2\2\u01f5{\3\2\2\2\u01f6\u01f7")
-        buf.write("\5\u0082B\2\u01f7\u01f8\5~@\2\u01f8}\3\2\2\2\u01f9\u01fa")
-        buf.write("\5\u0080A\2\u01fa\u01fb\5\u0082B\2\u01fb\u01fe\3\2\2\2")
-        buf.write("\u01fc\u01fe\3\2\2\2\u01fd\u01f9\3\2\2\2\u01fd\u01fc\3")
-        buf.write("\2\2\2\u01fe\177\3\2\2\2\u01ff\u0200\t\6\2\2\u0200\u0081")
-        buf.write("\3\2\2\2\u0201\u0202\5\u0088E\2\u0202\u0203\5\u0084C\2")
-        buf.write("\u0203\u0083\3\2\2\2\u0204\u0205\5\u0086D\2\u0205\u0206")
-        buf.write("\5\u0082B\2\u0206\u0209\3\2\2\2\u0207\u0209\3\2\2\2\u0208")
-        buf.write("\u0204\3\2\2\2\u0208\u0207\3\2\2\2\u0209\u0085\3\2\2\2")
-        buf.write("\u020a\u020b\t\7\2\2\u020b\u0087\3\2\2\2\u020c\u020d\5")
-        buf.write("\u008aF\2\u020d\u020e\5\u008cG\2\u020e\u0089\3\2\2\2\u020f")
-        buf.write("\u0212\7.\2\2\u0210\u0212\3\2\2\2\u0211\u020f\3\2\2\2")
-        buf.write("\u0211\u0210\3\2\2\2\u0212\u008b\3\2\2\2\u0213\u0214\7")
-        buf.write("\37\2\2\u0214\u0215\5p9\2\u0215\u0216\7 \2\2\u0216\u021b")
-        buf.write("\3\2\2\2\u0217\u0218\5\u008eH\2\u0218\u0219\5\u0090I\2")
-        buf.write("\u0219\u021b\3\2\2\2\u021a\u0213\3\2\2\2\u021a\u0217\3")
-        buf.write("\2\2\2\u021b\u008d\3\2\2\2\u021c\u0220\7*\2\2\u021d\u0220")
-        buf.write("\7+\2\2\u021e\u0220\3\2\2\2\u021f\u021c\3\2\2\2\u021f")
-        buf.write("\u021d\3\2\2\2\u021f\u021e\3\2\2\2\u0220\u008f\3\2\2\2")
-        buf.write("\u0221\u022c\5T+\2\u0222\u022c\5D#\2\u0223\u022c\5h\65")
-        buf.write("\2\u0224\u022c\5\u0096L\2\u0225\u022c\5\u0098M\2\u0226")
-        buf.write("\u022c\5\u009aN\2\u0227\u022c\5\u009cO\2\u0228\u022c\5")
-        buf.write("\u009eP\2\u0229\u022a\79\2\2\u022a\u022c\5\u0092J\2\u022b")
-        buf.write("\u0221\3\2\2\2\u022b\u0222\3\2\2\2\u022b\u0223\3\2\2\2")
-        buf.write("\u022b\u0224\3\2\2\2\u022b\u0225\3\2\2\2\u022b\u0226\3")
-        buf.write("\2\2\2\u022b\u0227\3\2\2\2\u022b\u0228\3\2\2\2\u022b\u0229")
-        buf.write("\3\2\2\2\u022c\u0091\3\2\2\2\u022d\u022e\7!\2\2\u022e")
-        buf.write("\u022f\5p9\2\u022f\u0230\7\"\2\2\u0230\u0231\5\u0094K")
-        buf.write("\2\u0231\u0234\3\2\2\2\u0232\u0234\3\2\2\2\u0233\u022d")
-        buf.write("\3\2\2\2\u0233\u0232\3\2\2\2\u0234\u0093\3\2\2\2\u0235")
-        buf.write("\u0236\7!\2\2\u0236\u0237\5p9\2\u0237\u0238\7\"\2\2\u0238")
-        buf.write("\u023b\3\2\2\2\u0239\u023b\3\2\2\2\u023a\u0235\3\2\2\2")
-        buf.write("\u023a\u0239\3\2\2\2\u023b\u0095\3\2\2\2\u023c\u023d\7")
-        buf.write("\f\2\2\u023d\u023e\7\37\2\2\u023e\u023f\5p9\2\u023f\u0240")
-        buf.write("\7 \2\2\u0240\u0097\3\2\2\2\u0241\u0242\7\r\2\2\u0242")
-        buf.write("\u0243\7\37\2\2\u0243\u0244\5p9\2\u0244\u0245\7 \2\2\u0245")
-        buf.write("\u0099\3\2\2\2\u0246\u0247\7\16\2\2\u0247\u0248\7\37\2")
-        buf.write("\2\u0248\u0249\5p9\2\u0249\u024a\7 \2\2\u024a\u009b\3")
-        buf.write("\2\2\2\u024b\u024c\7\17\2\2\u024c\u024d\7\37\2\2\u024d")
-        buf.write("\u024e\5p9\2\u024e\u024f\7 \2\2\u024f\u009d\3\2\2\2\u0250")
-        buf.write("\u0251\7\20\2\2\u0251\u0252\7\37\2\2\u0252\u0253\5\u00a0")
-        buf.write("Q\2\u0253\u0254\7 \2\2\u0254\u009f\3\2\2\2\u0255\u0259")
-        buf.write("\7\65\2\2\u0256\u0257\79\2\2\u0257\u0259\5\u00a2R\2\u0258")
-        buf.write("\u0255\3\2\2\2\u0258\u0256\3\2\2\2\u0259\u00a1\3\2\2\2")
-        buf.write("\u025a\u025b\7!\2\2\u025b\u025c\5p9\2\u025c\u025d\7\"")
-        buf.write("\2\2\u025d\u0260\3\2\2\2\u025e\u0260\3\2\2\2\u025f\u025a")
-        buf.write("\3\2\2\2\u025f\u025e\3\2\2\2\u0260\u00a3\3\2\2\2,\u00ad")
-        buf.write("\u00b3\u00c3\u00c9\u00da\u00df\u00e5\u00eb\u00f2\u0104")
-        buf.write("\u010a\u0113\u0117\u011c\u012b\u0139\u0140\u0156\u0165")
-        buf.write("\u016c\u0174\u017a\u017f\u018a\u018f\u0194\u01a2\u01c2")
-        buf.write("\u01d5\u01da\u01e7\u01f2\u01fd\u0208\u0211\u021a\u021f")
-        buf.write("\u022b\u0233\u023a\u0258\u025f")
+        buf.write("w\3\2\2\2\u01f4\u01f5\t\4\2\2\u01f5y\3\2\2\2\u01f6\u01f7")
+        buf.write("\5\u0080A\2\u01f7\u01f8\5|?\2\u01f8{\3\2\2\2\u01f9\u01fa")
+        buf.write("\5~@\2\u01fa\u01fb\5\u0080A\2\u01fb\u01fe\3\2\2\2\u01fc")
+        buf.write("\u01fe\3\2\2\2\u01fd\u01f9\3\2\2\2\u01fd\u01fc\3\2\2\2")
+        buf.write("\u01fe}\3\2\2\2\u01ff\u0200\t\5\2\2\u0200\177\3\2\2\2")
+        buf.write("\u0201\u0202\5\u0086D\2\u0202\u0203\5\u0082B\2\u0203\u0081")
+        buf.write("\3\2\2\2\u0204\u0205\5\u0084C\2\u0205\u0206\5\u0086D\2")
+        buf.write("\u0206\u0209\3\2\2\2\u0207\u0209\3\2\2\2\u0208\u0204\3")
+        buf.write("\2\2\2\u0208\u0207\3\2\2\2\u0209\u0083\3\2\2\2\u020a\u020b")
+        buf.write("\t\6\2\2\u020b\u0085\3\2\2\2\u020c\u020d\5\u008cG\2\u020d")
+        buf.write("\u020e\5\u0088E\2\u020e\u0087\3\2\2\2\u020f\u0210\5\u008a")
+        buf.write("F\2\u0210\u0211\5\u0086D\2\u0211\u0214\3\2\2\2\u0212\u0214")
+        buf.write("\3\2\2\2\u0213\u020f\3\2\2\2\u0213\u0212\3\2\2\2\u0214")
+        buf.write("\u0089\3\2\2\2\u0215\u0216\t\7\2\2\u0216\u008b\3\2\2\2")
+        buf.write("\u0217\u0218\5\u008eH\2\u0218\u0219\5\u0090I\2\u0219\u008d")
+        buf.write("\3\2\2\2\u021a\u021d\7.\2\2\u021b\u021d\3\2\2\2\u021c")
+        buf.write("\u021a\3\2\2\2\u021c\u021b\3\2\2\2\u021d\u008f\3\2\2\2")
+        buf.write("\u021e\u021f\7\37\2\2\u021f\u0220\5t;\2\u0220\u0221\7")
+        buf.write(" \2\2\u0221\u0226\3\2\2\2\u0222\u0223\5\u0092J\2\u0223")
+        buf.write("\u0224\5\u0094K\2\u0224\u0226\3\2\2\2\u0225\u021e\3\2")
+        buf.write("\2\2\u0225\u0222\3\2\2\2\u0226\u0091\3\2\2\2\u0227\u022b")
+        buf.write("\7*\2\2\u0228\u022b\7+\2\2\u0229\u022b\3\2\2\2\u022a\u0227")
+        buf.write("\3\2\2\2\u022a\u0228\3\2\2\2\u022a\u0229\3\2\2\2\u022b")
+        buf.write("\u0093\3\2\2\2\u022c\u0237\5T+\2\u022d\u0237\5D#\2\u022e")
+        buf.write("\u0237\5l\67\2\u022f\u0237\5\u009aN\2\u0230\u0237\5\u009c")
+        buf.write("O\2\u0231\u0237\5\u009eP\2\u0232\u0237\5\u00a0Q\2\u0233")
+        buf.write("\u0237\5\u00a2R\2\u0234\u0235\79\2\2\u0235\u0237\5\u0096")
+        buf.write("L\2\u0236\u022c\3\2\2\2\u0236\u022d\3\2\2\2\u0236\u022e")
+        buf.write("\3\2\2\2\u0236\u022f\3\2\2\2\u0236\u0230\3\2\2\2\u0236")
+        buf.write("\u0231\3\2\2\2\u0236\u0232\3\2\2\2\u0236\u0233\3\2\2\2")
+        buf.write("\u0236\u0234\3\2\2\2\u0237\u0095\3\2\2\2\u0238\u0239\7")
+        buf.write("!\2\2\u0239\u023a\5t;\2\u023a\u023b\7\"\2\2\u023b\u023c")
+        buf.write("\5\u0098M\2\u023c\u023f\3\2\2\2\u023d\u023f\3\2\2\2\u023e")
+        buf.write("\u0238\3\2\2\2\u023e\u023d\3\2\2\2\u023f\u0097\3\2\2\2")
+        buf.write("\u0240\u0241\7!\2\2\u0241\u0242\5t;\2\u0242\u0243\7\"")
+        buf.write("\2\2\u0243\u0246\3\2\2\2\u0244\u0246\3\2\2\2\u0245\u0240")
+        buf.write("\3\2\2\2\u0245\u0244\3\2\2\2\u0246\u0099\3\2\2\2\u0247")
+        buf.write("\u0248\7\f\2\2\u0248\u0249\7\37\2\2\u0249\u024a\5t;\2")
+        buf.write("\u024a\u024b\7 \2\2\u024b\u009b\3\2\2\2\u024c\u024d\7")
+        buf.write("\r\2\2\u024d\u024e\7\37\2\2\u024e\u024f\5t;\2\u024f\u0250")
+        buf.write("\7 \2\2\u0250\u009d\3\2\2\2\u0251\u0252\7\16\2\2\u0252")
+        buf.write("\u0253\7\37\2\2\u0253\u0254\5t;\2\u0254\u0255\7 \2\2\u0255")
+        buf.write("\u009f\3\2\2\2\u0256\u0257\7\17\2\2\u0257\u0258\7\37\2")
+        buf.write("\2\u0258\u0259\5t;\2\u0259\u025a\7 \2\2\u025a\u00a1\3")
+        buf.write("\2\2\2\u025b\u025c\7\20\2\2\u025c\u025d\7\37\2\2\u025d")
+        buf.write("\u025e\5\u0094K\2\u025e\u025f\7 \2\2\u025f\u00a3\3\2\2")
+        buf.write("\2,\u00ad\u00b3\u00c3\u00c9\u00da\u00df\u00e5\u00eb\u00f2")
+        buf.write("\u0104\u010a\u0113\u0117\u011c\u012b\u0139\u0140\u0156")
+        buf.write("\u0165\u016c\u0174\u017a\u017f\u018a\u018f\u0194\u01a2")
+        buf.write("\u01ae\u01b3\u01cd\u01e0\u01e5\u01f2\u01fd\u0208\u0213")
+        buf.write("\u021c\u0225\u022a\u0236\u023e\u0245")
         return buf.getvalue()
 
 
@@ -352,41 +351,41 @@ class DASAParser ( Parser ):
     RULE_bloque = 43
     RULE_bloque1 = 44
     RULE_escritura = 45
-    RULE_estdesc = 46
-    RULE_dibujar = 47
-    RULE_regresion = 48
-    RULE_reg1 = 49
-    RULE_clustering = 50
-    RULE_funcion = 51
-    RULE_func1 = 52
-    RULE_func2 = 53
-    RULE_regresa = 54
-    RULE_expresion = 55
-    RULE_expres1 = 56
-    RULE_expres2 = 57
-    RULE_comp = 58
-    RULE_comp1 = 59
-    RULE_comp2 = 60
-    RULE_exp = 61
-    RULE_exp1 = 62
-    RULE_exp2 = 63
-    RULE_termino = 64
-    RULE_term1 = 65
-    RULE_term2 = 66
-    RULE_factor = 67
-    RULE_fact1 = 68
-    RULE_fact2 = 69
-    RULE_fact3 = 70
-    RULE_valor = 71
-    RULE_valor1 = 72
-    RULE_valor2 = 73
-    RULE_vacio = 74
-    RULE_castint = 75
-    RULE_castfloat = 76
-    RULE_caststring = 77
-    RULE_tamano = 78
-    RULE_tamano1 = 79
-    RULE_tamano2 = 80
+    RULE_escr1 = 46
+    RULE_escr2 = 47
+    RULE_estdesc = 48
+    RULE_dibujar = 49
+    RULE_regresion = 50
+    RULE_reg1 = 51
+    RULE_clustering = 52
+    RULE_funcion = 53
+    RULE_func1 = 54
+    RULE_func2 = 55
+    RULE_regresa = 56
+    RULE_expresion = 57
+    RULE_expres1 = 58
+    RULE_expres2 = 59
+    RULE_comp = 60
+    RULE_comp1 = 61
+    RULE_comp2 = 62
+    RULE_exp = 63
+    RULE_exp1 = 64
+    RULE_exp2 = 65
+    RULE_termino = 66
+    RULE_term1 = 67
+    RULE_term2 = 68
+    RULE_factor = 69
+    RULE_fact1 = 70
+    RULE_fact2 = 71
+    RULE_fact3 = 72
+    RULE_valor = 73
+    RULE_valor1 = 74
+    RULE_valor2 = 75
+    RULE_vacio = 76
+    RULE_castint = 77
+    RULE_castfloat = 78
+    RULE_caststring = 79
+    RULE_tamano = 80
 
     ruleNames =  [ "programa", "prog1", "prog2", "prog3", "main", "main1", 
                    "main2", "metodos", "met1", "met2", "met3", "met4", "met5", 
@@ -395,13 +394,13 @@ class DASAParser ( Parser ):
                    "asig2", "durante", "duro1", "condicion", "con1", "con2", 
                    "lectura", "lec1", "lec2", "arreglo", "arr1", "arr2", 
                    "arr3", "arr4", "arr5", "arr6", "arr7", "cte", "tipo", 
-                   "bloque", "bloque1", "escritura", "estdesc", "dibujar", 
-                   "regresion", "reg1", "clustering", "funcion", "func1", 
-                   "func2", "regresa", "expresion", "expres1", "expres2", 
-                   "comp", "comp1", "comp2", "exp", "exp1", "exp2", "termino", 
-                   "term1", "term2", "factor", "fact1", "fact2", "fact3", 
-                   "valor", "valor1", "valor2", "vacio", "castint", "castfloat", 
-                   "caststring", "tamano", "tamano1", "tamano2" ]
+                   "bloque", "bloque1", "escritura", "escr1", "escr2", "estdesc", 
+                   "dibujar", "regresion", "reg1", "clustering", "funcion", 
+                   "func1", "func2", "regresa", "expresion", "expres1", 
+                   "expres2", "comp", "comp1", "comp2", "exp", "exp1", "exp2", 
+                   "termino", "term1", "term2", "factor", "fact1", "fact2", 
+                   "fact3", "valor", "valor1", "valor2", "vacio", "castint", 
+                   "castfloat", "caststring", "tamano" ]
 
     EOF = Token.EOF
     DEFINE=1
@@ -3244,8 +3243,8 @@ class DASAParser ( Parser ):
         def LPAREN(self):
             return self.getToken(DASAParser.LPAREN, 0)
 
-        def expresion(self):
-            return self.getTypedRuleContext(DASAParser.ExpresionContext,0)
+        def escr1(self):
+            return self.getTypedRuleContext(DASAParser.Escr1Context,0)
 
 
         def RPAREN(self):
@@ -3279,11 +3278,128 @@ class DASAParser ( Parser ):
             self.state = 419
             self.match(DASAParser.LPAREN)
             self.state = 420
-            self.expresion()
+            self.escr1()
             self.state = 421
             self.match(DASAParser.RPAREN)
             self.state = 422
             self.match(DASAParser.SCOLON)
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Escr1Context(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def expresion(self):
+            return self.getTypedRuleContext(DASAParser.ExpresionContext,0)
+
+
+        def escr2(self):
+            return self.getTypedRuleContext(DASAParser.Escr2Context,0)
+
+
+        def getRuleIndex(self):
+            return DASAParser.RULE_escr1
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterEscr1" ):
+                listener.enterEscr1(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitEscr1" ):
+                listener.exitEscr1(self)
+
+
+
+
+    def escr1(self):
+
+        localctx = DASAParser.Escr1Context(self, self._ctx, self.state)
+        self.enterRule(localctx, 92, self.RULE_escr1)
+        try:
+            self.state = 428
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [DASAParser.ISNULL, DASAParser.TOINT, DASAParser.TOFLOAT, DASAParser.TOSTRING, DASAParser.SIZE, DASAParser.NULL, DASAParser.LPAREN, DASAParser.LBRACK, DASAParser.PLUS, DASAParser.MINUS, DASAParser.NOT, DASAParser.CSTRING, DASAParser.CFLOAT, DASAParser.CINT, DASAParser.CBOOL, DASAParser.ID]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 424
+                self.expresion()
+                self.state = 425
+                self.escr2()
+                pass
+            elif token in [DASAParser.RPAREN]:
+                self.enterOuterAlt(localctx, 2)
+
+                pass
+            else:
+                raise NoViableAltException(self)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class Escr2Context(ParserRuleContext):
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def COMMA(self):
+            return self.getToken(DASAParser.COMMA, 0)
+
+        def escr1(self):
+            return self.getTypedRuleContext(DASAParser.Escr1Context,0)
+
+
+        def getRuleIndex(self):
+            return DASAParser.RULE_escr2
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterEscr2" ):
+                listener.enterEscr2(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitEscr2" ):
+                listener.exitEscr2(self)
+
+
+
+
+    def escr2(self):
+
+        localctx = DASAParser.Escr2Context(self, self._ctx, self.state)
+        self.enterRule(localctx, 94, self.RULE_escr2)
+        try:
+            self.state = 433
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [DASAParser.COMMA]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 430
+                self.match(DASAParser.COMMA)
+                self.state = 431
+                self.escr1()
+                pass
+            elif token in [DASAParser.RPAREN]:
+                self.enterOuterAlt(localctx, 2)
+
+                pass
+            else:
+                raise NoViableAltException(self)
+
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
@@ -3332,18 +3448,18 @@ class DASAParser ( Parser ):
     def estdesc(self):
 
         localctx = DASAParser.EstdescContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 92, self.RULE_estdesc)
+        self.enterRule(localctx, 96, self.RULE_estdesc)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 424
+            self.state = 435
             self.match(DASAParser.DESCRIBE)
-            self.state = 425
+            self.state = 436
             self.match(DASAParser.LPAREN)
-            self.state = 426
+            self.state = 437
             self.expresion()
-            self.state = 427
+            self.state = 438
             self.match(DASAParser.RPAREN)
-            self.state = 428
+            self.state = 439
             self.match(DASAParser.SCOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -3399,22 +3515,22 @@ class DASAParser ( Parser ):
     def dibujar(self):
 
         localctx = DASAParser.DibujarContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 94, self.RULE_dibujar)
+        self.enterRule(localctx, 98, self.RULE_dibujar)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 430
+            self.state = 441
             self.match(DASAParser.PLOT)
-            self.state = 431
+            self.state = 442
             self.match(DASAParser.LPAREN)
-            self.state = 432
+            self.state = 443
             self.expresion()
-            self.state = 433
+            self.state = 444
             self.match(DASAParser.COMMA)
-            self.state = 434
+            self.state = 445
             self.expresion()
-            self.state = 435
+            self.state = 446
             self.match(DASAParser.RPAREN)
-            self.state = 436
+            self.state = 447
             self.match(DASAParser.SCOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -3468,20 +3584,20 @@ class DASAParser ( Parser ):
     def regresion(self):
 
         localctx = DASAParser.RegresionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 96, self.RULE_regresion)
+        self.enterRule(localctx, 100, self.RULE_regresion)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 438
+            self.state = 449
             self.match(DASAParser.REGRESSION)
-            self.state = 439
+            self.state = 450
             self.match(DASAParser.LPAREN)
-            self.state = 440
+            self.state = 451
             self.expresion()
-            self.state = 441
+            self.state = 452
             self.reg1()
-            self.state = 442
+            self.state = 453
             self.match(DASAParser.RPAREN)
-            self.state = 443
+            self.state = 454
             self.match(DASAParser.SCOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -3522,16 +3638,16 @@ class DASAParser ( Parser ):
     def reg1(self):
 
         localctx = DASAParser.Reg1Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 98, self.RULE_reg1)
+        self.enterRule(localctx, 102, self.RULE_reg1)
         try:
-            self.state = 448
+            self.state = 459
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.COMMA]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 445
+                self.state = 456
                 self.match(DASAParser.COMMA)
-                self.state = 446
+                self.state = 457
                 self.expresion()
                 pass
             elif token in [DASAParser.RPAREN]:
@@ -3595,22 +3711,22 @@ class DASAParser ( Parser ):
     def clustering(self):
 
         localctx = DASAParser.ClusteringContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 100, self.RULE_clustering)
+        self.enterRule(localctx, 104, self.RULE_clustering)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 450
+            self.state = 461
             self.match(DASAParser.CLUSTER)
-            self.state = 451
+            self.state = 462
             self.match(DASAParser.LPAREN)
-            self.state = 452
+            self.state = 463
             self.expresion()
-            self.state = 453
+            self.state = 464
             self.match(DASAParser.COMMA)
-            self.state = 454
+            self.state = 465
             self.expresion()
-            self.state = 455
+            self.state = 466
             self.match(DASAParser.RPAREN)
-            self.state = 456
+            self.state = 467
             self.match(DASAParser.SCOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -3657,16 +3773,16 @@ class DASAParser ( Parser ):
     def funcion(self):
 
         localctx = DASAParser.FuncionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 102, self.RULE_funcion)
+        self.enterRule(localctx, 106, self.RULE_funcion)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 458
+            self.state = 469
             self.match(DASAParser.ID)
-            self.state = 459
+            self.state = 470
             self.match(DASAParser.LPAREN)
-            self.state = 460
+            self.state = 471
             self.func1()
-            self.state = 461
+            self.state = 472
             self.match(DASAParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -3708,16 +3824,16 @@ class DASAParser ( Parser ):
     def func1(self):
 
         localctx = DASAParser.Func1Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 104, self.RULE_func1)
+        self.enterRule(localctx, 108, self.RULE_func1)
         try:
-            self.state = 467
+            self.state = 478
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.ISNULL, DASAParser.TOINT, DASAParser.TOFLOAT, DASAParser.TOSTRING, DASAParser.SIZE, DASAParser.NULL, DASAParser.LPAREN, DASAParser.LBRACK, DASAParser.PLUS, DASAParser.MINUS, DASAParser.NOT, DASAParser.CSTRING, DASAParser.CFLOAT, DASAParser.CINT, DASAParser.CBOOL, DASAParser.ID]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 463
+                self.state = 474
                 self.expresion()
-                self.state = 464
+                self.state = 475
                 self.func2()
                 pass
             elif token in [DASAParser.RPAREN]:
@@ -3766,16 +3882,16 @@ class DASAParser ( Parser ):
     def func2(self):
 
         localctx = DASAParser.Func2Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 106, self.RULE_func2)
+        self.enterRule(localctx, 110, self.RULE_func2)
         try:
-            self.state = 472
+            self.state = 483
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.COMMA]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 469
+                self.state = 480
                 self.match(DASAParser.COMMA)
-                self.state = 470
+                self.state = 481
                 self.func1()
                 pass
             elif token in [DASAParser.RPAREN]:
@@ -3827,14 +3943,14 @@ class DASAParser ( Parser ):
     def regresa(self):
 
         localctx = DASAParser.RegresaContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 108, self.RULE_regresa)
+        self.enterRule(localctx, 112, self.RULE_regresa)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 474
+            self.state = 485
             self.match(DASAParser.RETURN)
-            self.state = 475
+            self.state = 486
             self.expresion()
-            self.state = 476
+            self.state = 487
             self.match(DASAParser.SCOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -3876,12 +3992,12 @@ class DASAParser ( Parser ):
     def expresion(self):
 
         localctx = DASAParser.ExpresionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 110, self.RULE_expresion)
+        self.enterRule(localctx, 114, self.RULE_expresion)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 478
+            self.state = 489
             self.comp()
-            self.state = 479
+            self.state = 490
             self.expres1()
         except RecognitionException as re:
             localctx.exception = re
@@ -3923,16 +4039,16 @@ class DASAParser ( Parser ):
     def expres1(self):
 
         localctx = DASAParser.Expres1Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 112, self.RULE_expres1)
+        self.enterRule(localctx, 116, self.RULE_expres1)
         try:
-            self.state = 485
+            self.state = 496
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.AND, DASAParser.OR]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 481
+                self.state = 492
                 self.expres2()
-                self.state = 482
+                self.state = 493
                 self.comp()
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK]:
@@ -3980,11 +4096,11 @@ class DASAParser ( Parser ):
     def expres2(self):
 
         localctx = DASAParser.Expres2Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 114, self.RULE_expres2)
+        self.enterRule(localctx, 118, self.RULE_expres2)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 487
+            self.state = 498
             _la = self._input.LA(1)
             if not(_la==DASAParser.AND or _la==DASAParser.OR):
                 self._errHandler.recoverInline(self)
@@ -4031,12 +4147,12 @@ class DASAParser ( Parser ):
     def comp(self):
 
         localctx = DASAParser.CompContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 116, self.RULE_comp)
+        self.enterRule(localctx, 120, self.RULE_comp)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 489
+            self.state = 500
             self.exp()
-            self.state = 490
+            self.state = 501
             self.comp1()
         except RecognitionException as re:
             localctx.exception = re
@@ -4078,16 +4194,16 @@ class DASAParser ( Parser ):
     def comp1(self):
 
         localctx = DASAParser.Comp1Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 118, self.RULE_comp1)
+        self.enterRule(localctx, 122, self.RULE_comp1)
         try:
-            self.state = 496
+            self.state = 507
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.DIFF, DASAParser.EQUALS, DASAParser.GREATEQ, DASAParser.LESSEQ, DASAParser.GREAT, DASAParser.LESS]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 492
+                self.state = 503
                 self.comp2()
-                self.state = 493
+                self.state = 504
                 self.exp()
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK, DASAParser.AND, DASAParser.OR]:
@@ -4147,11 +4263,11 @@ class DASAParser ( Parser ):
     def comp2(self):
 
         localctx = DASAParser.Comp2Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 120, self.RULE_comp2)
+        self.enterRule(localctx, 124, self.RULE_comp2)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 498
+            self.state = 509
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DASAParser.DIFF) | (1 << DASAParser.EQUALS) | (1 << DASAParser.GREATEQ) | (1 << DASAParser.LESSEQ) | (1 << DASAParser.GREAT) | (1 << DASAParser.LESS))) != 0)):
                 self._errHandler.recoverInline(self)
@@ -4198,12 +4314,12 @@ class DASAParser ( Parser ):
     def exp(self):
 
         localctx = DASAParser.ExpContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 122, self.RULE_exp)
+        self.enterRule(localctx, 126, self.RULE_exp)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 500
+            self.state = 511
             self.termino()
-            self.state = 501
+            self.state = 512
             self.exp1()
         except RecognitionException as re:
             localctx.exception = re
@@ -4245,16 +4361,16 @@ class DASAParser ( Parser ):
     def exp1(self):
 
         localctx = DASAParser.Exp1Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 124, self.RULE_exp1)
+        self.enterRule(localctx, 128, self.RULE_exp1)
         try:
-            self.state = 507
+            self.state = 518
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.PLUS, DASAParser.MINUS]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 503
+                self.state = 514
                 self.exp2()
-                self.state = 504
+                self.state = 515
                 self.termino()
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK, DASAParser.DIFF, DASAParser.EQUALS, DASAParser.GREATEQ, DASAParser.LESSEQ, DASAParser.GREAT, DASAParser.LESS, DASAParser.AND, DASAParser.OR]:
@@ -4302,11 +4418,11 @@ class DASAParser ( Parser ):
     def exp2(self):
 
         localctx = DASAParser.Exp2Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 126, self.RULE_exp2)
+        self.enterRule(localctx, 130, self.RULE_exp2)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 509
+            self.state = 520
             _la = self._input.LA(1)
             if not(_la==DASAParser.PLUS or _la==DASAParser.MINUS):
                 self._errHandler.recoverInline(self)
@@ -4353,12 +4469,12 @@ class DASAParser ( Parser ):
     def termino(self):
 
         localctx = DASAParser.TerminoContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 128, self.RULE_termino)
+        self.enterRule(localctx, 132, self.RULE_termino)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 511
+            self.state = 522
             self.factor()
-            self.state = 512
+            self.state = 523
             self.term1()
         except RecognitionException as re:
             localctx.exception = re
@@ -4400,16 +4516,16 @@ class DASAParser ( Parser ):
     def term1(self):
 
         localctx = DASAParser.Term1Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 130, self.RULE_term1)
+        self.enterRule(localctx, 134, self.RULE_term1)
         try:
-            self.state = 518
+            self.state = 529
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.MULT, DASAParser.DIVIDE, DASAParser.MOD]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 514
+                self.state = 525
                 self.term2()
-                self.state = 515
+                self.state = 526
                 self.termino()
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK, DASAParser.DIFF, DASAParser.EQUALS, DASAParser.GREATEQ, DASAParser.LESSEQ, DASAParser.GREAT, DASAParser.LESS, DASAParser.PLUS, DASAParser.MINUS, DASAParser.AND, DASAParser.OR]:
@@ -4460,11 +4576,11 @@ class DASAParser ( Parser ):
     def term2(self):
 
         localctx = DASAParser.Term2Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 132, self.RULE_term2)
+        self.enterRule(localctx, 136, self.RULE_term2)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 520
+            self.state = 531
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << DASAParser.MULT) | (1 << DASAParser.DIVIDE) | (1 << DASAParser.MOD))) != 0)):
                 self._errHandler.recoverInline(self)
@@ -4511,12 +4627,12 @@ class DASAParser ( Parser ):
     def factor(self):
 
         localctx = DASAParser.FactorContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 134, self.RULE_factor)
+        self.enterRule(localctx, 138, self.RULE_factor)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 522
+            self.state = 533
             self.fact1()
-            self.state = 523
+            self.state = 534
             self.fact2()
         except RecognitionException as re:
             localctx.exception = re
@@ -4553,14 +4669,14 @@ class DASAParser ( Parser ):
     def fact1(self):
 
         localctx = DASAParser.Fact1Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 136, self.RULE_fact1)
+        self.enterRule(localctx, 140, self.RULE_fact1)
         try:
-            self.state = 527
+            self.state = 538
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.NOT]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 525
+                self.state = 536
                 self.match(DASAParser.NOT)
                 pass
             elif token in [DASAParser.ISNULL, DASAParser.TOINT, DASAParser.TOFLOAT, DASAParser.TOSTRING, DASAParser.SIZE, DASAParser.NULL, DASAParser.LPAREN, DASAParser.LBRACK, DASAParser.PLUS, DASAParser.MINUS, DASAParser.CSTRING, DASAParser.CFLOAT, DASAParser.CINT, DASAParser.CBOOL, DASAParser.ID]:
@@ -4620,25 +4736,25 @@ class DASAParser ( Parser ):
     def fact2(self):
 
         localctx = DASAParser.Fact2Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 138, self.RULE_fact2)
+        self.enterRule(localctx, 142, self.RULE_fact2)
         try:
-            self.state = 536
+            self.state = 547
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.LPAREN]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 529
+                self.state = 540
                 self.match(DASAParser.LPAREN)
-                self.state = 530
+                self.state = 541
                 self.expresion()
-                self.state = 531
+                self.state = 542
                 self.match(DASAParser.RPAREN)
                 pass
             elif token in [DASAParser.ISNULL, DASAParser.TOINT, DASAParser.TOFLOAT, DASAParser.TOSTRING, DASAParser.SIZE, DASAParser.NULL, DASAParser.LBRACK, DASAParser.PLUS, DASAParser.MINUS, DASAParser.CSTRING, DASAParser.CFLOAT, DASAParser.CINT, DASAParser.CBOOL, DASAParser.ID]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 533
+                self.state = 544
                 self.fact3()
-                self.state = 534
+                self.state = 545
                 self.valor()
                 pass
             else:
@@ -4682,19 +4798,19 @@ class DASAParser ( Parser ):
     def fact3(self):
 
         localctx = DASAParser.Fact3Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 140, self.RULE_fact3)
+        self.enterRule(localctx, 144, self.RULE_fact3)
         try:
-            self.state = 541
+            self.state = 552
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.PLUS]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 538
+                self.state = 549
                 self.match(DASAParser.PLUS)
                 pass
             elif token in [DASAParser.MINUS]:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 539
+                self.state = 550
                 self.match(DASAParser.MINUS)
                 pass
             elif token in [DASAParser.ISNULL, DASAParser.TOINT, DASAParser.TOFLOAT, DASAParser.TOSTRING, DASAParser.SIZE, DASAParser.NULL, DASAParser.LBRACK, DASAParser.CSTRING, DASAParser.CFLOAT, DASAParser.CINT, DASAParser.CBOOL, DASAParser.ID]:
@@ -4775,64 +4891,64 @@ class DASAParser ( Parser ):
     def valor(self):
 
         localctx = DASAParser.ValorContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 142, self.RULE_valor)
+        self.enterRule(localctx, 146, self.RULE_valor)
         try:
-            self.state = 553
+            self.state = 564
             self._errHandler.sync(self)
-            la_ = self._interp.adaptivePredict(self._input,37,self._ctx)
+            la_ = self._interp.adaptivePredict(self._input,39,self._ctx)
             if la_ == 1:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 543
+                self.state = 554
                 self.cte()
                 pass
 
             elif la_ == 2:
                 self.enterOuterAlt(localctx, 2)
-                self.state = 544
+                self.state = 555
                 self.arreglo()
                 pass
 
             elif la_ == 3:
                 self.enterOuterAlt(localctx, 3)
-                self.state = 545
+                self.state = 556
                 self.funcion()
                 pass
 
             elif la_ == 4:
                 self.enterOuterAlt(localctx, 4)
-                self.state = 546
+                self.state = 557
                 self.vacio()
                 pass
 
             elif la_ == 5:
                 self.enterOuterAlt(localctx, 5)
-                self.state = 547
+                self.state = 558
                 self.castint()
                 pass
 
             elif la_ == 6:
                 self.enterOuterAlt(localctx, 6)
-                self.state = 548
+                self.state = 559
                 self.castfloat()
                 pass
 
             elif la_ == 7:
                 self.enterOuterAlt(localctx, 7)
-                self.state = 549
+                self.state = 560
                 self.caststring()
                 pass
 
             elif la_ == 8:
                 self.enterOuterAlt(localctx, 8)
-                self.state = 550
+                self.state = 561
                 self.tamano()
                 pass
 
             elif la_ == 9:
                 self.enterOuterAlt(localctx, 9)
-                self.state = 551
+                self.state = 562
                 self.match(DASAParser.ID)
-                self.state = 552
+                self.state = 563
                 self.valor1()
                 pass
 
@@ -4883,20 +4999,20 @@ class DASAParser ( Parser ):
     def valor1(self):
 
         localctx = DASAParser.Valor1Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 144, self.RULE_valor1)
+        self.enterRule(localctx, 148, self.RULE_valor1)
         try:
-            self.state = 561
+            self.state = 572
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.LBRACK]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 555
+                self.state = 566
                 self.match(DASAParser.LBRACK)
-                self.state = 556
+                self.state = 567
                 self.expresion()
-                self.state = 557
+                self.state = 568
                 self.match(DASAParser.RBRACK)
-                self.state = 558
+                self.state = 569
                 self.valor2()
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK, DASAParser.DIFF, DASAParser.EQUALS, DASAParser.GREATEQ, DASAParser.LESSEQ, DASAParser.GREAT, DASAParser.LESS, DASAParser.PLUS, DASAParser.MINUS, DASAParser.MULT, DASAParser.DIVIDE, DASAParser.MOD, DASAParser.AND, DASAParser.OR]:
@@ -4948,18 +5064,18 @@ class DASAParser ( Parser ):
     def valor2(self):
 
         localctx = DASAParser.Valor2Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 146, self.RULE_valor2)
+        self.enterRule(localctx, 150, self.RULE_valor2)
         try:
-            self.state = 568
+            self.state = 579
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [DASAParser.LBRACK]:
                 self.enterOuterAlt(localctx, 1)
-                self.state = 563
+                self.state = 574
                 self.match(DASAParser.LBRACK)
-                self.state = 564
+                self.state = 575
                 self.expresion()
-                self.state = 565
+                self.state = 576
                 self.match(DASAParser.RBRACK)
                 pass
             elif token in [DASAParser.SCOLON, DASAParser.COMMA, DASAParser.RPAREN, DASAParser.RBRACK, DASAParser.DIFF, DASAParser.EQUALS, DASAParser.GREATEQ, DASAParser.LESSEQ, DASAParser.GREAT, DASAParser.LESS, DASAParser.PLUS, DASAParser.MINUS, DASAParser.MULT, DASAParser.DIVIDE, DASAParser.MOD, DASAParser.AND, DASAParser.OR]:
@@ -5014,16 +5130,16 @@ class DASAParser ( Parser ):
     def vacio(self):
 
         localctx = DASAParser.VacioContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 148, self.RULE_vacio)
+        self.enterRule(localctx, 152, self.RULE_vacio)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 570
+            self.state = 581
             self.match(DASAParser.ISNULL)
-            self.state = 571
+            self.state = 582
             self.match(DASAParser.LPAREN)
-            self.state = 572
+            self.state = 583
             self.expresion()
-            self.state = 573
+            self.state = 584
             self.match(DASAParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -5070,16 +5186,16 @@ class DASAParser ( Parser ):
     def castint(self):
 
         localctx = DASAParser.CastintContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 150, self.RULE_castint)
+        self.enterRule(localctx, 154, self.RULE_castint)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 575
+            self.state = 586
             self.match(DASAParser.TOINT)
-            self.state = 576
+            self.state = 587
             self.match(DASAParser.LPAREN)
-            self.state = 577
+            self.state = 588
             self.expresion()
-            self.state = 578
+            self.state = 589
             self.match(DASAParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -5126,16 +5242,16 @@ class DASAParser ( Parser ):
     def castfloat(self):
 
         localctx = DASAParser.CastfloatContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 152, self.RULE_castfloat)
+        self.enterRule(localctx, 156, self.RULE_castfloat)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 580
+            self.state = 591
             self.match(DASAParser.TOFLOAT)
-            self.state = 581
+            self.state = 592
             self.match(DASAParser.LPAREN)
-            self.state = 582
+            self.state = 593
             self.expresion()
-            self.state = 583
+            self.state = 594
             self.match(DASAParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -5182,16 +5298,16 @@ class DASAParser ( Parser ):
     def caststring(self):
 
         localctx = DASAParser.CaststringContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 154, self.RULE_caststring)
+        self.enterRule(localctx, 158, self.RULE_caststring)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 585
+            self.state = 596
             self.match(DASAParser.TOSTRING)
-            self.state = 586
+            self.state = 597
             self.match(DASAParser.LPAREN)
-            self.state = 587
+            self.state = 598
             self.expresion()
-            self.state = 588
+            self.state = 599
             self.match(DASAParser.RPAREN)
         except RecognitionException as re:
             localctx.exception = re
@@ -5214,8 +5330,8 @@ class DASAParser ( Parser ):
         def LPAREN(self):
             return self.getToken(DASAParser.LPAREN, 0)
 
-        def tamano1(self):
-            return self.getTypedRuleContext(DASAParser.Tamano1Context,0)
+        def valor(self):
+            return self.getTypedRuleContext(DASAParser.ValorContext,0)
 
 
         def RPAREN(self):
@@ -5238,142 +5354,17 @@ class DASAParser ( Parser ):
     def tamano(self):
 
         localctx = DASAParser.TamanoContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 156, self.RULE_tamano)
+        self.enterRule(localctx, 160, self.RULE_tamano)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 590
+            self.state = 601
             self.match(DASAParser.SIZE)
-            self.state = 591
+            self.state = 602
             self.match(DASAParser.LPAREN)
-            self.state = 592
-            self.tamano1()
-            self.state = 593
+            self.state = 603
+            self.valor()
+            self.state = 604
             self.match(DASAParser.RPAREN)
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class Tamano1Context(ParserRuleContext):
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def CSTRING(self):
-            return self.getToken(DASAParser.CSTRING, 0)
-
-        def ID(self):
-            return self.getToken(DASAParser.ID, 0)
-
-        def tamano2(self):
-            return self.getTypedRuleContext(DASAParser.Tamano2Context,0)
-
-
-        def getRuleIndex(self):
-            return DASAParser.RULE_tamano1
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterTamano1" ):
-                listener.enterTamano1(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitTamano1" ):
-                listener.exitTamano1(self)
-
-
-
-
-    def tamano1(self):
-
-        localctx = DASAParser.Tamano1Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 158, self.RULE_tamano1)
-        try:
-            self.state = 598
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [DASAParser.CSTRING]:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 595
-                self.match(DASAParser.CSTRING)
-                pass
-            elif token in [DASAParser.ID]:
-                self.enterOuterAlt(localctx, 2)
-                self.state = 596
-                self.match(DASAParser.ID)
-                self.state = 597
-                self.tamano2()
-                pass
-            else:
-                raise NoViableAltException(self)
-
-        except RecognitionException as re:
-            localctx.exception = re
-            self._errHandler.reportError(self, re)
-            self._errHandler.recover(self, re)
-        finally:
-            self.exitRule()
-        return localctx
-
-
-    class Tamano2Context(ParserRuleContext):
-
-        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
-            super().__init__(parent, invokingState)
-            self.parser = parser
-
-        def LBRACK(self):
-            return self.getToken(DASAParser.LBRACK, 0)
-
-        def expresion(self):
-            return self.getTypedRuleContext(DASAParser.ExpresionContext,0)
-
-
-        def RBRACK(self):
-            return self.getToken(DASAParser.RBRACK, 0)
-
-        def getRuleIndex(self):
-            return DASAParser.RULE_tamano2
-
-        def enterRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "enterTamano2" ):
-                listener.enterTamano2(self)
-
-        def exitRule(self, listener:ParseTreeListener):
-            if hasattr( listener, "exitTamano2" ):
-                listener.exitTamano2(self)
-
-
-
-
-    def tamano2(self):
-
-        localctx = DASAParser.Tamano2Context(self, self._ctx, self.state)
-        self.enterRule(localctx, 160, self.RULE_tamano2)
-        try:
-            self.state = 605
-            self._errHandler.sync(self)
-            token = self._input.LA(1)
-            if token in [DASAParser.LBRACK]:
-                self.enterOuterAlt(localctx, 1)
-                self.state = 600
-                self.match(DASAParser.LBRACK)
-                self.state = 601
-                self.expresion()
-                self.state = 602
-                self.match(DASAParser.RBRACK)
-                pass
-            elif token in [DASAParser.RPAREN]:
-                self.enterOuterAlt(localctx, 2)
-
-                pass
-            else:
-                raise NoViableAltException(self)
-
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)
