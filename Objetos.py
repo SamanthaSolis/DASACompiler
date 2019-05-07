@@ -171,6 +171,7 @@ class CuboSemantico():
     semCube[1][2][13] = 3
     semCube[1][2][16] = 1
 
+
     semCube[2][1][3] = 2
     semCube[2][1][4] = 2
     semCube[2][1][5] = 2

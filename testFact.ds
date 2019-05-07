@@ -1,13 +1,13 @@
 func factorial(Int: i) : Int{
-    if(i == 0) {
+    if(i == 0){
         return 1;
-    } else {
+    } else{
         return i * factorial(i-1);
     }
 }
 
 main(){
-
-    print(factorial(10));
-    print("ESTE ES EL NUMERO")
+    define Int : n;
+    input(n);
+    print(factorial(n));
 }

@@ -1,0 +1,11 @@
+main(){
+    define Int : o=40;
+    #isNull no jala
+    #print(isNull(o));
+    define String: x="2.0";
+    define Float : f;
+    define Int[2] : arr;
+    define Bool : b = True;
+    b=isNull(arr[1]);
+    print(b);
+}

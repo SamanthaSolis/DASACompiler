@@ -173,6 +173,7 @@ def operINPUT(op1, op2, res):
         itype = 1
         valor = int(valor)
 
+    setValue(valor,op1)
     quads.quadCount += 1
 
 def operDESCRIBE(op1, op2, res):
@@ -185,6 +186,26 @@ def operREGRESION(op1, op2, res):
     quads.quadCount += 1
 
 def operVACIO(op1, op2, res):
+    if (op1 < 10000):
+        raise Exception("Invalid Address")
+    else:
+        iUno = int(op1/10000) #local(1) global(2) cte(3)
+        iDos = int((op1-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
+        iTres = int((op1-10000*iUno)-(iDos*1000))
+        #print("----->>",iUno,iDos,iTres)
+        #obtiene el valor de la posición de memoria
+        if iUno == 4:
+            ptr = mem.memStack[iUno][iDos][iTres]
+            value = getValue(ptr)
+        elif iUno != 1:
+            value = mem.memStack[iUno][iDos][iTres]
+        else:
+            value= mem.memStack[iUno][mem.offsetCont][iDos][iTres]
+            
+        if value == None:
+            setValue(True,res)
+        else:
+            setValue(False,res)
     quads.quadCount += 1
 
 def operCLUSTER(op1, op2, res):
@@ -363,11 +384,11 @@ def setValue(value,address):
 
 
 def getValue(address):
-    # print("getvalue", address)
+    # print('\n',"getvalue", address)
     # for m in mem.memStack:
     #     print(m)
     # print("countdos",mem.offsetCont)
-    # print(mem.offsetStack)
+    # print(mem.offsetStack,'\n')
     if (address < 10000):
         raise Exception("Invalid Address")
     else:

@@ -1,4 +1,3 @@
-
 func fibo(Int: n): Int{
     if((n == 1) || (n == 2)){
         return 1;
@@ -8,7 +7,7 @@ func fibo(Int: n): Int{
 }
 
 main(){
-
-    print(fibo(10)));
-
+    define Int : n;
+    input(n);
+    print(fibo(n)));
 }

@@ -503,7 +503,7 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#asignacion.
     def exitAsignacion(self, ctx:DASAParser.AsignacionContext):
-        print("hereeee",self.stackOP)
+        #print("hereeee",self.stackOP)
         type1 = self.stackTypes.pop()
         res = self.stackTypes.pop()
         typeRes = CuboSemantico.semCube[type1][res][16]
@@ -592,7 +592,7 @@ class DASAListener(ParseTreeListener):
                 self.contCuadruplos += 1
             else:
                 varType = self.stackTypes.pop()
-                res = Calc.genAddress(1, 1, self.functionsTable[self.currFunction]["Signature"][1])
+                res = Calc.genAddress(self.currScope, 1, self.functionsTable[self.currFunction]["Signature"][1])
                 self.functionsTable[self.currFunction]["Signature"][1] += 1
                 
                 m1 = -1
@@ -655,7 +655,7 @@ class DASAListener(ParseTreeListener):
 
                 # Sumar s2 a la temporal del calculo de s1*m1
                 tmpType = self.stackTypes.pop()
-                res = Calc.genAddress(1,1, self.functionsTable[self.currFunction]["Signature"][1])
+                res = Calc.genAddress(self.currScope,1, self.functionsTable[self.currFunction]["Signature"][1])
                 self.functionsTable[self.currFunction]["Signature"][1] += 1
                 self.quad = { #s1*m1 + s2
                     "Oper" : 6,
@@ -1202,7 +1202,7 @@ class DASAListener(ParseTreeListener):
                     "Oper" : 22, # PARAM
                     "Op1" : self.stackOP.pop(),
                     "Op2" : None,
-                    "Res" : Calc.genAddress(1, tipoParam, self.paramCounter[len(self.paramCounter)-1][tipoParam])
+                    "Res" : Calc.genAddress(self.currScope, tipoParam, self.paramCounter[len(self.paramCounter)-1][tipoParam])
                 }
                 self.cuadruplos.append(self.quad)
                 self.quad = {}
@@ -1625,7 +1625,7 @@ class DASAListener(ParseTreeListener):
                 self.contCuadruplos += 1
             else:
                 varType = self.stackTypes.pop()
-                res = Calc.genAddress(1, 1, self.functionsTable[self.currFunction]["Signature"][1])
+                res = Calc.genAddress(self.currScope, 1, self.functionsTable[self.currFunction]["Signature"][1])
                 self.functionsTable[self.currFunction]["Signature"][1] += 1
                 
                 m1 = -1
@@ -1691,7 +1691,7 @@ class DASAListener(ParseTreeListener):
 
                 # Sumar s2 a la temporal del calculo de s1*m1
                 tmpType = self.stackTypes.pop()
-                res = Calc.genAddress(1,1, self.functionsTable[self.currFunction]["Signature"][1])
+                res = Calc.genAddress(self.currScope,1, self.functionsTable[self.currFunction]["Signature"][1])
                 self.functionsTable[self.currFunction]["Signature"][1] += 1
                 self.quad = { #s1*m1 + s2
                     "Oper" : 6,
@@ -1737,28 +1737,26 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#vacio.
     def exitVacio(self, ctx:DASAParser.VacioContext):
-        """
+        #sacamos valores
         tmpadd= self.stackOP.pop()
         tmptype= self.stackTypes.pop()
-        res = Calc.genAddress(1,1,self.functionsTable[self.currFunction]["Signature"][1])
-        self.functionsTable[self.currFunction]["Signature"][1] += 1
-
+        #generamos nueva temporal
+        res = Calc.genAddress(self.currScope,3,self.functionsTable[self.currFunction]["Signature"][3])
+        self.functionsTable[self.currFunction]["Signature"][3] += 1
         #metemos valor para valor    
         self.stackOP.append(res)
-        self.stackTypes.append(1)
+        self.stackTypes.append(3)
 
         self.quad = {
             "Oper" : 30, #VACIO
-            "Op1" : self.stackOP.pop(),
+            "Op1" : tmpadd,
             "Op2" : None,
-            "Res" : 
+            "Res" : res,
         }
 
         self.cuadruplos.append(self.quad)
         self.quad = {}
         self.contCuadruplos += 1
-        """
-        pass
 
 
     # Enter a parse tree produced by DASAParser#castint.
@@ -1767,16 +1765,32 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#castint.
     def exitCastint(self, ctx:DASAParser.CastintContext):
-        self.quad = {
+        tempid = self.stackOP.pop()
+        temptype = self.stackTypes.pop()
+        #temptype should be 1,2,4
+
+        if temptype == 4 or temptype == 2:
+            #genera temporal para la respuesta 
+            res = Calc.genAddress(self.currScope,1,self.functionsTable[self.currFunction]["Signature"][1])
+            self.functionsTable[self.currFunction]["Signature"][1] += 1
+
+            self.quad = {
             "Oper" : 32, #CASTINT
-            "Op1" : None,
+            "Op1" : tempid,
             "Op2" : None,
-            "Res" : self.stackOP.pop()
-        }
-        self.stackTypes.pop()
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
-        self.contCuadruplos += 1
+            "Res" : res
+            }
+
+            self.stackOP.append(res)
+            self.stackTypes.append(1)
+            self.cuadruplos.append(self.quad)
+            self.quad = {}
+            self.contCuadruplos += 1
+        
+        elif temptype == 1:
+            raise Exception("Variable is already an Int")
+        else:
+            raise Exception("TOINT: Invalid argument")
 
 
     # Enter a parse tree produced by DASAParser#castfloat.
@@ -1785,16 +1799,32 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#castfloat.
     def exitCastfloat(self, ctx:DASAParser.CastfloatContext):
-        self.quad = {
+        tempid = self.stackOP.pop()
+        temptype = self.stackTypes.pop()
+        #temptype should be 1,2,4
+
+        if temptype == 4 or temptype == 1:
+            #genera temporal para la respuesta 
+            res = Calc.genAddress(self.currScope,2,self.functionsTable[self.currFunction]["Signature"][2])
+            self.functionsTable[self.currFunction]["Signature"][2] += 1
+
+            self.quad = {
             "Oper" : 33, #CASTFLOAT
-            "Op1" : None,
+            "Op1" : tempid,
             "Op2" : None,
-            "Res" : self.stackOP.pop()
-        }
-        self.stackTypes.pop()
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
-        self.contCuadruplos += 1
+            "Res" : res
+            }
+
+            self.stackOP.append(res)
+            self.stackTypes.append(2)
+            self.cuadruplos.append(self.quad)
+            self.quad = {}
+            self.contCuadruplos += 1
+        
+        elif temptype == 2:
+            raise Exception("Variable is already a Float")
+        else:
+            raise Exception("TOFLOAT: Invalid argument")
 
 
     # Enter a parse tree produced by DASAParser#caststring.
@@ -1803,16 +1833,32 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#caststring.
     def exitCaststring(self, ctx:DASAParser.CaststringContext):
-        self.quad = {
-            "Oper" : 34, #CASTSTR
-            "Op1" : None,
+        tempid = self.stackOP.pop()
+        temptype = self.stackTypes.pop()
+        #temptype should be 1,2,3,4
+
+        if temptype == 1 or temptype == 2 or temptype ==3:
+            #genera temporal para la respuesta 
+            res = Calc.genAddress(self.currScope,4,self.functionsTable[self.currFunction]["Signature"][4])
+            self.functionsTable[self.currFunction]["Signature"][4] += 1
+
+            self.quad = {
+            "Oper" : 34, #CASTSTRING
+            "Op1" : tempid,
             "Op2" : None,
-            "Res" : self.stackOP.pop()
-        }
-        self.stackTypes.pop()
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
-        self.contCuadruplos += 1
+            "Res" : res
+            }
+
+            self.stackOP.append(res)
+            self.stackTypes.append(4)
+            self.cuadruplos.append(self.quad)
+            self.quad = {}
+            self.contCuadruplos += 1
+        
+        elif temptype == 4:
+            raise Exception("Variable is already a String")
+        else:
+            raise Exception("TOFLOAT: Invalid argument")
 
 
     # Enter a parse tree produced by DASAParser#tamano.
@@ -1826,7 +1872,7 @@ class DASAListener(ParseTreeListener):
         tempadd= self.stackOP.pop()
         #print("Dir:", tempadd, "Tipo:",temptype)
         #genera temporal para la respuesta 
-        res = Calc.genAddress(1,1,self.functionsTable[self.currFunction]["Signature"][1])
+        res = Calc.genAddress(self.currScope,1,self.functionsTable[self.currFunction]["Signature"][1])
         self.functionsTable[self.currFunction]["Signature"][1] += 1
 
         #metemos valor para valor    
