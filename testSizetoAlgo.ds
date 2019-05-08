@@ -6,6 +6,6 @@ main(){
     define Float : f;
     define Int[2] : arr;
     define Bool : b = True;
-    b=isNull(arr[1]);
+    #b=isNull(arr[1]);
     print(b);
 }

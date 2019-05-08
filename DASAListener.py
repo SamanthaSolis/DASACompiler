@@ -80,57 +80,25 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#programa.
     def exitPrograma(self, ctx:DASAParser.ProgramaContext):
+        # Pasar las funciones a la maquina virtual
         for f in self.functionsTable:
             mem.funcTable.append(f)
-        # print("******Variables globales")
-        # print(self.functionsTable[0]["SymTable"])
-        # mem.globalVars = self.functionsTable[0]["SymTable"]
-
-        #pasar todos los cuadruplos
+        
+        # Pasar las variables globales a la maquina virtual
+        for v in self.functionsTable[0]["SymTable"]:
+            mem.globalVars.append(v)
+        
+        # Pasar los cuadruplos a la maquina virtual
         for q in self.cuadruplos:
-            #print(q)
             quad.cuadruplos.append(q)
-        print('\n----------Cuadruplos----------')
-        # for ind, q in enumerate(quad.cuadruplos):
-        #     # res = str(ind) + "- {Oper: "
-        #     # if "Oper" in q:
-        #     #     res += ops.arrOperations[q["Oper"]]
-        #     # else:
-        #     #     res += "-"
-        #     # res += ", Op1: "
-        #     # if "Op1" in q:
-        #     #     res += str(q["Op1"])
-        #     # else:
-        #     #     res += "-"
-        #     # res += ", Op2: "
-        #     # if "Op2" in q:
-        #     #     res += str(q["Op2"])
-        #     # else:
-        #     #     res += "-"
-        #     # res += ", Res: "
-        #     # if "Res" in q:
-        #     #     res += str(q["Res"])
-        #     # else:
-        #     #     res += "-"
-        #     # res += "}"
-        #     print(ind,"-", q)
-        # for x in self.functionsTable:
-        #     print("{", x["Id"], x["Params"], x["TiposParams"], x["Return"], x["StartQuad"], x["Signature"], "}")
-        #     for y in x["SymTable"]:
-        #         print("\t", y)
-        #print("Memoria local:", mem.memLocal)
-        #print("Memoria global:", mem.memGlobal)
-        print('\n----------Stacks----------')
-        print("Stack Operaciones", self.stackOper)
-        print("Stack Types", self.stackTypes)
-        print("Stack OP", self.stackOP)
-        # print("Stack Saltos", self.stackPJ)
-        # print("Cuadruplos Table:")
-        # for y in self.cuadruplos:
-        #     print("\t",self.printIndex, ".", "{Oper:", y["Oper"], ", Op1:", y["Op1"], ", Op2:", y["Op2"], ", Res:", y["Res"], "}")
-        #     self.printIndex = self.printIndex + 1
-        # print("Memoria:")
-        # print(mem.memStack)
+
+        # Verificar que las pilas terminan vacias
+        # print('\n----------Stacks----------')
+        # print("Stack Operaciones", self.stackOper)
+        # print("Stack Tipos", self.stackTypes)
+        # print("Stack Operandos", self.stackOP)
+        # print("Stack Saltos", self.StackPJ)
+        
 
     # Enter a parse tree produced by DASAParser#prog1.
     def enterProg1(self, ctx:DASAParser.Prog1Context):
@@ -151,14 +119,13 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#prog3.
     def enterProg3(self, ctx:DASAParser.Prog3Context):
-        self.quad = {
+        quad = {
             "Oper" : 17, #GOTO
             "Op1" : None,
             "Op2" : None,
             "Res" : None
         }
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
+        self.cuadruplos.append(quad)
         self.stackPJ.append(self.contCuadruplos)
         self.contCuadruplos += 1
 
@@ -169,37 +136,39 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#main.
     def enterMain(self, ctx:DASAParser.MainContext):
         self.varsTable = []
-        self.function = {"Id" : "main",
-                         "Params" : 0,
-                         "TiposParams" : [],
-                         "Return" : 0,
-                         "StartQuad" : self.contCuadruplos,
-                         "Signature" : [0, 0, 0, 0, 0],
-                         "Address": -1,
-                         "SymTable" : []}
+        function = {
+            "Id" : "main",
+            "Params" : 0,
+            "TiposParams" : [],
+            "Return" : 0,
+            "StartQuad" : self.contCuadruplos,
+            "Signature" : [0, 0, 0, 0, 0],
+            "Address": -1,
+            "SymTable" : []
+        }
         self.currScope= 1
         self.cuadruplos[self.stackPJ.pop()]["Res"] = self.contCuadruplos
 
         self.currFunction= len(self.functionsTable)
-        self.functionsTable.append(self.function)
+        self.functionsTable.append(function)
 
 
 
     # Exit a parse tree produced by DASAParser#main.
     def exitMain(self, ctx:DASAParser.MainContext):
-        self.quad = {
+        quad = {
             "Oper" : 20, #END
             "Op1" : None,
             "Op2" : None,
             "Res" : None
         }
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
+        self.cuadruplos.append(quad)
         self.contCuadruplos += 1
+        self.functionsTable[self.currFunction]["SymTable"] = []
 
     # Enter a parse tree produced by DASAParser#main1.
     def enterMain1(self, ctx:DASAParser.Main1Context):
-        self.inBody = False
+        pass
 
     # Exit a parse tree produced by DASAParser#main1.
     def exitMain1(self, ctx:DASAParser.Main1Context):
@@ -208,7 +177,7 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#main2.
     def enterMain2(self, ctx:DASAParser.Main2Context):
-        self.inBody = True
+        pass
 
     # Exit a parse tree produced by DASAParser#main2.
     def exitMain2(self, ctx:DASAParser.Main2Context):
@@ -222,9 +191,9 @@ class DASAListener(ParseTreeListener):
             if f["Id"] == name:
                 raise Exception("Function already defined")
                 break
- 
+
         self.varsTable = []
-        self.function = {
+        function = {
             "Id" : name,
             "Params" : 0,
             "TiposParams" : [],
@@ -235,20 +204,20 @@ class DASAListener(ParseTreeListener):
             "SymTable" : []
         }
         self.currFunction = len(self.functionsTable)
-        self.functionsTable.append(self.function)
+        self.functionsTable.append(function)
         self.currScope= 1
 
     # Exit a parse tree produced by DASAParser#metodos.
     def exitMetodos(self, ctx:DASAParser.MetodosContext):
-        self.quad = {
+        quad = {
             "Oper" : 21, #ENDPROC
             "Op1" : None,
             "Op2" : None,
             "Res" : None
         }
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
+        self.cuadruplos.append(quad)
         self.contCuadruplos += 1
+        self.functionsTable[self.currFunction]["SymTable"] = []
 
     # Enter a parse tree produced by DASAParser#met1.
     def enterMet1(self, ctx:DASAParser.Met1Context):
@@ -275,7 +244,6 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#met3.
     def enterMet3(self, ctx:DASAParser.Met3Context):
-        #self.inBody = False
         self.functionsTable[self.currFunction]["SymTable"] = self.varsTable
 
     # Exit a parse tree produced by DASAParser#met3.
@@ -307,14 +275,14 @@ class DASAListener(ParseTreeListener):
 
         tmpType = dTypes.dicTypes[ctx.tipo().getText()]
         self.functionsTable[self.currFunction]["TiposParams"].append(dTypes.dicTypes[ctx.tipo().getText()])
-        self.var = {"Name" : ctx.ID().getText(),
-                    "Type" : tmpType,
-                    "Dims" : 0,
-                    "SizeD1" : -1,
-                    "SizeD2" : -1,
-                    #"HasValue" : False,
-                    "Scope" : self.currScope,
-                    "Address" : Calc.genAddress(self.currScope, tmpType,self.functionsTable[self.currFunction]["Signature"][tmpType])
+        self.var = {
+            "Name" : ctx.ID().getText(),
+            "Type" : tmpType,
+            "Dims" : 0,
+            "SizeD1" : -1,
+            "SizeD2" : -1,
+            "Scope" : self.currScope,
+            "Address" : Calc.genAddress(self.currScope, tmpType,self.functionsTable[self.currFunction]["Signature"][tmpType])
         }
         self.functionsTable[self.currFunction]["Signature"][tmpType] += 1
         self.varsTable.append(self.var)
@@ -328,14 +296,13 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#vars_st.
     def enterVars_st(self, ctx:DASAParser.Vars_stContext):
         self.currType = dTypes.dicTypes[ctx.tipo().getText()]
-        # print(type(self.currType))
+
         self.var = {
             "Name" : "",
             "Type" : self.currType,
             "Dims" : 0,
             "SizeD1" : -1,
             "SizeD2" : -1,
-            #"HasValue" : False,
             "Scope" : self.currScope,
             "Address" : Calc.genAddress(self.currScope, self.currType, self.functionsTable[self.currFunction]["Signature"][self.currType])
         }
@@ -372,15 +339,13 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#vars3.
     def enterVars3(self, ctx:DASAParser.Vars3Context):
         tempname = ctx.ID().getText()
-        exists = False
         #print(self.varsTable)
- 
+
         #Checamos si existe
         for v in self.varsTable:
             if v["Name"] == tempname:
                 raise Exception("Variable already defined")
-                exists = True 
-                break   
+                break
         self.var["Name"] = tempname
 
     # Exit a parse tree produced by DASAParser#vars3.
@@ -404,9 +369,6 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#vars5.
     def exitVars5(self, ctx:DASAParser.Vars5Context):
-        #update hasvalue
-        #self.var["HasValue"]=self.currNull
-        #self.currNull=True
         res = self.var["Type"]
 
         if res < 5:
@@ -414,14 +376,13 @@ class DASAListener(ParseTreeListener):
             type1 = self.stackTypes.pop()
             typeRes = CuboSemantico.semCube[type1][res][16]
             if(typeRes != -1):
-                self.quad = {
+                quad = {
                     "Oper" : self.stackOper.pop(),
                     "Op1"  : self.stackOP.pop(),
                     "Op2" : None,
                     "Res"  : self.var["Address"]
                 }
-                self.cuadruplos.append(self.quad)
-                self.quad = {}
+                self.cuadruplos.append(quad)
                 self.contCuadruplos += 1
             else:
                 raise Exception("Error: Type mismatch in assign operation (" + str(type1) + ", " + str(res) + ")")
@@ -450,7 +411,6 @@ class DASAListener(ParseTreeListener):
                 "Dims" : 0,
                 "SizeD1" : self.varsTable[len(self.varsTable)-1]["SizeD1"],
                 "SizeD2" : self.varsTable[len(self.varsTable)-1]["SizeD2"],
-                #"HasValue" : False,
                 "Scope" : self.currScope,
                 "Address" : Calc.genAddress(self.currScope, self.currType, self.functionsTable[self.currFunction]["Signature"][self.currType])
             }
@@ -503,19 +463,17 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#asignacion.
     def exitAsignacion(self, ctx:DASAParser.AsignacionContext):
-        #print("hereeee",self.stackOP)
         type1 = self.stackTypes.pop()
         res = self.stackTypes.pop()
         typeRes = CuboSemantico.semCube[type1][res][16]
         if(typeRes != -1):
-            self.quad = {
+            quad = {
                 "Oper" : self.stackOper.pop(),
                 "Op1"  : self.stackOP.pop(),
                 "Op2" : None,
                 "Res"  : self.stackOP.pop(),
             }
-            self.cuadruplos.append(self.quad)
-            self.quad = {}
+            self.cuadruplos.append(quad)
             self.contCuadruplos += 1
         else:
             raise Exception("Error: Type mismatch in assign operation (" + str(type1) + ", " + str(res) + ")")
@@ -553,16 +511,15 @@ class DASAListener(ParseTreeListener):
                     if var["Address"] == top:
                         exists = True
                         v = self.functionsTable[0]["SymTable"][index]
-                
+
             #Generar VER
-            self.quad = {
+            quad = {
                 "Oper" : 35,
                 "Op1"  : s1,
                 "Op2" : v["SizeD1"],
                 "Res"  : None
             }
-            self.cuadruplos.append(self.quad)
-            self.quad = {}
+            self.cuadruplos.append(quad)
             self.contCuadruplos += 1
 
             if v["SizeD2"] == -1:
@@ -578,7 +535,7 @@ class DASAListener(ParseTreeListener):
                     mem.memStack[3][1].append(address)
                     baseAddr = 31000 + len(mem.memStack[3][1])-1
 
-                self.quad = {
+                quad = {
                     "Oper" : 36,
                     "Op1"  : s1,
                     "Op2" : baseAddr,
@@ -587,14 +544,13 @@ class DASAListener(ParseTreeListener):
 
                 self.stackOP.append(res)
                 self.stackTypes.append(v["Type"]-4)
-                self.cuadruplos.append(self.quad)
-                self.quad = {}
+                self.cuadruplos.append(quad)
                 self.contCuadruplos += 1
             else:
                 varType = self.stackTypes.pop()
                 res = Calc.genAddress(self.currScope, 1, self.functionsTable[self.currFunction]["Signature"][1])
                 self.functionsTable[self.currFunction]["Signature"][1] += 1
-                
+
                 m1 = -1
                 sizeD2 = v["SizeD2"]
                 if sizeD2 in mem.memStack[3][1]:
@@ -603,7 +559,7 @@ class DASAListener(ParseTreeListener):
                     mem.memStack[3][1].append(sizeD2)
                     m1 = 31000 + len(mem.memStack[3][1])-1
 
-                self.quad = {
+                quad = {
                     "Oper" : 3,
                     "Op1"  : s1,
                     "Op2" : m1,
@@ -612,8 +568,7 @@ class DASAListener(ParseTreeListener):
 
                 self.stackOP.append(res)
                 self.stackTypes.append(1)
-                self.cuadruplos.append(self.quad)
-                self.quad = {}
+                self.cuadruplos.append(quad)
                 self.contCuadruplos += 1
                 self.stackOP.append(v["Address"])
                 self.stackTypes.append(v["Type"])
@@ -643,31 +598,29 @@ class DASAListener(ParseTreeListener):
                             v = self.functionsTable[0]["SymTable"][index]
 
                 #Generar VER
-                self.quad = {
+                quad = {
                     "Oper" : 35,
                     "Op1"  : s2,
-                    "Op2" : v["SizeD2"],
+                    "Op2"  : v["SizeD2"],
                     "Res"  : None
                 }
-                self.cuadruplos.append(self.quad)
-                self.quad = {}
+                self.cuadruplos.append(quad)
                 self.contCuadruplos += 1
 
                 # Sumar s2 a la temporal del calculo de s1*m1
                 tmpType = self.stackTypes.pop()
                 res = Calc.genAddress(self.currScope,1, self.functionsTable[self.currFunction]["Signature"][1])
                 self.functionsTable[self.currFunction]["Signature"][1] += 1
-                self.quad = { #s1*m1 + s2
+                quad = { #s1*m1 + s2
                     "Oper" : 6,
                     "Op1"  : s2,
-                    "Op2" : self.stackOP.pop(),
+                    "Op2"  : self.stackOP.pop(),
                     "Res"  : res
                 }
-                self.cuadruplos.append(self.quad)
-                self.quad = {}
+                self.cuadruplos.append(quad)
                 self.contCuadruplos += 1
-                #Sumando dirBase si dos dimensión
                 
+                #Sumando dirBase si dos dimensión
                 resAdd = Calc.genAddress(4,0,len(mem.memStack[4][0]))
                 mem.memStack[4][0].append(None)
                 address = self.stackOP.pop()
@@ -678,18 +631,16 @@ class DASAListener(ParseTreeListener):
                     mem.memStack[3][1].append(address)
                     baseAddr = 31000 + len(mem.memStack[3][1])-1
 
-                self.quad = {
+                quad = {
                     "Oper" : 36, #dirBase + s1*m1 + s2
                     "Op1"  : res,
-                    "Op2" : baseAddr,
+                    "Op2"  : baseAddr,
                     "Res"  :resAdd
                 }
-
-                self.stackOP.append(resAdd)
-                self.stackTypes.append(varType-8)            
-                self.cuadruplos.append(self.quad)
-                self.quad = {}
+                self.cuadruplos.append(quad)
                 self.contCuadruplos += 1
+                self.stackOP.append(resAdd)
+                self.stackTypes.append(varType-8)
 
     # Enter a parse tree produced by DASAParser#durante.
     def enterDurante(self, ctx:DASAParser.DuranteContext):
@@ -698,13 +649,14 @@ class DASAListener(ParseTreeListener):
     # Exit a parse tree produced by DASAParser#durante.
     def exitDurante(self, ctx:DASAParser.DuranteContext):
         end = self.stackPJ.pop()
-        self.quad["Oper"] = 17 #GOTO
-        self.quad["Op1"]= None
-        self.quad["Op2"]= None
-        self.quad["Res"]= self.stackPJ.pop()
-        self.cuadruplos.append(self.quad)
-        self.contCuadruplos = self.contCuadruplos + 1
-        self.quad = {}
+        quad = {
+            "Oper" : 17, # GOTO
+            "Op1"  : None,
+            "Op2"  : None,
+            "Res"  : self.stackPJ.pop()
+        }
+        self.cuadruplos.append(quad)
+        self.contCuadruplos += 1
         self.cuadruplos[end]["Res"] = self.contCuadruplos
 
     # Enter a parse tree produced by DASAParser#duro1.
@@ -713,12 +665,14 @@ class DASAListener(ParseTreeListener):
         if contemp != 3:
             raise Exception("Expected Boolean expression in while condition")
         else:
-            self.quad["Oper"]= 18 #GOTOF
-            self.quad["Op1"]= self.stackOP.pop()
-            self.quad["Op2"]= None
-            self.cuadruplos.append(self.quad)
-            self.contCuadruplos = self.contCuadruplos + 1
-            self.quad= {}
+            quad = {
+                "Oper" : 18, #GOTOF
+                "Op1"  : self.stackOP.pop(),
+                "Op2"  : None,
+                "Res"  : None
+            }
+            self.cuadruplos.append(quad)
+            self.contCuadruplos += 1
             self.stackPJ.append(self.contCuadruplos-1)
 
 
@@ -741,12 +695,14 @@ class DASAListener(ParseTreeListener):
         if contemp != 3:
             raise Exception("Expected Boolean expression in if condition")
         else:
-            self.quad["Op1"]= self.stackOP.pop()
-            self.quad["Op2"]= None
-            self.quad["Oper"]= 18 #GOTOF
-            self.cuadruplos.append(self.quad)
-            self.contCuadruplos = self.contCuadruplos + 1
-            self.quad={}
+            quad = {
+                "Oper" : 18, # GOTOF
+                "Op1"  : self.stackOP.pop(),
+                "Op2"  : None,
+                "Res"  : None
+            }
+            self.cuadruplos.append(quad)
+            self.contCuadruplos += 1
             self.stackPJ.append(self.contCuadruplos-1)
 
 
@@ -759,12 +715,14 @@ class DASAListener(ParseTreeListener):
     # Enter a parse tree produced by DASAParser#con2.
     def enterCon2(self, ctx:DASAParser.Con2Context):
         if ctx.getChildCount():
-            self.quad["Oper"]= 17 #GOTO
-            self.quad["Op1"]= None
-            self.quad["Op2"]= None
-            self.cuadruplos.append(self.quad)
-            self.quad = {}
-            self.contCuadruplos = self.contCuadruplos + 1
+            quad = {
+                "Oper" : 17, # GOTO
+                "Op1"  : None,
+                "Op2"  : None,
+                "Res"  : None,
+            }
+            self.cuadruplos.append(quad)
+            self.contCuadruplos += 1
             false = self.stackPJ.pop()
             self.stackPJ.append(self.contCuadruplos-1)
             self.cuadruplos[false]["Res"] = self.contCuadruplos
@@ -784,22 +742,17 @@ class DASAListener(ParseTreeListener):
         var = ctx.ID().getText()
         func = self.currFunction
 
-        # for f in self.functionsTable:
-        #     if f["Id"] == self.currFunction:
-        #         func = self.functionsTable.index(f)
-
         for v in self.functionsTable[func]["SymTable"]:
             if v["Name"] == var:
                 address = v["Address"]
 
-        self.quad = {
+        quad = {
             "Oper" : 26, #INPUT
-            "Op1" : address,
-            "Op2" : None,
-            "Res" : None
+            "Op1"  : address,
+            "Op2"  : None,
+            "Res"  : None
         }
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
+        self.cuadruplos.append(quad)
         self.contCuadruplos += 1
 
 
@@ -856,14 +809,13 @@ class DASAListener(ParseTreeListener):
         if (self.var["Type"]-tmptype) != 4:
                raise Exception("Mismatch in assign types", tmptype, self.var["Type"])
         else:
-            self.quad = {
-            "Oper" : 16,
-            "Op1" : self.stackOP.pop(),
-            "Op2" : None,
-            "Res" : self.var["Address"] + self.arrCountD1
+            quad = {
+                "Oper" : 16, # '='
+                "Op1"  : self.stackOP.pop(),
+                "Op2"  : None,
+                "Res"  : self.var["Address"] + self.arrCountD1
             }
-            self.cuadruplos.append(self.quad)
-            self.quad = {}
+            self.cuadruplos.append(quad)
             self.contCuadruplos += 1
             self.arrCountD1 += 1
 
@@ -897,14 +849,13 @@ class DASAListener(ParseTreeListener):
         if (self.var["Type"]-tmptype) != 8:
                raise Exception("Mismatch in assign types", tmptype, self.var["Type"])
         else:
-            self.quad = {
-            "Oper" : 16,
-            "Op1" : self.stackOP.pop(),
-            "Op2" : None,
-            "Res" : self.var["Address"] + self.arrCountD1*self.var["SizeD2"] + self.arrCountD2
+            quad = {
+                "Oper" : 16,
+                "Op1"  : self.stackOP.pop(),
+                "Op2"  : None,
+                "Res"  : self.var["Address"] + self.arrCountD1*self.var["SizeD2"] + self.arrCountD2
             }
-            self.cuadruplos.append(self.quad)
-            self.quad = {}
+            self.cuadruplos.append(quad)
             self.contCuadruplos += 1
             self.arrCountD2 += 1
 
@@ -996,20 +947,19 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#escritura.
     def enterEscritura(self, ctx:DASAParser.EscrituraContext):
-        pass
+        if ctx.getChild(0).getChildCount() == 0:
+            quad = {
+                "Oper" : 25, #PRINT
+                "Op1" : None,
+                "Op2" : None,
+                "Res" : None
+            }
+            self.cuadruplos.append(quad)
+            self.contCuadruplos += 1
 
     # Exit a parse tree produced by DASAParser#escritura.
     def exitEscritura(self, ctx:DASAParser.EscrituraContext):
-        self.quad = {
-            "Oper" : 25, #PRINT
-            "Op1" : self.stackOP.pop(),
-            "Op2" : None,
-            "Res" : None
-        }
-        self.stackTypes.pop()
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
-        self.contCuadruplos += 1
+        pass
 
 
     # Enter a parse tree produced by DASAParser#escr1.
@@ -1023,7 +973,15 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#escr2.
     def enterEscr2(self, ctx:DASAParser.Escr2Context):
-        pass
+        quad = {
+            "Oper" : 25, #PRINT
+            "Op1"  : self.stackOP.pop(),
+            "Op2"  : None,
+            "Res"  : None
+        }
+        self.stackTypes.pop()
+        self.cuadruplos.append(quad)
+        self.contCuadruplos += 1
 
     # Exit a parse tree produced by DASAParser#escr2.
     def exitEscr2(self, ctx:DASAParser.Escr2Context):
@@ -1036,17 +994,49 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#estdesc.
     def exitEstdesc(self, ctx:DASAParser.EstdescContext):
-        self.quad = {
-            "Oper" : 27, #DESCRIBE
-            "Op1" : None,
-            "Op2" : None,
-            "Res" : self.stackOP.pop()
-        }
-        self.stackTypes.pop()
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
-        self.contCuadruplos += 1
-
+        tmpType = self.stackTypes.pop()
+        if tmpType < 5:
+            raise Exception('The input for descriptive Statistics must be an array.')
+        else:
+            baseAddr = self.stackOP.pop()
+            v = {}
+            exists = False
+            for var in self.functionsTable[self.currFunction]["SymTable"]:
+                if var["Address"] == baseAddr:
+                    exists = True
+                    v = var
+            if not exists:
+                for var in self.functionsTable[0]["SymTable"]:
+                    if var["Address"] == baseAddr:
+                        exists = True
+                        v = var
+            d1 = v["SizeD1"]
+            d2 = v["SizeD2"]
+            d1exists = False
+            d2exists = False
+            d1Addr = -1
+            d2Addr = -1
+            for index, c in  enumerate(mem.memStack[3][1]):
+                if c == d1:
+                    d1exists = True
+                    d1Addr = Calc.genAddress(3,1,index)
+                if c == d2:
+                    d2exists = True
+                    d2Addr = Calc.genAddress(3,1,index)
+            if not d1exists:
+                d1Addr = Calc.genAddress(3,1,len(mem.memStack[3][1]))
+                mem.memStack[3][1].append(d1)
+            if not d2exists:
+                d2Addr = Calc.genAddress(3,1,len(mem.memStack[3][1]))
+                mem.memStack[3][1].append(d2)
+            quad = {
+                "Oper" : 27, #DESCRIBE
+                "Op1"  : d1Addr,
+                "Op2"  : d2Addr,
+                "Res"  : baseAddr
+            }
+            self.cuadruplos.append(quad)
+            self.contCuadruplos += 1
 
     # Enter a parse tree produced by DASAParser#dibujar.
     def enterDibujar(self, ctx:DASAParser.DibujarContext):
@@ -1054,16 +1044,47 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#dibujar.
     def exitDibujar(self, ctx:DASAParser.DibujarContext):
-        self.quad = {
-            "Oper" : 28, #PLOT
-            "Op1" : None,
-            "Op2" : None,
-            "Res" : self.stackOP.pop()
-        }
-        self.stackTypes.pop()
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
-        self.contCuadruplos += 1
+        nametype = self.stackTypes.pop()
+        tmpType = self.stackTypes.pop()
+        if tmpType < 9 or tmpType > 10:
+            raise Exception('The plot input must be a number matrix.')
+        elif nametype != 4:
+            raise Exception('The file path must be of type String')
+        else:
+            fileName = self.stackOP.pop()
+            baseAddr = self.stackOP.pop()
+            v = {}
+            exists = False
+            for var in self.functionsTable[self.currFunction]["SymTable"]:
+                if var["Address"] == baseAddr:
+                    exists = True
+                    v = var
+            if not exists:
+                for var in self.functionsTable[0]["SymTable"]:
+                    if var["Address"] == baseAddr:
+                        exists = True
+                        v = var
+            if v["SizeD1"] != 2:
+                raise Exception('The plot input must be a matrix of 2 arrays')
+            else:
+                d2 = v["SizeD2"]
+                exists = False
+                d2Addr = -1
+                for index, c in  enumerate(mem.memStack[3][1]):
+                    if c == d2:
+                        exists = True
+                        d2Addr = Calc.genAddress(3,1,index)
+                if not exists:
+                    d2Addr = Calc.genAddress(3,1,len(mem.memStack[3][1]))
+                    mem.memStack[3][1].append(d2)
+                quad = {
+                    "Oper" : 28, #PLOT
+                    "Op1"  : d2Addr,
+                    "Op2"  : fileName,
+                    "Res"  : baseAddr
+                }
+                self.cuadruplos.append(quad)
+                self.contCuadruplos += 1
 
 
     # Enter a parse tree produced by DASAParser#regresion.
@@ -1072,26 +1093,50 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#regresion.
     def exitRegresion(self, ctx:DASAParser.RegresionContext):
-        self.quad = {
-            "Oper" : 29, #REGRESION
-            "Op1" : None,
-            "Op2" : None,
-            "Res" : self.stackOP.pop()
-        }
-        self.stackTypes.pop()
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
-        self.contCuadruplos += 1
-
-
-    # Enter a parse tree produced by DASAParser#reg1.
-    def enterReg1(self, ctx:DASAParser.Reg1Context):
-        pass
-
-    # Exit a parse tree produced by DASAParser#reg1.
-    def exitReg1(self, ctx:DASAParser.Reg1Context):
-        pass
-
+        tmpType = self.stackTypes.pop()
+        print("tmp",tmpType)
+        if not(tmpType == 9 or tmpType == 10):
+            raise Exception('The input for regression must be a number matrix.')
+        else:
+            baseAddr = self.stackOP.pop()
+            v = {}
+            exists = False
+            for var in self.functionsTable[self.currFunction]["SymTable"]:
+                if var["Address"] == baseAddr:
+                    exists = True
+                    v = var
+            if not exists:
+                for var in self.functionsTable[0]["SymTable"]:
+                    if var["Address"] == baseAddr:
+                        exists = True
+                        v = var
+            d1 = v["SizeD1"]
+            d2 = v["SizeD2"]
+            d1exists = False
+            d2exists = False
+            d1Addr = -1
+            d2Addr = -1
+            for index, c in  enumerate(mem.memStack[3][1]):
+                if c == d1:
+                    d1exists = True
+                    d1Addr = Calc.genAddress(3,1,index)
+                if c == d2:
+                    d2exists = True
+                    d2Addr = Calc.genAddress(3,1,index)
+            if not d1exists:
+                d1Addr = Calc.genAddress(3,1,len(mem.memStack[3][1]))
+                mem.memStack[3][1].append(d1)
+            if not d2exists:
+                d2Addr = Calc.genAddress(3,1,len(mem.memStack[3][1]))
+                mem.memStack[3][1].append(d2)
+            quad = {
+                "Oper" : 29, #REGRESION
+                "Op1"  : d1Addr,
+                "Op2"  : d2Addr,
+                "Res"  : baseAddr
+            }
+            self.cuadruplos.append(quad)
+            self.contCuadruplos += 1
 
     # Enter a parse tree produced by DASAParser#clustering.
     def enterClustering(self, ctx:DASAParser.ClusteringContext):
@@ -1099,16 +1144,47 @@ class DASAListener(ParseTreeListener):
 
     # Exit a parse tree produced by DASAParser#clustering.
     def exitClustering(self, ctx:DASAParser.ClusteringContext):
-        self.quad = {
-            "Oper" : 31, #CLUSTER
-            "Op1" : None,
-            "Op2" : None,
-            "Res" : self.stackOP.pop()
-        }
-        self.stackTypes.pop()
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
-        self.contCuadruplos += 1
+        numbertype = self.stackTypes.pop()
+        tmpType = self.stackTypes.pop()
+        if tmpType < 9 or tmpType > 10:
+            raise Exception('The clustering input must be a number matrix.')
+        elif numbertype != 1:
+            raise Exception('The number of clusters must be an integer')
+        else:
+            numberClusters = self.stackOP.pop()
+            baseAddr = self.stackOP.pop()
+            v = {}
+            exists = False
+            for var in self.functionsTable[self.currFunction]["SymTable"]:
+                if var["Address"] == baseAddr:
+                    exists = True
+                    v = var
+            if not exists:
+                for var in self.functionsTable[0]["SymTable"]:
+                    if var["Address"] == baseAddr:
+                        exists = True
+                        v = var
+            if v["SizeD1"] != 2:
+                raise Exception('The clustering input must be a matrix of 2 arrays')
+            else:
+                d2 = v["SizeD2"]
+                exists = False
+                d2Addr = -1
+                for index, c in  enumerate(mem.memStack[3][1]):
+                    if c == d2:
+                        exists = True
+                        d2Addr = Calc.genAddress(3,1,index)
+                if not exists:
+                    d2Addr = Calc.genAddress(3,1,len(mem.memStack[3][1]))
+                    mem.memStack[3][1].append(d2)
+                quad = {
+                    "Oper" : 31, #CLUSTER
+                    "Op1"  : d2Addr,
+                    "Op2"  : numberClusters,
+                    "Res"  : baseAddr
+                }
+                self.cuadruplos.append(quad)
+                self.contCuadruplos += 1
 
 
     # Enter a parse tree produced by DASAParser#funcion.
@@ -1124,54 +1200,44 @@ class DASAListener(ParseTreeListener):
         if not exists:
             raise Exception("Error: Method called does not exists.")
         else:
-            self.quad = {
+            quad = {
                 "Oper": 23, #ERA
                 "Op1" : idtemp,
                 "Op2" : None,
                 "Res" : None
             }
-            self.cuadruplos.append(self.quad)
-            self.quad = {}
+            self.cuadruplos.append(quad)
             self.contCuadruplos += 1
             self.stackOper.append('(')
 
 
     # Exit a parse tree produced by DASAParser#funcion.
     def exitFuncion(self, ctx:DASAParser.FuncionContext):
-        print("---->Saliendo de funcion")
-        print("OP", self.stackOP)
-        print("Types", self.stackTypes)
-        print("Opers", self.stackOper)
         f = self.functionsTable[self.OnGoingFunc[len(self.OnGoingFunc)-1]]
 
-        self.quad = {
+        quad = {
             "Oper" : 19, #GOSUB
-            "Op1" : f["Id"],
-            "Op2" : None,
-            "Res" : f["StartQuad"]
+            "Op1"  : f["Id"],
+            "Op2"  : None,
+            "Res"  : f["StartQuad"]
         }
-        self.cuadruplos.append(self.quad)
-        self.quad = {}
+        self.cuadruplos.append(quad)
         self.contCuadruplos += 1
-        
         returnType = f['Return']
         if returnType != 0:
-
             temp = Calc.genAddress(self.currScope,returnType,self.functionsTable[self.currFunction]["Signature"][f['Return']])
             self.functionsTable[self.currFunction]["Signature"][returnType] += 1
 
-            self.quad = {
+            quad = {
                 "Oper" : 16,
-                "Op1" : f["Address"],
-                "Op2" : None,
-                "Res" : temp,
+                "Op1"  : f["Address"],
+                "Op2"  : None,
+                "Res"  : temp,
             }
-
+            self.cuadruplos.append(quad)
+            self.contCuadruplos += 1
             self.stackOP.append(temp)
             self.stackTypes.append(returnType)
-            self.cuadruplos.append(self.quad)
-            self.quad = {}
-            self.contCuadruplos += 1
             self.stackOper.pop()
         self.paramCounter.pop()
         self.OnGoingFunc.pop()
@@ -1190,7 +1256,7 @@ class DASAListener(ParseTreeListener):
     def enterFunc2(self, ctx:DASAParser.Func2Context):
         sumParams = sum(self.paramCounter[len(self.paramCounter)-1])
         f = self.functionsTable[self.OnGoingFunc[len(self.OnGoingFunc)-1]]
-        
+
         if sumParams > f["Params"]:
             raise Exception("Error. Method was given more parameters than expected.")
         else:
@@ -1198,14 +1264,13 @@ class DASAListener(ParseTreeListener):
             if self.stackTypes.pop() != tipoParam:
                 raise Exception("Error. Parameter not of expected type.")
             else:
-                self.quad = {
+                quad = {
                     "Oper" : 22, # PARAM
-                    "Op1" : self.stackOP.pop(),
-                    "Op2" : None,
-                    "Res" : Calc.genAddress(self.currScope, tipoParam, self.paramCounter[len(self.paramCounter)-1][tipoParam])
+                    "Op1"  : self.stackOP.pop(),
+                    "Op2"  : None,
+                    "Res"  : Calc.genAddress(self.currScope, tipoParam, self.paramCounter[len(self.paramCounter)-1][tipoParam])
                 }
-                self.cuadruplos.append(self.quad)
-                self.quad = {}
+                self.cuadruplos.append(quad)
                 self.contCuadruplos += 1
                 self.paramCounter[len(self.paramCounter)-1][tipoParam] +=1
 
@@ -1227,31 +1292,24 @@ class DASAListener(ParseTreeListener):
         if f['Return'] != resType:
             raise Exception("Mismatch return value", resType,f['Return'])
         else:
-            self.quad = {
+            quad = {
                 "Oper" : 24, #RETURN
-                "Op1" : res,
-                "Op2" : None,
-                "Res" : f["Address"]
+                "Op1"  : res,
+                "Op2"  : None,
+                "Res"  : f["Address"]
             }
 
-            self.cuadruplos.append(self.quad)
-            self.quad = {}
+            self.cuadruplos.append(quad)
             self.contCuadruplos += 1
 
 
     # Enter a parse tree produced by DASAParser#expresion.
     def enterExpresion(self, ctx:DASAParser.ExpresionContext):
-        print("---->Entrando a expresion")
-        print("OP", self.stackOP)
-        print("Types", self.stackTypes)
-        print("Opers", self.stackOper)
+        pass
 
     # Exit a parse tree produced by DASAParser#expresion.
     def exitExpresion(self, ctx:DASAParser.ExpresionContext):
-        print("<----Saliendo de expresion")
-        print("OP", self.stackOP)
-        print("Types", self.stackTypes)
-        print("Opers", self.stackOper)
+        pass
 
 
     # Enter a parse tree produced by DASAParser#expres1.
@@ -1263,21 +1321,24 @@ class DASAListener(ParseTreeListener):
         if self.stackOper:
             top = self.stackOper[len(self.stackOper)-1]
             if top == 14 or top == 15:
-                self.quad["Op2"]=self.stackOP.pop()
-                self.quad["Op1"]=self.stackOP.pop()
-                self.quad["Oper"]= self.stackOper.pop()
                 type2 = self.stackTypes.pop()
                 type1 = self.stackTypes.pop()
                 typeRes = CuboSemantico.semCube[type1][type2][top]
                 if(typeRes != -1):
-                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.currFunction]["Signature"][typeRes])
+                    res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.currFunction]["Signature"][typeRes])
                     self.functionsTable[self.currFunction]["Signature"][typeRes] += 1
-                    self.quad["Res"] = Res
-                    self.stackOP.append(Res)
-                    self.stackTypes.append(typeRes)
-                    self.cuadruplos.append(self.quad)
-                    self.quad = {}
+                    op2 = self.stackOP.pop()
+                    op1 = self.stackOP.pop()
+                    quad = {
+                        "Oper" : self.stackOper.pop(),
+                        "Op1"  : op1,
+                        "Op2"  : op2,
+                        "Res"  : res   
+                    }
+                    self.cuadruplos.append(quad)
                     self.contCuadruplos += 1
+                    self.stackOP.append(res)
+                    self.stackTypes.append(typeRes)
                 else:
                     raise Exception("error: not possible")
 
@@ -1294,17 +1355,11 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#comp.
     def enterComp(self, ctx:DASAParser.CompContext):
-        print("---->Entrando a comparacion")
-        print("OP", self.stackOP)
-        print("Types", self.stackTypes)
-        print("Opers", self.stackOper)
+        pass
 
     # Exit a parse tree produced by DASAParser#comp.
     def exitComp(self, ctx:DASAParser.CompContext):
-        print("<----Saliendo de comparacion")
-        print("OP", self.stackOP)
-        print("Types", self.stackTypes)
-        print("Opers", self.stackOper)
+        pass
 
 
     # Enter a parse tree produced by DASAParser#comp1.
@@ -1316,22 +1371,24 @@ class DASAListener(ParseTreeListener):
         if self.stackOper:
             top = self.stackOper[len(self.stackOper)-1]
             if top == 8 or top == 9 or top == 10 or top == 11 or top == 12 or top == 13:
-                self.quad["Op2"]=self.stackOP.pop()
-                self.quad["Op1"]=self.stackOP.pop()
-                self.quad["Oper"]= self.stackOper.pop()
                 type2 = self.stackTypes.pop()
                 type1 = self.stackTypes.pop()
                 typeRes = CuboSemantico.semCube[type1][type2][top]
                 if(typeRes != -1):
-                    Res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.currFunction]["Signature"][typeRes])
+                    op2 = self.stackOP.pop()
+                    op1 = self.stackOP.pop()
+                    res = Calc.genAddress(self.currScope,typeRes,self.functionsTable[self.currFunction]["Signature"][typeRes])
                     self.functionsTable[self.currFunction]["Signature"][typeRes] += 1
-                    self.quad["Res"] = Res
-                    self.stackOP.append(Res)
-                    self.stackTypes.append(typeRes)
-                    self.cuadruplos.append(self.quad)
-                    #print("temp cuad", self.quad)
-                    self.quad = {}
+                    quad = {
+                        "Oper" : self.stackOper.pop(),
+                        "Op1"  : op1,
+                        "Op2"  : op2,
+                        "Res"  : res
+                    }
+                    self.cuadruplos.append(quad)
                     self.contCuadruplos += 1
+                    self.stackOP.append(res)
+                    self.stackTypes.append(typeRes)
                 else:
                     raise Exception("error: not possible")
 
@@ -1349,17 +1406,11 @@ class DASAListener(ParseTreeListener):
 
     # Enter a parse tree produced by DASAParser#exp.
     def enterExp(self, ctx:DASAParser.ExpContext):
-        print("---->Entrando a exp")
-        print("OP", self.stackOP)
-        print("Types", self.stackTypes)
-        print("Opers", self.stackOper)
+        pass
 
     # Exit a parse tree produced by DASAParser#exp.
     def exitExp(self, ctx:DASAParser.ExpContext):
-        print("<----Saliendo de exp")
-        print("OP", self.stackOP)
-        print("Types", self.stackTypes)
-        print("Opers", self.stackOper)
+        pass
 
 
     # Enter a parse tree produced by DASAParser#exp1.
@@ -1627,7 +1678,7 @@ class DASAListener(ParseTreeListener):
                 varType = self.stackTypes.pop()
                 res = Calc.genAddress(self.currScope, 1, self.functionsTable[self.currFunction]["Signature"][1])
                 self.functionsTable[self.currFunction]["Signature"][1] += 1
-                
+
                 m1 = -1
                 sizeD2 = v["SizeD2"]
                 if sizeD2 in mem.memStack[3][1]:
@@ -1671,7 +1722,7 @@ class DASAListener(ParseTreeListener):
                     if vars["Address"] == top:
                         exists = True
                         v = self.functionsTable[self.currFunction]["SymTable"][index]
-                
+
                 if not exists:
                     for index, var in enumerate(self.functionsTable[0]["SymTable"]):
                         if var["Address"] == top:
@@ -1703,7 +1754,7 @@ class DASAListener(ParseTreeListener):
                 self.quad = {}
                 self.contCuadruplos += 1
                 #Sumando dirBase si dos dimensión
-                
+
                 resAdd = Calc.genAddress(4,0,len(mem.memStack[4][0]))
                 mem.memStack[4][0].append(None)
                 address = self.stackOP.pop()
@@ -1722,7 +1773,7 @@ class DASAListener(ParseTreeListener):
                 }
 
                 self.stackOP.append(resAdd)
-                self.stackTypes.append(varType-8)            
+                self.stackTypes.append(varType-8)
                 self.cuadruplos.append(self.quad)
                 self.quad = {}
                 self.contCuadruplos += 1
@@ -1743,7 +1794,7 @@ class DASAListener(ParseTreeListener):
         #generamos nueva temporal
         res = Calc.genAddress(self.currScope,3,self.functionsTable[self.currFunction]["Signature"][3])
         self.functionsTable[self.currFunction]["Signature"][3] += 1
-        #metemos valor para valor    
+        #metemos valor para valor
         self.stackOP.append(res)
         self.stackTypes.append(3)
 
@@ -1770,7 +1821,7 @@ class DASAListener(ParseTreeListener):
         #temptype should be 1,2,4
 
         if temptype == 4 or temptype == 2:
-            #genera temporal para la respuesta 
+            #genera temporal para la respuesta
             res = Calc.genAddress(self.currScope,1,self.functionsTable[self.currFunction]["Signature"][1])
             self.functionsTable[self.currFunction]["Signature"][1] += 1
 
@@ -1786,7 +1837,7 @@ class DASAListener(ParseTreeListener):
             self.cuadruplos.append(self.quad)
             self.quad = {}
             self.contCuadruplos += 1
-        
+
         elif temptype == 1:
             raise Exception("Variable is already an Int")
         else:
@@ -1804,7 +1855,7 @@ class DASAListener(ParseTreeListener):
         #temptype should be 1,2,4
 
         if temptype == 4 or temptype == 1:
-            #genera temporal para la respuesta 
+            #genera temporal para la respuesta
             res = Calc.genAddress(self.currScope,2,self.functionsTable[self.currFunction]["Signature"][2])
             self.functionsTable[self.currFunction]["Signature"][2] += 1
 
@@ -1820,7 +1871,7 @@ class DASAListener(ParseTreeListener):
             self.cuadruplos.append(self.quad)
             self.quad = {}
             self.contCuadruplos += 1
-        
+
         elif temptype == 2:
             raise Exception("Variable is already a Float")
         else:
@@ -1838,7 +1889,7 @@ class DASAListener(ParseTreeListener):
         #temptype should be 1,2,3,4
 
         if temptype == 1 or temptype == 2 or temptype ==3:
-            #genera temporal para la respuesta 
+            #genera temporal para la respuesta
             res = Calc.genAddress(self.currScope,4,self.functionsTable[self.currFunction]["Signature"][4])
             self.functionsTable[self.currFunction]["Signature"][4] += 1
 
@@ -1854,7 +1905,7 @@ class DASAListener(ParseTreeListener):
             self.cuadruplos.append(self.quad)
             self.quad = {}
             self.contCuadruplos += 1
-        
+
         elif temptype == 4:
             raise Exception("Variable is already a String")
         else:
@@ -1871,22 +1922,22 @@ class DASAListener(ParseTreeListener):
         temptype = self.stackTypes.pop()
         tempadd= self.stackOP.pop()
         #print("Dir:", tempadd, "Tipo:",temptype)
-        #genera temporal para la respuesta 
+        #genera temporal para la respuesta
         res = Calc.genAddress(self.currScope,1,self.functionsTable[self.currFunction]["Signature"][1])
         self.functionsTable[self.currFunction]["Signature"][1] += 1
 
-        #metemos valor para valor    
+        #metemos valor para valor
         self.stackOP.append(res)
         self.stackTypes.append(1)
 
-        if temptype == 4: 
+        if temptype == 4:
             self.quad = {
                 "Oper" : 37, #LENGTH
                 "Op1" : tempadd,
                 "Op2" : None,
                 "Res" : res
             }
- 
+
             self.cuadruplos.append(self.quad)
             self.quad = {}
             self.contCuadruplos += 1
@@ -1902,7 +1953,7 @@ class DASAListener(ParseTreeListener):
                     if var["Address"] == tempadd:
                         exists = True
                         v = self.functionsTable[0]["SymTable"][index]
-            
+
             self.quad = {
                 "Oper" : 38, #SIZE
                 "Op1" : v["SizeD1"],
@@ -1934,7 +1985,7 @@ class DASAListener(ParseTreeListener):
                 "Op2" : None,
                 "Res" : res
             }
- 
+
             self.cuadruplos.append(self.quad)
             self.quad = {}
             self.contCuadruplos += 1

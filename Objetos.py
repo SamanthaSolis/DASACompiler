@@ -1,5 +1,7 @@
 class Calc():
     def genAddress(scope,type,pos):
+        if pos > 1000:
+            raise Exception("Error: Memory limit reached")
         return scope*10000 + type*1000 + pos
 
 
@@ -9,13 +11,12 @@ class Memoria():
         0,
         [], #Local = 1 para cada funcion
         [0,[],[],[],[]], #Global = 2
-        [[None], [], [], [True, False], [],], #Constante = 3
+        [[None], [], [], [True, False], [],], #Constantes = 3
         [[]]  #Apuntadores = 4
     ]
 
     funcTable = []
     funcStack = []
-    offsetStack = []
     globalVars = []
     offsetCont = 0
 
@@ -31,20 +32,8 @@ class Memoria():
 
 
 class Cuadruplos():
-
     cuadruplos  = []
     quadCount = 0
-
-
-    # def __init__(self):
-    #     self.cuadruplos = []
-
-    # def printQuads(self):
-    #     index = 0
-    #     for y in self.cuadruplos:
-    #         print("\t",index, ".", "{Oper:", y["Oper"], ", Op1:", y["Op1"], ", Op2:", y["Op2"], ", Res:", y["Res"], "}")
-    #         index += 1
-
 
 class Operadores():
     dicOperations = {
@@ -86,7 +75,7 @@ class Operadores():
         "VER": 35,
         "SETADD": 36,
         "LENGTH": 37,
-        "SIZE": 38,
+        "SIZE": 38
     }
 
     arrOperations = [
@@ -171,7 +160,6 @@ class CuboSemantico():
     semCube[1][2][13] = 3
     semCube[1][2][16] = 1
 
-
     semCube[2][1][3] = 2
     semCube[2][1][4] = 2
     semCube[2][1][5] = 2
@@ -197,20 +185,17 @@ class CuboSemantico():
     semCube[2][2][13] = 3
     semCube[2][2][16] = 2
 
-
     semCube[3][3][12] = 3
     semCube[3][3][13] = 3
     semCube[3][3][14] = 3
     semCube[3][3][15] = 3
     semCube[3][3][16] = 3
 
-
     semCube[4][4][6] = 8
     semCube[4][4][12] = 3
     semCube[4][4][13] = 3
     semCube[4][4][16] = 4
     semCube[4][8][6] = 8
-
 
     semCube[5][5][12] = 3
     semCube[5][5][13] = 3
@@ -226,6 +211,7 @@ class CuboSemantico():
     semCube[8][8][6] = 8
     semCube[8][8][12] = 3
     semCube[8][8][13] = 3
+
     semCube[9][9][12] = 3
     semCube[9][9][13] = 3
     semCube[9][10][12] = 3

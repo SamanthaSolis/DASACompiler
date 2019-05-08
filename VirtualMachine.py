@@ -1,7 +1,14 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+import math
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.cluster import KMeans
+
 from Objetos import Memoria as mem
 from Objetos import Cuadruplos as quads
 from Objetos import Operadores as ops
-import math
+
 
 #Definicion de funciones
 
@@ -38,7 +45,6 @@ def operMod(op1, op2, res):
     quads.quadCount += 1
 
 def operSum(op1, op2, res):
-    #print("HEHEH",op1,op2,res)
     value = getValue(op1) + getValue(op2)
     setValue(value,res)
     quads.quadCount += 1
@@ -105,6 +111,8 @@ def operGOTOF(op1, op2, res):
 
 def operGOSUB(op1, op2, res):
     mem.funcStack.append(quads.quadCount+1)
+    if len(mem.funcStack) > 10000:
+        raise Exception("Error: Stack overflow.")
     for f in mem.funcTable:
         if f["Id"] == op1:
             quads.quadCount = f["StartQuad"]
@@ -145,7 +153,10 @@ def operRETURN(op1, op2, res):
     quads.quadCount += 1
 
 def operPRINT(op1, op2, res):
-    print(getValue(op1))
+    if op1 is None:
+        print()
+    else:
+        print(getValue(op1))
     quads.quadCount += 1
 
 def operINPUT(op1, op2, res):
@@ -177,17 +188,77 @@ def operINPUT(op1, op2, res):
     quads.quadCount += 1
 
 def operDESCRIBE(op1, op2, res):
+    sizeD1 = getValue(op1)
+    sizeD2 = getValue(op2)
+    arrData = []
+    if sizeD2 == -1:
+        for i in range(sizeD1):
+            arrData.append(getValue(res + i))
+    else:
+        tempArr = []
+        for i in range(sizeD1):
+            tempArr = []
+            for j in range(sizeD2):
+                tempArr.append(getValue(res + i*sizeD2 + j))
+            arrData.append(tempArr)
+    dataKey = {}
+    for ind,row in enumerate(arrData):
+        name = "col" + str(ind+1)
+        dataKey[name] = row
+    df = pd.DataFrame(dataKey)
+    print(df.describe())
     quads.quadCount += 1
 
 def operPLOT(op1, op2, res):
+    sizeD2 = getValue(op1)
+    title = getValue(op2)
+    filepath = title + '.png'
+    arrData = []
+    tempArr = []
+    for i in range(2):
+        tempArr = []
+        for j in range(sizeD2):
+            tempArr.append(getValue(res + i*sizeD2 + j))
+        arrData.append(tempArr)
+    dataset = pd.DataFrame({"x": arrData[0], "y": arrData[1]})
+    dataplot = dataset.plot.scatter(x = 'x', y='y')
+    dataplot.set_title(title, weight='bold')
+    dataplot.set_xlabel('Independent variable')
+    dataplot.set_ylabel('Dependent variable')
+    graph = dataplot.get_figure()
+    graph.savefig(filepath)
+    print("Plot saved to " + filepath)
+
     quads.quadCount += 1
 
 def operREGRESION(op1, op2, res):
+    sizeD1 = getValue(op1)
+    sizeD2 = getValue(op2)
+    arrData = []
+    tempArr = []
+    for i in range(sizeD1):
+        tempArr = []
+        for j in range(sizeD2):
+            tempArr.append(getValue(res + i*sizeD2 + j))
+        arrData.append(tempArr)
+
+    x = np.array(np.transpose(arrData[0:-1]))
+    y = np.array(arrData[-1])
+    model = LinearRegression().fit(x, y)
+    r_sq =  model.score(x, y)
+    intercept = model.intercept_
+    slope = model.coef_
+    print("Coefficient of determination:", r_sq)
+    eq = "y= "
+    for i in range(len(slope)):
+        eq += "("+str(model.coef_[i])+")*x" + str(i) + " + "
+    eq += str(intercept)
+    print("Equation:", eq)
     quads.quadCount += 1
 
 def operVACIO(op1, op2, res):
     if (op1 < 10000):
-        raise Exception("Invalid Address")
+        raise Exception("Error: Invalid address.")
     else:
         iUno = int(op1/10000) #local(1) global(2) cte(3)
         iDos = int((op1-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
@@ -201,7 +272,7 @@ def operVACIO(op1, op2, res):
             value = mem.memStack[iUno][iDos][iTres]
         else:
             value= mem.memStack[iUno][mem.offsetCont][iDos][iTres]
-            
+
         if value == None:
             setValue(True,res)
         else:
@@ -209,6 +280,23 @@ def operVACIO(op1, op2, res):
     quads.quadCount += 1
 
 def operCLUSTER(op1, op2, res):
+    sizeD2 = getValue(op1)
+    clusterNum = getValue(op2)
+    arrData = []
+    tempArr = []
+    for i in range(2):
+        tempArr = []
+        for j in range(sizeD2):
+            tempArr.append(getValue(res + i*sizeD2 + j))
+        arrData.append(tempArr)
+    X = np.array(list(zip(arrData[0], arrData[1])))
+    kmeans = KMeans(n_clusters=clusterNum)
+    kmeans = kmeans.fit(X)
+    labels = kmeans.predict(X)
+    centroids = kmeans.cluster_centers_
+    print("Centroids for " + str(clusterNum) + " clusters:")
+    for c in centroids:
+        print("\t", c)
     quads.quadCount += 1
 
 def operCASTINT(op1, op2, res):
@@ -228,7 +316,7 @@ def operCASTSTR(op1, op2, res):
 
 def operVER(op1, op2, res):
     if getValue(op1) >= op2 or getValue(op1) < 0:
-        raise Exception("Index out of bounds")
+        raise Exception("Error: Index out of bounds.")
     quads.quadCount += 1
 
 def operSETADD(op1, op2, res):
@@ -296,108 +384,53 @@ def run():
             mem.memStack[2][i].append(None)
 
     # Agregar main a memoria
-    #print("count",mem.offsetCont)
     OperationsDir[23]("main", None, None)
-    #mem.offsetCont -= 1
-    #print("count",mem.offsetCont)
 
-    # print('\n-----------Memoria------------')
-    # for m in mem.memStack:
-    #     print(m)
-    # print('\n----------Funciones-----------')
-    # for x in mem.funcTable:
-    #     print("{", x["Id"], x["Params"], x["TiposParams"], x["Return"], x["StartQuad"], x["Signature"], "}")
-    #     for y in x["SymTable"]:
-    #         print("\t", y)
-
-    # #lee los cuadruplos
-    # for q in quads.cuadruplos:
-    #     opType=q["Oper"] #Obtiene el tipo de operacion y llama esa funcion
-    #     OperationsDir[opType] (q["Op1"], q["Op2"], q["Res"])
-
-
-    print('\n----------Funciones-----------')
-    for x in mem.funcTable:
-        print("{Id:", x["Id"], ", Params:", x["Params"], ", TiposParams:", x["TiposParams"], ", Return:", x["Return"], ", Address:", x["Address"], ", StartQuad:", x["StartQuad"], ", Signature:", x["Signature"], "}")
-        for y in x["SymTable"]:
-            print("\t", y)
-    print('\n----------Cuadruplos----------')
-    for ind, q in enumerate(quads.cuadruplos):
-        res = str(ind) + "- {Oper: "
-        if "Oper" in q:
-            res += ops.arrOperations[q["Oper"]]
-        else:
-            res += "-"
-        res += ", Op1: "
-        if "Op1" in q:
-            res += str(q["Op1"])
-        else:
-            res += "-"
-        res += ", Op2: "
-        if "Op2" in q:
-            res += str(q["Op2"])
-        else:
-            res += "-"
-        res += ", Res: "
-        if "Res" in q:
-            res += str(q["Res"])
-        else:
-            res += "-"
-        res += "}"
-        print(res)
+    # Imprimir tabla de funciones
+    printFunctions()
+    # Imprimir variables globales
+    printGlobals()
+    # Imprimir cuadruplos
+    printQuads()
 
     quads.quadCount = 0
-    #print('\n----------Ejecucion----------')
+    # Ejecuta los cuadruplos
     while not quads.cuadruplos[quads.quadCount]["Oper"] == 20:
-        #print('******Ejecutando quad', quads.quadCount)
         opType=quads.cuadruplos[quads.quadCount]["Oper"] #Obtiene el tipo de operacion y llama esa funcion
-        #print(ops.arrOperations[opType],quads.cuadruplos[quads.quadCount]["Op1"], quads.cuadruplos[quads.quadCount]["Op2"], quads.cuadruplos[quads.quadCount]["Res"])
         OperationsDir[opType] (quads.cuadruplos[quads.quadCount]["Op1"], quads.cuadruplos[quads.quadCount]["Op2"], quads.cuadruplos[quads.quadCount]["Res"])
 
+    # Imprimir memoria final
+    printMemory()
+
     
-    print('\n-----------Memoria------------')
-    for m in mem.memStack:
-        print(m)
 
 def setValue(value,address):
-    # print("setvalue", value, address)
-    # for m in mem.memStack:
-    #     print(m)
-    # print(mem.offsetStack)
-
     if (address < 10000):
-        raise Exception("Invalid Address")
+        raise Exception("Error: Invalid address.")
     else:
         iUno = int(address/10000) #local(1) global(2) cte(3)
         iDos = int((address-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
         iTres = int((address-10000*iUno)-(iDos*1000))
-        #print("----->>",iUno,iDos,iTres)
-        if iUno == 4:
+        
+        # Sobreescribe el valor de memoria
+        if iUno == 4: # Caso especial para apuntadores
             ptr = mem.memStack[iUno][iDos][iTres]
             setValue(value, ptr)
         elif iUno != 1:
             mem.memStack[iUno][iDos][iTres]=value
         else:
             mem.memStack[iUno][mem.offsetCont][iDos][iTres]=value
-        #+ mem.offsetStack[len(mem.offsetStack)-2][iDos] #asigna valor en la posición de memoria
-        #print ( mem.memStack[iUno][iDos][iTres])
-
 
 def getValue(address):
-    # print('\n',"getvalue", address)
-    # for m in mem.memStack:
-    #     print(m)
-    # print("countdos",mem.offsetCont)
-    # print(mem.offsetStack,'\n')
     if (address < 10000):
-        raise Exception("Invalid Address")
+        raise Exception("Error: Invalid address.")
     else:
         iUno = int(address/10000) #local(1) global(2) cte(3)
         iDos = int((address-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
         iTres = int((address-10000*iUno)-(iDos*1000))
-        #print("----->>",iUno,iDos,iTres)
-        #obtiene el valor de la posición de memoria
-        if iUno == 4:
+
+        # Obtiene el valor de la posición de memoria
+        if iUno == 4: # Caso especial para apuntadores
             ptr = mem.memStack[iUno][iDos][iTres]
             value = getValue(ptr)
         elif iUno != 1:
@@ -406,16 +439,14 @@ def getValue(address):
             value= mem.memStack[iUno][mem.offsetCont][iDos][iTres]
 
         if value == None:
-            raise Exception("You can't make operations with a Null variable")
-        #print("value of address",address,":", value)
+            raise Exception("Error: Invalid operation with Null value.")
         return value
-
 
 
 #Regresa el contexto, el tipo o la posicion de una variable
 def getData(address,key):
     if (address < 10000):
-        raise Exception("Invalid Address")
+        raise Exception("Error: Invalid address.")
     iUno = int(address/10000) #local(1) global(2) cte(3)
     iDos = int((address-10000*iUno)/1000) #int(1) float(2) bool(3) char(4)
     iTres = int((address-10000*iUno)-(iDos*1000))
@@ -426,3 +457,44 @@ def getData(address,key):
         "pos": iTres
     }
     return switcher[key]
+
+def printFunctions():
+    print('\n----------Funciones-----------')
+    for x in mem.funcTable:
+        print("{Id:", x["Id"], ", Params:", x["Params"], ", TiposParams:", x["TiposParams"], ", Return:", x["Return"], ", Address:", x["Address"], ", StartQuad:", x["StartQuad"], ", Signature:", x["Signature"], "}")
+
+def printGlobals():
+    print('\n---------Vars. Glob-----------')
+    for v in mem.globalVars:
+        print(v)
+
+def printQuads():
+    print('\n----------Cuadruplos----------')
+    for ind, q in enumerate(quads.cuadruplos):
+        res = str(ind) + "- {Oper: "
+        if q["Oper"]:
+            res += ops.arrOperations[q["Oper"]]
+        else:
+            res += "-"
+        res += ", Op1: "
+        if q["Op1"]:
+            res += str(q["Op1"])
+        else:
+            res += "-"
+        res += ", Op2: "
+        if ["Op2"]:
+            res += str(q["Op2"])
+        else:
+            res += "-"
+        res += ", Res: "
+        if q["Res"]:
+            res += str(q["Res"])
+        else:
+            res += "-"
+        res += "}"
+        print(res)
+
+def printMemory():
+    print('\n-----------Memoria------------')
+    for m in mem.memStack:
+        print(m)

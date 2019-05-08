@@ -117,9 +117,7 @@ estdesc: DESCRIBE LPAREN expresion RPAREN SCOLON ;
 
 dibujar: PLOT LPAREN expresion COMMA expresion RPAREN SCOLON ;
 
-regresion: REGRESSION LPAREN expresion reg1 RPAREN SCOLON ;
-
-reg1: COMMA expresion |   ;
+regresion: REGRESSION LPAREN expresion COMMA expresion RPAREN SCOLON ;
 
 clustering: CLUSTER LPAREN expresion COMMA expresion RPAREN SCOLON ;
 
